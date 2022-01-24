@@ -18,9 +18,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish --configuration Release
+      run: dotnet publish --configuration Release -o Publish
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         name: Upload Artifact
-        path: bin\Release\Publish
+        path: .\Publish

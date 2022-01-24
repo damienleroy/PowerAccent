@@ -4,7 +4,8 @@ Use a letter and the left or right arrow to select the accent. For example `e` &
 The software is currently working with `a`, `c`, `e`, `i`, `o`, `u`, `y`.
 
 # Problem known
-- Inside browsers & some other softwares, the tool can't detect the caret position. So default is applied, meaning up center of the main window.
+- Inside browsers & some other softwares, the tool can't detect the caret position. So default is applied, meaning up center of the main window
+- Only available for windows
 
 # The future
 - Caps integration
