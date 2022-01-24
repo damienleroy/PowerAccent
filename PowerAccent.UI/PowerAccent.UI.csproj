@@ -20,7 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PowerAccentCore\PowerAccentCore.csproj" />
+    <ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
   </ItemGroup>
 
+    <Target Name="ConfigureTrimming" BeforeTargets="PrepareForILLink">
+	    <ItemGroup>
+		    <ManagedAssemblyToLink Condition="'%(Filename)' == 'System.Runtime' Or '%(Filename)' == 'System.Runtime.Extensions' Or '%(Filename)' == 'System.Diagnostics.Debug'">
+			    <IsTrimmable>false</IsTrimmable>
+		    </ManagedAssemblyToLink>
+	    </ItemGroup>
+    </Target>
+	
 </Project>
