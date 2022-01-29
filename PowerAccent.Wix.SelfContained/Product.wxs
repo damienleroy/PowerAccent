@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="PowerAccent.SelfContained" Language="1033" Version="0.0.1" Manufacturer="Damien Leroy" UpgradeCode="e8c1adda-4e34-48a8-94bb-2fa159277208">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="PowerAccent" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="RegistryEntries"/>
+		</Feature>
+
+		<CustomAction Id="LaunchApp" Directory="INSTALLFOLDER" ExeCommand="[SystemFolder]cmd.exe /C start PowerAccent.exe" />
+		<InstallExecuteSequence>
+			<Custom Action="LaunchApp" After="InstallFinalize">NOT REMOVE</Custom>
+		</InstallExecuteSequence>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="INSTALLFOLDER" Name="PowerAccent" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<ComponentGroupRef Id="HeatGenerated" />
+		</ComponentGroup>
+	</Fragment>
+
+	<Fragment>
+		<DirectoryRef Id="TARGETDIR">
+			<Component Id="RegistryEntries" Guid="90e014dd-e66e-4281-8061-1d0f92b86490">
+				<RegistryKey Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Run">
+					<RegistryValue Type="string" Name="PowerAccent" Value="[INSTALLFOLDER]PowerAccent.exe" KeyPath="yes"/>
+				</RegistryKey>
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+</Wix>

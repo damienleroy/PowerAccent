@@ -7,6 +7,7 @@
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <ApplicationIcon>a-icon.ico</ApplicationIcon>
+    <AssemblyName>PowerAccent</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,13 +23,5 @@
   <ItemGroup>
     <ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
   </ItemGroup>
-
-    <Target Name="ConfigureTrimming" BeforeTargets="PrepareForILLink">
-	    <ItemGroup>
-		    <ManagedAssemblyToLink Condition="'%(Filename)' == 'System.Runtime' Or '%(Filename)' == 'System.Runtime.Extensions' Or '%(Filename)' == 'System.Diagnostics.Debug'">
-			    <IsTrimmable>false</IsTrimmable>
-		    </ManagedAssemblyToLink>
-	    </ItemGroup>
-    </Target>
 	
 </Project>
