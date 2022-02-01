@@ -15,21 +15,21 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - name: Install Wix
-      run: |
-        curl -OLS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe
-        .\wix311.exe /install /quiet /norestart
-    - name: Configure Wix
-      run: |
-        $wixToolsetBinPath = ";C:\Program Files (x86)\WiX Toolset v3.11\bin;"
-        $env:PATH = $env:PATH + $wixToolsetBinPath
-        [Environment]::SetEnvironmentVariable("Path", $env:PATH, [EnvironmentVariableTarget]::Machine)
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Publish
-      run: dotnet publish -c Release -o Publish
-    - name: Zip
-      run: Compress-Archive -Path .\Publish\* -DestinationPath .\PowerAccent.zip
+    #- name: Install Wix
+    #  run: |
+    #    curl -OLS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe
+    #    .\wix311.exe /install /quiet /norestart
+    #- name: Configure Wix
+    #  run: |
+    #    $wixToolsetBinPath = ";C:\Program Files (x86)\WiX Toolset v3.11\bin;"
+    #    $env:PATH = $env:PATH + $wixToolsetBinPath
+    #    [Environment]::SetEnvironmentVariable("Path", $env:PATH, [EnvironmentVariableTarget]::Machine)
+    #- name: Restore dependencies
+    #  run: dotnet restore
+    #- name: Publish
+    #  run: dotnet publish -c Release -o Publish
+    #- name: Zip
+    #  run: Compress-Archive -Path .\Publish\* -DestinationPath .\PowerAccent.zip
     - name: Get release
       id: get_release
       uses: bruceadams/get-release@v1.2.3
@@ -45,3 +45,10 @@ jobs:
         asset_content_type: application/zip
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body: "If you have dotnet 6 install on your machine use `PowerAccent.light.msi`, if not use `PowerAccent.msi`"
+        files: |
+          .\Installer\PowerAccent.light.msi
+          .\Installer\PowerAccent.msi
