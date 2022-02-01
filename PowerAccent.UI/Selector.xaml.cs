@@ -83,25 +83,25 @@ public partial class Selector : Window
         switch (letter)
         {
             case LetterKey.A:
-                characters.ItemsSource = new char[] { 'á', 'à', 'â', 'ä', 'ã' };
+                characters.ItemsSource = new char[] { 'ä', 'â', 'á', 'à', 'ã' };
                 break;
             case LetterKey.C:
                 characters.ItemsSource = new char[] { 'ç' };
                 break;
             case LetterKey.E:
-                characters.ItemsSource = new char[] { 'ë', 'é', 'è', 'ê' };
+                characters.ItemsSource = new char[] { 'ë', 'ê', 'é', 'è', '€' };
                 break;
             case LetterKey.I:
-                characters.ItemsSource = new char[] { 'ì', 'í', 'î', 'ï' };
+                characters.ItemsSource = new char[] { 'ï', 'î', 'í', 'ì' };
                 break;
             case LetterKey.O:
-                characters.ItemsSource = new char[] { 'ò', 'ó', 'ô', 'õ', 'ö' };
+                characters.ItemsSource = new char[] { 'ö', 'ô', 'ó', 'ò', 'õ' };
                 break;
             case LetterKey.U:
-                characters.ItemsSource = new char[] { 'ù', 'ú', 'û', 'ü' };
+                characters.ItemsSource = new char[] { 'ü', 'û', 'ú', 'ù' };
                 break;
             case LetterKey.Y:
-                characters.ItemsSource = new char[] { 'ý', 'ÿ' };
+                characters.ItemsSource = new char[] { 'ÿ', 'ý' };
                 break;
             default:
                 break;
