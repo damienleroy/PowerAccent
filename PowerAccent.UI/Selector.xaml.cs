@@ -12,6 +12,8 @@ public partial class Selector : Window
 
     private int index = -1;
 
+    private bool _useCaretPosition = false;
+
     public Selector()
     {
         InitializeComponent();
@@ -124,31 +126,33 @@ public partial class Selector : Window
 
     private Point CalculatePosition()
     {
-        System.Drawing.Point carretPixel = WindowsFunctions.GetCaretPosition();
-        Point screen = new Point(SystemParameters.FullPrimaryScreenWidth, SystemParameters.FullPrimaryScreenHeight);
-
+        var activeDisplay = WindowsFunctions.GetActiveDisplay();
+        Rect screen = new Rect(new Point(activeDisplay.Location.X, activeDisplay.Location.Y), new Size(activeDisplay.Size.Width, activeDisplay.Size.Height));
         Point window = new Point(((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualWidth, ((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualHeight);
+        if (!_useCaretPosition)
+        {
+            return new Point(screen.X + (screen.Width / 2 - window.X / 2), 10);
+        }
 
+        System.Drawing.Point carretPixel = WindowsFunctions.GetCaretPosition();
         if (carretPixel.X == 0 && carretPixel.Y == 0)
         {
-            return new Point(screen.X / 2 - window.X / 2, 10);
+            return new Point((screen.X + screen.Width) / 2 - window.X / 2, 10);
         }
 
         PresentationSource source = PresentationSource.FromVisual(this);
         if (source == null)
         {
-            return new Point(screen.X / 2 - window.X / 2, 10);
+            return new Point((screen.X + screen.Width) / 2 - window.X / 2, 10);
         }
 
-        Point dpi = new Point(source.CompositionTarget.TransformToDevice.M11, source.CompositionTarget.TransformToDevice.M22);
-
+        Point dpi = new Point(activeDisplay.Dpi.X, activeDisplay.Dpi.Y);
         Point carret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
-
         var left = carret.X - window.X / 2; // X default position
         var top = carret.Y - window.Y - 20; // Y default position
 
-        return new Point(left < 0 ? 0 : (left + window.X > screen.X ? screen.X - window.X : left)
-            , top < 0 ? carret.Y + 20 : top);
+        return new Point(left < screen.X ? screen.X : (left + window.X > (screen.X + screen.Width) ? (screen.X + screen.Width) - window.X : left)
+            , top < screen.Y ? carret.Y + 20 : top);
     }
 
     protected override void OnClosed(EventArgs e)

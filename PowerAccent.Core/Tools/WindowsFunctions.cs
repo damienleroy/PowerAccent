@@ -38,11 +38,20 @@ public static class WindowsFunctions
         return caretPosition;
     }
 
-    public static (Point Location, Size Size) GetDisplay(Point location)
+    public static (Point Location, Size Size, Point Dpi) GetActiveDisplay()
     {
-        var res = User32.MonitorFromPoint(location, User32.MonitorFlags.MONITOR_DEFAULTTONEAREST);
+        User32.GUITHREADINFO guiInfo = new User32.GUITHREADINFO();
+        guiInfo.cbSize = (uint)Marshal.SizeOf(guiInfo);
+        User32.GetGUIThreadInfo(0, ref guiInfo);
+        var res = User32.MonitorFromWindow(guiInfo.hwndActive, User32.MonitorFlags.MONITOR_DEFAULTTONEAREST);
         User32.MONITORINFO monitorInfo = new User32.MONITORINFO();
+        monitorInfo.cbSize = (uint)Marshal.SizeOf(monitorInfo);
         User32.GetMonitorInfo(res, ref monitorInfo);
-        return (monitorInfo.rcMonitor.Location, monitorInfo.rcMonitor.Size);
+        uint dpi = User32.GetDpiForWindow(guiInfo.hwndActive) / 96;
+
+        return (monitorInfo.rcMonitor.Location, monitorInfo.rcMonitor.Size, new Point((int)dpi, (int)dpi));
     }
+
+    [DllImport("Shcore.dll")]
+    private static extern IntPtr GetDpiForMonitor(IntPtr hmonitor, int dpiType, out uint dpiX, out uint dpiY);
 }
