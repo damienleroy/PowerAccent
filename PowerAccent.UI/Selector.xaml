@@ -13,6 +13,7 @@
             ToolTipText="PowerAccent">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Settings" Click="Settings_Click" />
                     <MenuItem Header="Exit" Click="MenuExit_Click" />
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>

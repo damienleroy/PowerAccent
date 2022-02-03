@@ -9,6 +9,7 @@ namespace PowerAccent.UI;
 public partial class Selector : Window
 {
     private PowerAccentService _powerAccentService = new PowerAccentService();
+    private readonly SettingsService _settingService = new SettingsService();
 
     private int index = -1;
 
@@ -110,6 +111,12 @@ public partial class Selector : Window
         }
     }
 
+    private void Settings_Click(object sender, RoutedEventArgs e)
+    {
+        Settings settings = new Settings();
+        settings.Show();
+    }
+
     private void MenuExit_Click(object sender, RoutedEventArgs e)
     {
         Application.Current.Shutdown();
@@ -131,19 +138,19 @@ public partial class Selector : Window
         Point window = new Point(((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualWidth, ((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualHeight);
         if (!_useCaretPosition)
         {
-            return new Point(screen.X + (screen.Width / 2 - window.X / 2), 10);
+            return GetPosition(screen, window);
         }
 
         System.Drawing.Point carretPixel = WindowsFunctions.GetCaretPosition();
         if (carretPixel.X == 0 && carretPixel.Y == 0)
         {
-            return new Point((screen.X + screen.Width) / 2 - window.X / 2, 10);
+            return GetPosition(screen, window);
         }
 
         PresentationSource source = PresentationSource.FromVisual(this);
         if (source == null)
         {
-            return new Point((screen.X + screen.Width) / 2 - window.X / 2, 10);
+            return GetPosition(screen, window);
         }
 
         Point dpi = new Point(activeDisplay.Dpi.X, activeDisplay.Dpi.Y);
@@ -159,5 +166,56 @@ public partial class Selector : Window
     {
         _powerAccentService.Dispose();
         base.OnClosed(e);
+    }
+
+    private Point GetPosition(Rect screen, Point window)
+    {
+        int offset = 10;
+        Position position = _settingService.Position;
+
+        double pointX = position switch
+        {
+            var x when
+                x == Position.Top ||
+                x == Position.Bottom ||
+                x == Position.Center
+                => screen.X + screen.Width / 2 - window.X / 2,
+            var x when
+                x == Position.TopLeft ||
+                x == Position.Left ||
+                x == Position.BottomLeft
+                => screen.X + offset,
+            var x when
+                x == Position.TopRight ||
+                x == Position.Right ||
+                x == Position.BottomRight
+                => screen.X + screen.Width - (window.X + offset),
+        };
+
+        double pointY = position switch
+        {
+            var x when
+                x == Position.TopLeft ||
+                x == Position.Top ||
+                x == Position.TopRight
+                => screen.Y + offset,
+            var x when
+                x == Position.Left ||
+                x == Position.Center ||
+                x == Position.Right
+                => screen.Y + screen.Height / 2 - window.Y / 2,
+            var x when
+                x == Position.BottomLeft ||
+                x == Position.Bottom ||
+                x == Position.BottomRight
+                => screen.Y + screen.Height - (window.Y + offset),
+        };
+
+        return new Point(pointX, pointY);
+    }
+
+    public void Refresh()
+    {
+        _settingService.Reload();
     }
 }
