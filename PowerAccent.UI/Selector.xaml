@@ -18,7 +18,7 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        <ListBox x:Name="characters" ItemsSource="{Binding Items}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsHitTestVisible="False"
+        <ListBox x:Name="characters" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsHitTestVisible="False"
                  BorderThickness="1" BorderBrush="SlateGray">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

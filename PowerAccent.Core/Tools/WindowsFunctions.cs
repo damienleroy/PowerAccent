@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Runtime.InteropServices;
 using Vanara.PInvoke;
+using static Vanara.PInvoke.User32;
 
 namespace PowerAccent.Core.Tools;
 
@@ -38,20 +39,19 @@ public static class WindowsFunctions
         return caretPosition;
     }
 
-    public static (Point Location, Size Size, Point Dpi) GetActiveDisplay()
+    public static (Point Location, Size Size, double Dpi) GetActiveDisplay()
     {
         User32.GUITHREADINFO guiInfo = new User32.GUITHREADINFO();
         guiInfo.cbSize = (uint)Marshal.SizeOf(guiInfo);
         User32.GetGUIThreadInfo(0, ref guiInfo);
         var res = User32.MonitorFromWindow(guiInfo.hwndActive, User32.MonitorFlags.MONITOR_DEFAULTTONEAREST);
+
         User32.MONITORINFO monitorInfo = new User32.MONITORINFO();
         monitorInfo.cbSize = (uint)Marshal.SizeOf(monitorInfo);
         User32.GetMonitorInfo(res, ref monitorInfo);
-        uint dpi = User32.GetDpiForWindow(guiInfo.hwndActive) / 96;
 
-        return (monitorInfo.rcMonitor.Location, monitorInfo.rcMonitor.Size, new Point((int)dpi, (int)dpi));
+        double dpi = User32.GetDpiForWindow(guiInfo.hwndActive) / 96;
+
+        return (monitorInfo.rcWork.Location, monitorInfo.rcWork.Size, dpi);
     }
-
-    [DllImport("Shcore.dll")]
-    private static extern IntPtr GetDpiForMonitor(IntPtr hmonitor, int dpiType, out uint dpiX, out uint dpiY);
 }

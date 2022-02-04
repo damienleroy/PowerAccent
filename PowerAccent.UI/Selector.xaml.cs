@@ -18,6 +18,7 @@ public partial class Selector : Window
     public Selector()
     {
         InitializeComponent();
+        _useCaretPosition = _settingService.UseCaretPosition;
     }
 
     protected override void OnSourceInitialized(EventArgs e)
@@ -83,32 +84,7 @@ public partial class Selector : Window
 
     private void FillListBox(LetterKey letter)
     {
-        switch (letter)
-        {
-            case LetterKey.A:
-                characters.ItemsSource = new char[] { 'ä', 'â', 'á', 'à', 'ã' };
-                break;
-            case LetterKey.C:
-                characters.ItemsSource = new char[] { 'ç' };
-                break;
-            case LetterKey.E:
-                characters.ItemsSource = new char[] { 'ë', 'ê', 'é', 'è', '€' };
-                break;
-            case LetterKey.I:
-                characters.ItemsSource = new char[] { 'ï', 'î', 'í', 'ì' };
-                break;
-            case LetterKey.O:
-                characters.ItemsSource = new char[] { 'ö', 'ô', 'ó', 'ò', 'õ' };
-                break;
-            case LetterKey.U:
-                characters.ItemsSource = new char[] { 'ü', 'û', 'ú', 'ù' };
-                break;
-            case LetterKey.Y:
-                characters.ItemsSource = new char[] { 'ÿ', 'ý' };
-                break;
-            default:
-                break;
-        }
+        characters.ItemsSource = _settingService.GetLetterKey(letter);
     }
 
     private void Settings_Click(object sender, RoutedEventArgs e)
@@ -153,7 +129,7 @@ public partial class Selector : Window
             return GetPosition(screen, window);
         }
 
-        Point dpi = new Point(activeDisplay.Dpi.X, activeDisplay.Dpi.Y);
+        Point dpi = new Point(activeDisplay.Dpi, activeDisplay.Dpi);
         Point carret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
         var left = carret.X - window.X / 2; // X default position
         var top = carret.Y - window.Y - 20; // Y default position
@@ -214,8 +190,9 @@ public partial class Selector : Window
         return new Point(pointX, pointY);
     }
 
-    public void Refresh()
+    public void RefreshSettings()
     {
         _settingService.Reload();
+        _useCaretPosition = _settingService.UseCaretPosition;
     }
 }
