@@ -42,6 +42,7 @@
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Background" Value="DeepSkyBlue" />
+                    <Setter Property="Foreground" Value="White" />
                     <Setter Property="Opacity" Value="1" />
                 </Trigger>
             </Style.Triggers>

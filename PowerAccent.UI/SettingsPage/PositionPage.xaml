@@ -23,7 +23,6 @@
             <ToggleButton x:Name="Position_DownRight" Content="↘" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Checked="Position_DownRight_Checked" />
             <ToggleButton x:Name="Position_Center" Content="•" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="Position_Center_Checked"/>
         </Grid>
-        <Label Content="Changing the position" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="161" FontWeight="Bold" FontFamily="Cascadia Mono SemiBold"/>
         <Line X1="0" Y1="0" X2="50" Y2="50" Stroke="Gray" />
         <Line X1="400" Y1="0" X2="350" Y2="50" Stroke="Gray" />
         <Line X1="0" Y1="300" X2="50" Y2="250" Stroke="Gray" />
@@ -32,6 +31,7 @@
 
     <Page.Resources>
         <Style TargetType="ToggleButton">
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Background" Value="White" />
             <Setter Property="Width" Value="50" />
             <Setter Property="Height" Value="20" />
@@ -52,6 +52,7 @@
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Background" Value="DeepSkyBlue" />
+                    <Setter Property="Foreground" Value="White" />
                     <Setter Property="Opacity" Value="1" />
                 </Trigger>
             </Style.Triggers>

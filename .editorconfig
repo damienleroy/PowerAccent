@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS8846: L'expression switch ne prend pas en charge toutes les valeurs possibles de son type d'entrée (elle n'est pas exhaustive).
+dotnet_diagnostic.CS8846.severity = none

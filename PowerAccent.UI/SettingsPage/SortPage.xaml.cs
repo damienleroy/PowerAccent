@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using static PowerAccent.Core.Tools.Enums;
@@ -79,3 +81,36 @@ public partial class SortPage : Page, INotifyPropertyChanged
     }
 }
 
+class VisibilityNullConverter : IValueConverter
+{
+    #region IValueConverter Members
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value == null ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
+}
+
+class BooleanNullConverter : IValueConverter
+{
+    #region IValueConverter Members
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value != null;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value == null;
+    }
+
+    #endregion
+}

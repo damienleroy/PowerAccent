@@ -1,4 +1,5 @@
 ﻿using PowerAccent.UI.SettingsPage;
+using System;
 using System.Windows;
 
 namespace PowerAccent.UI
@@ -11,7 +12,13 @@ namespace PowerAccent.UI
         public Settings()
         {
             InitializeComponent();
-            this.ParentFrame.Navigate(new PositionPage());
+            //this.ParentFrame.Navigate(new PositionPage());
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            Position.IsChecked = true;
         }
 
         private void Position_Checked(object sender, RoutedEventArgs e)
