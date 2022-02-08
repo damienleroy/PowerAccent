@@ -9,12 +9,10 @@ See the [Release](https://github.com/leroyd/PowerAccent/releases) page
 # Problem known
 - Inside browsers & some other softwares, the tool can't detect the caret position. So default is applied, meaning up center of the main window
 - Only available for windows
-- The position of the window can stay on the main screen with multi-monitor configuration
 
 # The future
 - Caps integration
 - Theme & design improvement
-- Choose screen position
 
 # If you like it
 https://www.buymeacoffee.com/dams
