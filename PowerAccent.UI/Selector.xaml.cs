@@ -19,6 +19,8 @@ public partial class Selector : Window
     {
         InitializeComponent();
         _useCaretPosition = _settingService.UseCaretPosition;
+        Application.Current.MainWindow.ShowActivated = false;
+        Application.Current.MainWindow.Topmost = true;
     }
 
     protected override void OnSourceInitialized(EventArgs e)
@@ -29,7 +31,7 @@ public partial class Selector : Window
         this.Visibility = Visibility.Hidden;
     }
 
-    private void PowerAccent_KeyUp(LetterKey? letterKey, ArrowKey? arrowKey)
+    private void PowerAccent_KeyUp(LetterKey? letterKey)
     {
         if (this.Visibility == Visibility.Visible && !letterKey.HasValue)
         {
@@ -48,8 +50,6 @@ public partial class Selector : Window
         {
             FillListBox(letterKey.Value);
             this.Visibility = Visibility.Visible;
-            Application.Current.MainWindow.ShowActivated = false;
-            Application.Current.MainWindow.Topmost = true;
             CenterWindow();
         }
 
@@ -78,6 +78,7 @@ public partial class Selector : Window
             characters.SelectedIndex = index;
             return false;
         }
+
 
         return true;
     }

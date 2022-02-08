@@ -7,7 +7,6 @@ public class PowerAccentService
 {
     private KeyboardListener _keyboardListener = new KeyboardListener();
     private LetterKey? letterPressed = null;
-    private ArrowKey? arrowPressed = null;
 
     public PowerAccentService()
     {
@@ -16,7 +15,7 @@ public class PowerAccentService
     }
 
     public event Func<LetterKey?, ArrowKey?, bool>? KeyDown;
-    public event Action<LetterKey?, ArrowKey?>? KeyUp;
+    public event Action<LetterKey?>? KeyUp;
 
     private bool PowerAccent_KeyDown(object sender, KeyboardListener.RawKeyEventArgs args)
     {
@@ -25,6 +24,7 @@ public class PowerAccentService
             letterPressed = (LetterKey)args.Key;
         }
 
+        ArrowKey? arrowPressed = null;
         if (letterPressed.HasValue)
             if (Enum.IsDefined(typeof(ArrowKey), (int)args.Key))
             {
@@ -41,13 +41,7 @@ public class PowerAccentService
             letterPressed = null;
         }
 
-        if (letterPressed.HasValue)
-            if (Enum.IsDefined(typeof(ArrowKey), (int)args.Key))
-            {
-                arrowPressed = null;
-            }
-
-        KeyUp?.Invoke(letterPressed, arrowPressed);
+        KeyUp?.Invoke(letterPressed);
 
         return true;
     }
