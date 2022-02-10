@@ -12,7 +12,6 @@ namespace PowerAccent.UI
         public Settings()
         {
             InitializeComponent();
-            //this.ParentFrame.Navigate(new PositionPage());
         }
 
         protected override void OnInitialized(EventArgs e)

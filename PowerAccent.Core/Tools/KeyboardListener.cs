@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace PowerAccent.Core.Tools;
 
-public class KeyboardListener : IDisposable
+internal class KeyboardListener : IDisposable
 {
     /// <summary>
     /// Creates global keyboard listener.
@@ -79,7 +79,7 @@ public class KeyboardListener : IDisposable
                 wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_SYSKEYDOWN ||
                 wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_SYSKEYUP)
             {
-                // Captures the character(s) pressed only on WM_KEYDOWN
+                //Captures the character(s) pressed only on WM_KEYDOWN
                 var chars = InterceptKeys.VKCodeToString((uint)Marshal.ReadInt32(lParam),
                     wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_KEYDOWN ||
                      wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_SYSKEYDOWN);
@@ -92,6 +92,7 @@ public class KeyboardListener : IDisposable
 
         return InterceptKeys.CallNextHookEx(_hookId, nCode, wParam, lParam);
     }
+
     /// <summary>
     /// HookCallbackAsync procedure that calls accordingly the KeyDown or KeyUp events.
     /// </summary>
@@ -104,20 +105,24 @@ public class KeyboardListener : IDisposable
         {
             // KeyDown events
             case InterceptKeys.KeyEvent.WM_KEYDOWN:
+                Trace.WriteLine("WM_KEYDOWN");
                 if (KeyDown != null)
                     return KeyDown.Invoke(this, new RawKeyEventArgs(vkCode, false, character));
                 break;
             case InterceptKeys.KeyEvent.WM_SYSKEYDOWN:
+                Trace.WriteLine("WM_SYSKEYDOWN");
                 if (KeyDown != null)
                     return KeyDown.Invoke(this, new RawKeyEventArgs(vkCode, true, character));
                 break;
 
             // KeyUp events
             case InterceptKeys.KeyEvent.WM_KEYUP:
+                Trace.WriteLine("WM_KEYUP");
                 if (KeyUp != null)
                     return KeyUp.Invoke(this, new RawKeyEventArgs(vkCode, false, character));
                 break;
             case InterceptKeys.KeyEvent.WM_SYSKEYUP:
+                Trace.WriteLine("WM_SYSKEYUP");
                 if (KeyUp != null)
                     return KeyUp.Invoke(this, new RawKeyEventArgs(vkCode, true, character));
                 break;

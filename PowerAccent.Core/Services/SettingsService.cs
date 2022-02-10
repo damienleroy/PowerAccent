@@ -1,6 +1,5 @@
 ﻿using PowerAccent.Core.Tools;
 using System.Configuration;
-using static PowerAccent.Core.Tools.Enums;
 
 namespace PowerAccent.Core.Services;
 
