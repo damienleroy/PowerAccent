@@ -93,8 +93,13 @@ public class PowerAccent
     public Point GetDisplayCoordinates(Size window)
     {
         var activeDisplay = WindowsFunctions.GetActiveDisplay();
-        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size);
+        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
         Position position = _settingService.Position;
+
+#if DEBUG
+        System.Diagnostics.Trace.WriteLine("Dpi: " + activeDisplay.Dpi);
+#endif
+
         if (!_settingService.UseCaretPosition)
         {
             return Calculation.GetRawCoordinatesFromPosition(position, screen, window);

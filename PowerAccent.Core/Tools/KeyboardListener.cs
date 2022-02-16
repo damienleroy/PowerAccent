@@ -105,24 +105,20 @@ internal class KeyboardListener : IDisposable
         {
             // KeyDown events
             case InterceptKeys.KeyEvent.WM_KEYDOWN:
-                Trace.WriteLine("WM_KEYDOWN");
                 if (KeyDown != null)
                     return KeyDown.Invoke(this, new RawKeyEventArgs(vkCode, false, character));
                 break;
             case InterceptKeys.KeyEvent.WM_SYSKEYDOWN:
-                Trace.WriteLine("WM_SYSKEYDOWN");
                 if (KeyDown != null)
                     return KeyDown.Invoke(this, new RawKeyEventArgs(vkCode, true, character));
                 break;
 
             // KeyUp events
             case InterceptKeys.KeyEvent.WM_KEYUP:
-                Trace.WriteLine("WM_KEYUP");
                 if (KeyUp != null)
                     return KeyUp.Invoke(this, new RawKeyEventArgs(vkCode, false, character));
                 break;
             case InterceptKeys.KeyEvent.WM_SYSKEYUP:
-                Trace.WriteLine("WM_SYSKEYUP");
                 if (KeyUp != null)
                     return KeyUp.Invoke(this, new RawKeyEventArgs(vkCode, true, character));
                 break;

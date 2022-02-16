@@ -7,15 +7,24 @@ internal static class WindowsFunctions
 {
     public static void Insert(char c)
     {
-        var inputs = new User32.INPUT[3]
+        // Split in 2 different SendInput (Powershell doesn't take back issue)
+        var inputsBack = new User32.INPUT[2]
         {
                 new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK}},
-                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK, dwFlags = User32.KEYEVENTF.KEYEVENTF_KEYUP}},
+                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK, dwFlags = User32.KEYEVENTF.KEYEVENTF_KEYUP}}
+        };
+        var inputsInsert = new User32.INPUT[1]
+        {
                 new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = 0, dwFlags = User32.KEYEVENTF.KEYEVENTF_UNICODE, wScan = c}}
         };
         unsafe
         {
-            _ = User32.SendInput((uint)inputs.Length, inputs, sizeof(User32.INPUT));
+            // DO NOT REMOVE Trace.WriteLine (Powershell doesn't take back issue)
+            var temp1 = User32.SendInput((uint)inputsBack.Length, inputsBack, sizeof(User32.INPUT));
+            System.Diagnostics.Trace.WriteLine(temp1);
+
+            var temp2 = User32.SendInput((uint)inputsInsert.Length, inputsInsert, sizeof(User32.INPUT));
+            System.Diagnostics.Trace.WriteLine(temp2);
         }
     }
 
@@ -48,7 +57,7 @@ internal static class WindowsFunctions
         monitorInfo.cbSize = (uint)Marshal.SizeOf(monitorInfo);
         User32.GetMonitorInfo(res, ref monitorInfo);
 
-        double dpi = User32.GetDpiForWindow(guiInfo.hwndActive) / 96;
+        double dpi = User32.GetDpiForWindow(guiInfo.hwndActive) / 96d;
 
         return (monitorInfo.rcWork.Location, monitorInfo.rcWork.Size, dpi);
     }

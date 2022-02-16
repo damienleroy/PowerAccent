@@ -39,4 +39,21 @@ public struct Rect
     public double Width { get; init; }
     public double Height { get; init; }
 
+    public static Rect operator /(Rect rect, double divider)
+    {
+        if (divider == 0)
+        {
+            throw new DivideByZeroException();
+        }
+        return new Rect(rect.X / divider, rect.Y / divider, rect.Width / divider, rect.Height / divider);
+    }
+
+    public static Rect operator /(Rect rect, Rect divider)
+    {
+        if (divider.X == 0 || divider.Y == 0)
+        {
+            throw new DivideByZeroException();
+        }
+        return new Rect(rect.X / divider.X, rect.Y / divider.Y, rect.Width / divider.Width, rect.Height / divider.Height);
+    }
 }
