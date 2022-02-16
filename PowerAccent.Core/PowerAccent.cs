@@ -36,9 +36,6 @@ public class PowerAccent
                 arrowPressed = (ArrowKey)args.Key;
             }
 
-        System.Diagnostics.Trace.WriteLine(_visible);
-        System.Diagnostics.Trace.WriteLine(letterPressed);
-        System.Diagnostics.Trace.WriteLine(arrowPressed);
         if (!_visible && letterPressed.HasValue && arrowPressed.HasValue)
         {
             _visible = true;
@@ -72,20 +69,22 @@ public class PowerAccent
             return false;
         }
 
-
         return true;
     }
 
     private bool PowerAccent_KeyUp(object sender, KeyboardListener.RawKeyEventArgs args)
     {
-        if (_visible && Enum.IsDefined(typeof(LetterKey), (int)args.Key))
+        if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
-            OnChangeDisplay?.Invoke(false, null);
-            if (_selectedIndex != -1)
-                WindowsFunctions.Insert(_characters[_selectedIndex]);
-            _selectedIndex = -1;
-            _visible = false;
             letterPressed = null;
+            if (_visible)
+            {
+                OnChangeDisplay?.Invoke(false, null);
+                if (_selectedIndex != -1)
+                    WindowsFunctions.Insert(_characters[_selectedIndex]);
+                _selectedIndex = -1;
+                _visible = false;
+            }
         }
 
         return true;
