@@ -1,11 +1,9 @@
-﻿using System.Drawing;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Vanara.PInvoke;
-using static Vanara.PInvoke.User32;
 
 namespace PowerAccent.Core.Tools;
 
-public static class WindowsFunctions
+internal static class WindowsFunctions
 {
     public static void Insert(char c)
     {
@@ -26,12 +24,12 @@ public static class WindowsFunctions
         User32.GUITHREADINFO guiInfo = new User32.GUITHREADINFO();
         guiInfo.cbSize = (uint)Marshal.SizeOf(guiInfo);
         User32.GetGUIThreadInfo(0, ref guiInfo);
-        Point caretPosition = new Point(guiInfo.rcCaret.left, guiInfo.rcCaret.top);
+        System.Drawing.Point caretPosition = new System.Drawing.Point(guiInfo.rcCaret.left, guiInfo.rcCaret.top);
         User32.ClientToScreen(guiInfo.hwndCaret, ref caretPosition);
 
         if (caretPosition.X == 0)
         {
-            Point testPoint;
+            System.Drawing.Point testPoint;
             User32.GetCaretPos(out testPoint);
             return testPoint;
         }
