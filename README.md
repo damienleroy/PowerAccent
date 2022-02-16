@@ -1,5 +1,5 @@
 # How it works
-Use a letter and the left or right arrow to select the accent. For example `e` & `←`. When releasing the letter key, the accent is inserted.
+Press and hold letter then hit arrow key to select the accent. For example `e` & `←`. When releasing the letter key, the accent is inserted.
 
 The software is currently working with `a`, `c`, `e`, `i`, `o`, `u`, `y`.
 
