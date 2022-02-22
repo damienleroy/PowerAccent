@@ -61,4 +61,9 @@ internal static class WindowsFunctions
 
         return (monitorInfo.rcWork.Location, monitorInfo.rcWork.Size, dpi);
     }
+
+    public static bool IsCapitalState()
+    {
+        return User32.GetKeyState((int)User32.VK.VK_CAPITAL) != 0 || User32.GetKeyState((int)User32.VK.VK_SHIFT) != 0;
+    }
 }

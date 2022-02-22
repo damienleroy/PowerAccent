@@ -44,7 +44,7 @@ public class PowerAccent
         if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
         {
             _visible = true;
-            _characters = _settingService.GetLetterKey(letterPressed.Value);
+            _characters = WindowsFunctions.IsCapitalState() ? ToUpper(_settingService.GetLetterKey(letterPressed.Value)) : _settingService.GetLetterKey(letterPressed.Value);
             OnChangeDisplay?.Invoke(true, _characters);
         }
 
@@ -145,5 +145,15 @@ public class PowerAccent
     public void Dispose()
     {
         _keyboardListener.Dispose();
+    }
+
+    public char[] ToUpper(char[] array)
+    {
+        char[] result = new char[array.Length];
+        for (int i = 0; i < array.Length; i++)
+        {
+            result[i] = Char.ToUpper(array[i]);
+        }
+        return result;
     }
 }
