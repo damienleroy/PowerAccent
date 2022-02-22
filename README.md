@@ -11,7 +11,7 @@ See the [Release](https://github.com/leroyd/PowerAccent/releases) page
 - (Experimental feature) Inside browsers & some other softwares, the tool can't detect the caret position. So default is applied, meaning up center of the main window
 
 # The future
-- Caps integration
+- More special characters
 - Theme & design improvement
 
 # If you like it
