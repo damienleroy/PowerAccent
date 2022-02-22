@@ -20,14 +20,6 @@ public class SettingsService : ApplicationSettingsBase
         set { this["UseCaretPosition"] = value; Save(); }
     }
 
-    [UserScopedSetting()]
-    [DefaultSettingValue("False")]
-    public bool UseArrowKeys
-    {
-        get { return (bool)this["UseArrowKeys"]; }
-        set { this["UseArrowKeys"] = value; Save(); }
-    }
-
     #region LetterKey
 
     [UserScopedSetting()]
