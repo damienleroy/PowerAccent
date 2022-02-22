@@ -53,11 +53,22 @@ public class PowerAccent
                 if (arrowPressed.Value == ArrowKey.Right)
                     _selectedIndex = _characters.Length / 2;
 
+                if (arrowPressed.Value == ArrowKey.Space)
+                    _selectedIndex = 0;
+
                 if (_selectedIndex < 0) _selectedIndex = 0;
                 if (_selectedIndex > _characters.Length - 1) _selectedIndex = _characters.Length - 1;
 
                 OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
                 return false;
+            }
+
+            if (arrowPressed.Value == ArrowKey.Space)
+            {
+                if (_selectedIndex < _characters.Length - 1)
+                    ++_selectedIndex;
+                else
+                    _selectedIndex = 0;
             }
 
             if (arrowPressed.Value == ArrowKey.Left && _selectedIndex > 0)

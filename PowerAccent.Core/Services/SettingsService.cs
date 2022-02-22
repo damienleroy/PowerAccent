@@ -1,5 +1,4 @@
-﻿using PowerAccent.Core.Tools;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace PowerAccent.Core.Services;
 
@@ -92,17 +91,17 @@ public class SettingsService : ApplicationSettingsBase
         switch (letter)
         {
             case LetterKey.A:
-                return new char[] { 'ä', 'â', 'á', 'à', 'ã' };
+                return new char[] { 'à', 'â', 'á', 'ä', 'ã' };
             case LetterKey.C:
                 return new char[] { 'ç' };
             case LetterKey.E:
-                return new char[] { 'ë', 'ê', 'é', 'è', '€' };
+                return new char[] { 'é', 'è', 'ê', 'ë', '€' };
             case LetterKey.I:
-                return new char[] { 'ï', 'î', 'í', 'ì' };
+                return new char[] { 'î', 'ï', 'í', 'ì' };
             case LetterKey.O:
-                return new char[] { 'ö', 'ô', 'ó', 'ò', 'õ' };
+                return new char[] { 'ô', 'ö', 'ó', 'ò', 'õ' };
             case LetterKey.U:
-                return new char[] { 'ü', 'û', 'ú', 'ù' };
+                return new char[] { 'û', 'ù', 'ü', 'ú' };
             case LetterKey.Y:
                 return new char[] { 'ÿ', 'ý' };
         }

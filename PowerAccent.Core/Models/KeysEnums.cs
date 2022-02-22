@@ -17,4 +17,5 @@ public enum ArrowKey
 {
     Left = User32.VK.VK_LEFT,
     Right = User32.VK.VK_RIGHT,
+    Space = User32.VK.VK_SPACE
 }
