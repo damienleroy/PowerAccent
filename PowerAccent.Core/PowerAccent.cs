@@ -29,31 +29,36 @@ public class PowerAccent
             letterPressed = (LetterKey)args.Key;
         }
 
-        ArrowKey? arrowPressed = null;
+        if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
+        {
+            letterPressed = (LetterKey)args.Key;
+        }
+
+        TriggerKey? triggerPressed = null;
         if (letterPressed.HasValue)
-            if (Enum.IsDefined(typeof(ArrowKey), (int)args.Key))
+            if (Enum.IsDefined(typeof(TriggerKey), (int)args.Key))
             {
-                arrowPressed = (ArrowKey)args.Key;
+                triggerPressed = (TriggerKey)args.Key;
             }
 
-        if (!_visible && letterPressed.HasValue && arrowPressed.HasValue)
+        if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
         {
             _visible = true;
             _characters = _settingService.GetLetterKey(letterPressed.Value);
             OnChangeDisplay?.Invoke(true, _characters);
         }
 
-        if (_visible && arrowPressed.HasValue)
+        if (_visible && triggerPressed.HasValue)
         {
             if (_selectedIndex == -1)
             {
-                if (arrowPressed.Value == ArrowKey.Left)
+                if (triggerPressed.Value == TriggerKey.Left)
                     _selectedIndex = _characters.Length / 2 - 1;
 
-                if (arrowPressed.Value == ArrowKey.Right)
+                if (triggerPressed.Value == TriggerKey.Right)
                     _selectedIndex = _characters.Length / 2;
 
-                if (arrowPressed.Value == ArrowKey.Space)
+                if (triggerPressed.Value == TriggerKey.Space)
                     _selectedIndex = 0;
 
                 if (_selectedIndex < 0) _selectedIndex = 0;
@@ -63,7 +68,7 @@ public class PowerAccent
                 return false;
             }
 
-            if (arrowPressed.Value == ArrowKey.Space)
+            if (triggerPressed.Value == TriggerKey.Space)
             {
                 if (_selectedIndex < _characters.Length - 1)
                     ++_selectedIndex;
@@ -71,9 +76,9 @@ public class PowerAccent
                     _selectedIndex = 0;
             }
 
-            if (arrowPressed.Value == ArrowKey.Left && _selectedIndex > 0)
+            if (triggerPressed.Value == TriggerKey.Left && _selectedIndex > 0)
                 --_selectedIndex;
-            if (arrowPressed.Value == ArrowKey.Right && _selectedIndex < _characters.Length - 1)
+            if (triggerPressed.Value == TriggerKey.Right && _selectedIndex < _characters.Length - 1)
                 ++_selectedIndex;
 
             OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);

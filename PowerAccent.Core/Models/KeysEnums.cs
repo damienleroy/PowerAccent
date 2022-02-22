@@ -13,7 +13,7 @@ public enum LetterKey
     Y = User32.VK.VK_Y
 }
 
-public enum ArrowKey
+public enum TriggerKey
 {
     Left = User32.VK.VK_LEFT,
     Right = User32.VK.VK_RIGHT,
