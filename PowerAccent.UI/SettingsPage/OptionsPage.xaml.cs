@@ -22,11 +22,18 @@ namespace PowerAccent.UI.SettingsPage
         {
             base.OnInitialized(e);
             IsUseCaretPosition.IsOn = _settingService.UseCaretPosition;
+            IsSpaceBarActive.IsOn = _settingService.IsSpaceBarActive;
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void UseCaretPosition_Checked(object sender, RoutedEventArgs e)
         {
             _settingService.UseCaretPosition = ((ToggleSwitch)sender).IsOn;
+            (Application.Current.MainWindow as Selector).RefreshSettings();
+        }
+
+        private void SpaceBarActive_Checked(object sender, RoutedEventArgs e)
+        {
+            _settingService.IsSpaceBarActive = ((ToggleSwitch)sender).IsOn;
             (Application.Current.MainWindow as Selector).RefreshSettings();
         }
     }

@@ -10,8 +10,15 @@
       Title="OptionsPage">
 
     <Grid Width="300" Height="200">
-        <mah:ToggleSwitch x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
                           OnContent="On" OffContent="Off"
-                          VerticalAlignment="Center" Toggled="CheckBox_Checked" Cursor="Hand" />
+                          VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
+        <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
+                          OnContent="On" OffContent="Off"
+                          VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />
     </Grid>
 </Page>

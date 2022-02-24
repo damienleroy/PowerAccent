@@ -20,6 +20,14 @@ public class SettingsService : ApplicationSettingsBase
         set { this["UseCaretPosition"] = value; Save(); }
     }
 
+    [UserScopedSetting()]
+    [DefaultSettingValue("True")]
+    public bool IsSpaceBarActive
+    {
+        get { return (bool)this["IsSpaceBarActive"]; }
+        set { this["IsSpaceBarActive"] = value; Save(); }
+    }
+
     #region LetterKey
 
     [UserScopedSetting()]

@@ -39,6 +39,8 @@ public class PowerAccent
             if (Enum.IsDefined(typeof(TriggerKey), (int)args.Key))
             {
                 triggerPressed = (TriggerKey)args.Key;
+                if (triggerPressed == TriggerKey.Space && !_settingService.IsSpaceBarActive)
+                    triggerPressed = null;
             }
 
         if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
