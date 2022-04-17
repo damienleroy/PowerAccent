@@ -5,24 +5,29 @@ namespace PowerAccent.Core.Tools;
 
 internal static class WindowsFunctions
 {
-    public static void Insert(char c)
+    public static void Insert(char c, bool back = false)
     {
-        // Split in 2 different SendInput (Powershell doesn't take back issue)
-        var inputsBack = new User32.INPUT[2]
-        {
-                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK}},
-                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK, dwFlags = User32.KEYEVENTF.KEYEVENTF_KEYUP}}
-        };
-        var inputsInsert = new User32.INPUT[1]
-        {
-                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = 0, dwFlags = User32.KEYEVENTF.KEYEVENTF_UNICODE, wScan = c}}
-        };
         unsafe
         {
-            // DO NOT REMOVE Trace.WriteLine (Powershell doesn't take back issue)
-            var temp1 = User32.SendInput((uint)inputsBack.Length, inputsBack, sizeof(User32.INPUT));
-            System.Diagnostics.Trace.WriteLine(temp1);
+            if (back)
+            {
+                // Split in 2 different SendInput (Powershell doesn't take back issue)
+                var inputsBack = new User32.INPUT[]
+                {
+                    new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK}},
+                    new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = (ushort) User32.VK.VK_BACK, dwFlags = User32.KEYEVENTF.KEYEVENTF_KEYUP}}
+                };
 
+                // DO NOT REMOVE Trace.WriteLine (Powershell doesn't take back issue)
+                var temp1 = User32.SendInput((uint)inputsBack.Length, inputsBack, sizeof(User32.INPUT));
+                System.Diagnostics.Trace.WriteLine(temp1);
+            }
+
+            // Letter
+            var inputsInsert = new User32.INPUT[1]
+            {
+                new User32.INPUT {type = User32.INPUTTYPE.INPUT_KEYBOARD, ki = new User32.KEYBDINPUT {wVk = 0, dwFlags = User32.KEYEVENTF.KEYEVENTF_UNICODE, wScan = c}}
+            };
             var temp2 = User32.SendInput((uint)inputsInsert.Length, inputsInsert, sizeof(User32.INPUT));
             System.Diagnostics.Trace.WriteLine(temp2);
         }

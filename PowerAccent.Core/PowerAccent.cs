@@ -1,4 +1,5 @@
-﻿using PowerAccent.Core.Services;
+﻿using System.Diagnostics;
+using PowerAccent.Core.Services;
 using PowerAccent.Core.Tools;
 
 namespace PowerAccent.Core;
@@ -12,6 +13,8 @@ public class PowerAccent
     private bool _visible = false;
     private char[] _characters = new char[0];
     private int _selectedIndex = -1;
+    private Stopwatch _stopWatch;
+    private Timer _timer;
 
     public event Action<bool, char[]> OnChangeDisplay;
     public event Action<int, char> OnSelectCharacter;
@@ -26,11 +29,7 @@ public class PowerAccent
     {
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
-            letterPressed = (LetterKey)args.Key;
-        }
-
-        if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
-        {
+            _stopWatch = Stopwatch.StartNew();
             letterPressed = (LetterKey)args.Key;
         }
 
@@ -50,7 +49,7 @@ public class PowerAccent
             OnChangeDisplay?.Invoke(true, _characters);
         }
 
-        if (_visible && triggerPressed.HasValue)
+        if(_visible && triggerPressed.HasValue)
         {
             if (_selectedIndex == -1)
             {
@@ -95,11 +94,24 @@ public class PowerAccent
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
             letterPressed = null;
+            _stopWatch.Stop();
             if (_visible)
             {
+                if (_stopWatch.ElapsedMilliseconds < _settingService.InputTime)
+                {
+                    Debug.WriteLine("Insert before inputTime - " + _stopWatch.ElapsedMilliseconds);
+                    //WindowsFunctions.Insert('e');
+                    WindowsFunctions.Insert(' ');
+                    OnChangeDisplay?.Invoke(false, null);
+                    _selectedIndex = -1;
+                    _visible = false;
+                    return false;
+                }
+
+                Debug.WriteLine("Insert after inputTime - " + _stopWatch.ElapsedMilliseconds);
                 OnChangeDisplay?.Invoke(false, null);
                 if (_selectedIndex != -1)
-                    WindowsFunctions.Insert(_characters[_selectedIndex]);
+                    WindowsFunctions.Insert(_characters[_selectedIndex], true);
                 _selectedIndex = -1;
                 _visible = false;
             }
@@ -114,9 +126,7 @@ public class PowerAccent
         Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
         Position position = _settingService.Position;
 
-#if DEBUG
-        System.Diagnostics.Trace.WriteLine("Dpi: " + activeDisplay.Dpi);
-#endif
+        Debug.WriteLine("Dpi: " + activeDisplay.Dpi);
 
         if (!_settingService.UseCaretPosition)
         {

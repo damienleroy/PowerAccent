@@ -4,7 +4,7 @@ namespace PowerAccent.Core.Services;
 
 public class SettingsService : ApplicationSettingsBase
 {
-    [UserScopedSetting()]
+    [UserScopedSetting]
     [DefaultSettingValue("Top")]
     public Position Position
     {
@@ -12,7 +12,7 @@ public class SettingsService : ApplicationSettingsBase
         set { this["Position"] = value; Save(); }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     [DefaultSettingValue("False")]
     public bool UseCaretPosition
     {
@@ -20,7 +20,7 @@ public class SettingsService : ApplicationSettingsBase
         set { this["UseCaretPosition"] = value; Save(); }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     [DefaultSettingValue("True")]
     public bool IsSpaceBarActive
     {
@@ -28,51 +28,59 @@ public class SettingsService : ApplicationSettingsBase
         set { this["IsSpaceBarActive"] = value; Save(); }
     }
 
+    [UserScopedSetting]
+    [DefaultSettingValue("200")]
+    public int InputTime
+    {
+        get { return (int)this["InputTime"]; }
+        set { this["InputTime"] = value; Save(); }
+    }
+
     #region LetterKey
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyA
     {
         get { return (char[])this["LetterKeyA"]; }
         set { this["LetterKeyA"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyC
     {
         get { return (char[])this["LetterKeyC"]; }
         set { this["LetterKeyC"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyE
     {
         get { return (char[])this["LetterKeyE"]; }
         set { this["LetterKeyE"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyI
     {
         get { return (char[])this["LetterKeyI"]; }
         set { this["LetterKeyI"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyO
     {
         get { return (char[])this["LetterKeyO"]; }
         set { this["LetterKeyO"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyU
     {
         get { return (char[])this["LetterKeyU"]; }
         set { this["LetterKeyU"] = value; }
     }
 
-    [UserScopedSetting()]
+    [UserScopedSetting]
     public char[] LetterKeyY
     {
         get { return (char[])this["LetterKeyY"]; }

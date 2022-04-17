@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
@@ -69,5 +70,10 @@ public partial class Selector : Window
     public void RefreshSettings()
     {
         _powerAccent.ReloadSettings();
+    }
+
+    public void HideTaskbarIcon()
+    {
+        this.TaskbarIcon.Visibility = Visibility.Collapsed;
     }
 }
