@@ -156,7 +156,7 @@ public class PowerAccent : IDisposable
     public void Dispose()
     {
         _keyboardListener.Dispose();
-        GC.SuppressFinalize(_keyboardListener);
+        GC.SuppressFinalize(this);
     }
 
     public static char[] ToUpper(char[] array)
