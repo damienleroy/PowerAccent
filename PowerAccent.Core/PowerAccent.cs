@@ -4,17 +4,16 @@ using PowerAccent.Core.Tools;
 
 namespace PowerAccent.Core;
 
-public class PowerAccent
+public class PowerAccent : IDisposable
 {
     private readonly SettingsService _settingService = new SettingsService();
     private readonly KeyboardListener _keyboardListener = new KeyboardListener();
 
-    private LetterKey? letterPressed = null;
-    private bool _visible = false;
-    private char[] _characters = new char[0];
+    private LetterKey? letterPressed;
+    private bool _visible;
+    private char[] _characters = Array.Empty<char>();
     private int _selectedIndex = -1;
     private Stopwatch _stopWatch;
-    private Timer _timer;
 
     public event Action<bool, char[]> OnChangeDisplay;
     public event Action<int, char> OnSelectCharacter;
@@ -159,7 +158,7 @@ public class PowerAccent
         _keyboardListener.Dispose();
     }
 
-    public char[] ToUpper(char[] array)
+    public static char[] ToUpper(char[] array)
     {
         char[] result = new char[array.Length];
         for (int i = 0; i < array.Length; i++)

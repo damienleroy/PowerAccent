@@ -24,12 +24,12 @@ internal class KeyboardListener : IDisposable
     /// <summary>
     /// Fired when any of the keys is pressed down.
     /// </summary>
-    public event RawKeyEventHandler? KeyDown;
+    public event RawKeyEventHandler KeyDown;
 
     /// <summary>
     /// Fired when any of the keys is released.
     /// </summary>
-    public event RawKeyEventHandler? KeyUp;
+    public event RawKeyEventHandler KeyUp;
 
     /// <summary>
     /// Hook ID
@@ -221,7 +221,7 @@ internal static class InterceptKeys
     public static IntPtr SetHook(LowLevelKeyboardProc proc)
     {
         using (Process curProcess = Process.GetCurrentProcess())
-        using (ProcessModule? curModule = curProcess.MainModule)
+        using (ProcessModule curModule = curProcess.MainModule)
         {
             return SetWindowsHookEx(WH_KEYBOARD_LL, proc, (IntPtr)0, 0);
         }
