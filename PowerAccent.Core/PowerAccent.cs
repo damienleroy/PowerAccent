@@ -45,7 +45,7 @@ public class PowerAccent : IDisposable
         {
             _visible = true;
             _characters = WindowsFunctions.IsCapitalState() ? ToUpper(_settingService.GetLetterKey(letterPressed.Value)) : _settingService.GetLetterKey(letterPressed.Value);
-            Task.Delay(200).ContinueWith(t =>
+            Task.Delay(_settingService.InputTime).ContinueWith(t =>
             {
                 if (_visible)
                     OnChangeDisplay?.Invoke(true, _characters);
