@@ -23,3 +23,4 @@ https://www.buymeacoffee.com/dams
 # Thanks to
 - [Ciantic](https://gist.github.com/Ciantic/471698) for the implementation of the Keyboard Listener.
 - [Saurabh Singh](https://www.codeproject.com/Articles/34520/Getting-Caret-Position-Inside-Any-Application) to share how get the caret position.
+- [PowerToys team](https://github.com/microsoft/PowerToys) to integrated PowerAccent in PowerToys (named as Quick Accent).
