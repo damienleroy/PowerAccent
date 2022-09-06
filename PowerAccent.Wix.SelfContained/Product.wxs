@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PowerAccent.SelfContained" Language="1033" Version="0.0.1" Manufacturer="Damien Leroy" UpgradeCode="e8c1adda-4e34-48a8-94bb-2fa159277208">
+	<Product Id="*" Name="PowerAccent" Language="1033" Version="0.0.1" Manufacturer="Damien Leroy" UpgradeCode="e8c1adda-4e34-48a8-94bb-2fa159277208">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
