@@ -7,10 +7,17 @@ public enum LetterKey
     A = User32.VK.VK_A,
     C = User32.VK.VK_C,
     E = User32.VK.VK_E,
+    G = User32.VK.VK_G,
     I = User32.VK.VK_I,
+    L = User32.VK.VK_L,
+    N = User32.VK.VK_N,
     O = User32.VK.VK_O,
+    S = User32.VK.VK_S,
+    T = User32.VK.VK_T,
     U = User32.VK.VK_U,
-    Y = User32.VK.VK_Y
+    Y = User32.VK.VK_Y,
+    Z = User32.VK.VK_Z,
+    _1 = User32.VK.VK_OEM_COMMA,
 }
 
 public enum TriggerKey

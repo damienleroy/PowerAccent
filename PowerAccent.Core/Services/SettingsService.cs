@@ -1,9 +1,19 @@
 ﻿using System.Configuration;
+using System.Diagnostics.Metrics;
+using System.Linq;
 
 namespace PowerAccent.Core.Services;
 
 public class SettingsService : ApplicationSettingsBase
 {
+    [UserScopedSetting]
+    [DefaultSettingValue("FR")]
+    public Language SelectedLanguage
+    {
+        get { return (Language)this["SelectedLanguage"]; }
+        set { this["SelectedLanguage"] = value; Save(); }
+    }
+
     [UserScopedSetting]
     [DefaultSettingValue("Top")]
     public Position Position
@@ -60,6 +70,13 @@ public class SettingsService : ApplicationSettingsBase
     }
 
     [UserScopedSetting]
+    public char[] LetterKeyG
+    {
+        get { return (char[])this["LetterKeyG"]; }
+        set { this["LetterKeyG"] = value; }
+    }
+
+    [UserScopedSetting]
     public char[] LetterKeyI
     {
         get { return (char[])this["LetterKeyI"]; }
@@ -67,10 +84,24 @@ public class SettingsService : ApplicationSettingsBase
     }
 
     [UserScopedSetting]
+    public char[] LetterKeyN
+    {
+        get { return (char[])this["LetterKeyN"]; }
+        set { this["LetterKeyN"] = value; }
+    }
+
+    [UserScopedSetting]
     public char[] LetterKeyO
     {
         get { return (char[])this["LetterKeyO"]; }
         set { this["LetterKeyO"] = value; }
+    }
+
+    [UserScopedSetting]
+    public char[] LetterKeyS
+    {
+        get { return (char[])this["LetterKeyS"]; }
+        set { this["LetterKeyS"] = value; }
     }
 
     [UserScopedSetting]
@@ -96,33 +127,15 @@ public class SettingsService : ApplicationSettingsBase
     public char[] GetLetterKey(LetterKey letter)
     {
         string key = $"LetterKey{letter}";
-        if (this[key] != null)
+        if (this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key) && this[key] != null)
             return (char[])this[key];
 
-        return GetDefaultLetterKey(letter);
+          return Languages.GetDefaultLetterKey(letter, SelectedLanguage);
     }
 
-    public char[] GetDefaultLetterKey(LetterKey letter)
+    public char[] GetDefaultLetterKey(LetterKey key)
     {
-        switch (letter)
-        {
-            case LetterKey.A:
-                return new char[] { 'à', 'â', 'á', 'ä', 'ã' };
-            case LetterKey.C:
-                return new char[] { 'ç' };
-            case LetterKey.E:
-                return new char[] { 'é', 'è', 'ê', 'ë', '€' };
-            case LetterKey.I:
-                return new char[] { 'î', 'ï', 'í', 'ì' };
-            case LetterKey.O:
-                return new char[] { 'ô', 'ö', 'ó', 'ò', 'õ' };
-            case LetterKey.U:
-                return new char[] { 'û', 'ù', 'ü', 'ú' };
-            case LetterKey.Y:
-                return new char[] { 'ÿ', 'ý' };
-        }
-
-        throw new ArgumentException("Letter {0} is missing", letter.ToString());
+        return Languages.GetDefaultLetterKey(key, SelectedLanguage);
     }
 
     #endregion
