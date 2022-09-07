@@ -71,7 +71,7 @@ namespace PowerAccent.Core
                     return new char[] { 'ó' };
                 case LetterKey.U:
                     return new char[] { 'ü', 'ú' };
-                case LetterKey._1:
+                case LetterKey._:
                     return new char[] { '¿', '?' };
             }
 

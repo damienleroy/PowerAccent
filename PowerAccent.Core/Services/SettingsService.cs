@@ -51,91 +51,132 @@ public class SettingsService : ApplicationSettingsBase
     [UserScopedSetting]
     public char[] LetterKeyA
     {
-        get { return (char[])this["LetterKeyA"]; }
-        set { this["LetterKeyA"] = value; }
+        get { return (char[])this[$"LetterKeyA_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyA_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyC
     {
-        get { return (char[])this["LetterKeyC"]; }
-        set { this["LetterKeyC"] = value; }
+        get { return (char[])this[$"LetterKeyC_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyC_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyE
     {
-        get { return (char[])this["LetterKeyE"]; }
-        set { this["LetterKeyE"] = value; }
+        get { return (char[])this[$"LetterKeyE_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyE_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyG
     {
-        get { return (char[])this["LetterKeyG"]; }
-        set { this["LetterKeyG"] = value; }
+        get { return (char[])this[$"LetterKeyG_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyG_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyI
     {
-        get { return (char[])this["LetterKeyI"]; }
-        set { this["LetterKeyI"] = value; }
+        get { return (char[])this[$"LetterKeyI_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyI_{SelectedLanguage}"] = value; }
+    }
+
+    [UserScopedSetting]
+    public char[] LetterKeyL
+    {
+        get { return (char[])this[$"LetterKeyL_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyL_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyN
     {
-        get { return (char[])this["LetterKeyN"]; }
-        set { this["LetterKeyN"] = value; }
+        get { return (char[])this[$"LetterKeyN_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyN_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyO
     {
-        get { return (char[])this["LetterKeyO"]; }
-        set { this["LetterKeyO"] = value; }
+        get { return (char[])this[$"LetterKeyO_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyO_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyS
     {
-        get { return (char[])this["LetterKeyS"]; }
-        set { this["LetterKeyS"] = value; }
+        get { return (char[])this[$"LetterKeyS_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyS_{SelectedLanguage}"] = value; }
+    }
+
+    [UserScopedSetting]
+    public char[] LetterKeyT
+    {
+        get { return (char[])this[$"LetterKeyT_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyT_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyU
     {
-        get { return (char[])this["LetterKeyU"]; }
-        set { this["LetterKeyU"] = value; }
+        get { return (char[])this[$"LetterKeyU_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyU_{SelectedLanguage}"] = value; }
     }
 
     [UserScopedSetting]
     public char[] LetterKeyY
     {
-        get { return (char[])this["LetterKeyY"]; }
-        set { this["LetterKeyY"] = value; }
+        get { return (char[])this[$"LetterKeyY_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyY_{SelectedLanguage}"] = value; }
+    }
+
+    [UserScopedSetting]
+    public char[] LetterKeyZ
+    {
+        get { return (char[])this[$"LetterKeyZ_{SelectedLanguage}"]; }
+        set { this[$"LetterKeyZ_{SelectedLanguage}"] = value; }
     }
 
     public void SetLetterKey(LetterKey letter, char[] value)
     {
-        string key = $"LetterKey{letter}";
+        string key = $"LetterKey{letter}_{SelectedLanguage}";
+        AddingProperty(key);
+
         this[key] = value;
+        this.Save();
     }
 
     public char[] GetLetterKey(LetterKey letter)
     {
-        string key = $"LetterKey{letter}";
+        string key = $"LetterKey{letter}_{SelectedLanguage}";
+        AddingProperty(key);
         if (this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key) && this[key] != null)
             return (char[])this[key];
-
+        
           return Languages.GetDefaultLetterKey(letter, SelectedLanguage);
     }
 
     public char[] GetDefaultLetterKey(LetterKey key)
     {
         return Languages.GetDefaultLetterKey(key, SelectedLanguage);
+    }
+
+    private void AddingProperty(string key)
+    {
+        if (!this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key))
+        {
+            SettingsProvider sp = this.Providers["LocalFileSettingsProvider"];
+            SettingsProperty p = new SettingsProperty(key);
+            p.PropertyType = typeof(char[]);
+            p.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
+            p.Provider = sp;
+            p.SerializeAs = SettingsSerializeAs.Xml;
+            SettingsPropertyValue v = new SettingsPropertyValue(p);
+            this.Properties.Add(p);
+            this.Reload();
+        }
     }
 
     #endregion

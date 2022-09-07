@@ -19,16 +19,8 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="60" />
-                </Grid.RowDefinitions>
-                
-                <Label Grid.Row="0" Content="Select a letter" HorizontalContentAlignment="Center" />
-                
-                <ListBox Grid.Row="1" x:Name="Letters" HorizontalAlignment="Center" BorderThickness="0"
-                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" SelectionChanged="Letters_SelectionChanged">
+            <GroupBox Grid.Row="0" Header="1 - Select a letter" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <ListBox Grid.Row="1" x:Name="Letters" HorizontalAlignment="Center" BorderThickness="0" SelectionChanged="Letters_SelectionChanged">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
@@ -72,70 +64,67 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
-            </Grid>
+            </GroupBox>
 
             <Grid Grid.Row="1" Visibility="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource visibilityNullConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="60" />
-                </Grid.RowDefinitions>
-                
-                <Label Grid.Row="0" Content="Drag &amp; drop to rearrange the characters" HorizontalContentAlignment="Center" />
-                
-                <ListBox Grid.Row="1" x:Name="CharacterList" HorizontalAlignment="Center" BorderThickness="0"
+                <GroupBox Header="2 - Drag &amp; drop to rearrange the characters" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <ListBox Grid.Row="1" x:Name="CharacterList" HorizontalAlignment="Center" BorderThickness="0"
                  ItemsSource="{Binding Characters}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding}" FontSize="18" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                        <Border x:Name="myBorder" Cursor="Hand"
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding}" FontSize="18" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border x:Name="myBorder" Cursor="Hand"
                                     Padding="0" Margin="0"
                                     SnapsToDevicePixels="true"
                                     Style="{DynamicResource borderContent}">
-                                            <ContentPresenter />
-                                        </Border>
-                                        <ControlTemplate.Resources>
-                                            <Style x:Key="borderContent" TargetType="Border">
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                                <Setter Property="Background" Value="#ECECEC"/>
-                                                <Setter Property="Width" Value="50"/>
-                                                <Setter Property="Height" Value="50"/>
-                                            </Style>
-                                        </ControlTemplate.Resources>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsSelected" Value="true">
-                                                <Setter TargetName="myBorder" Property="Background" Value="White"/>
-                                                <Setter Property="FontWeight" Value="Bold"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                                                <ContentPresenter />
+                                            </Border>
+                                            <ControlTemplate.Resources>
+                                                <Style x:Key="borderContent" TargetType="Border">
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                    <Setter Property="Background" Value="#ECECEC"/>
+                                                    <Setter Property="Width" Value="50"/>
+                                                    <Setter Property="Height" Value="50"/>
+                                                </Style>
+                                            </ControlTemplate.Resources>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter TargetName="myBorder" Property="Background" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="Bold"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </GroupBox>
             </Grid>
         </Grid>
 
-        <Grid Height="50">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button x:Name="Back" DockPanel.Dock="Bottom" Grid.Column="0" Width="200" Content="Back to default" Click="Back_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
-            <Button x:Name="Save" DockPanel.Dock="Bottom" Grid.Column="1" Width="200" Content="Save" Click="Save_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
+        <Grid Height="Auto" Margin="0,50,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="Back" DockPanel.Dock="Bottom" Grid.Row="1" Width="200" Height="50" Content="Back to default" Click="Back_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
+            <Button x:Name="Save" DockPanel.Dock="Bottom" Grid.Row="0" Width="200" Height="50" Content="Save" Click="Save_Click"
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                    IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
         </Grid>
 
     </DockPanel>

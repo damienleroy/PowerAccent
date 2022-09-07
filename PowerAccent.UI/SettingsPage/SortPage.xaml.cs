@@ -8,6 +8,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Shell;
+using Application = System.Windows.Application;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.Forms.DragEventArgs;
+using ListBox = System.Windows.Controls.ListBox;
 
 namespace PowerAccent.UI.SettingsPage;
 
@@ -26,7 +33,9 @@ public partial class SortPage : Page, INotifyPropertyChanged
     protected override void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);
-        Letters.ItemsSource = Enum.GetValues(typeof(LetterKey)).Cast<LetterKey>();
+        Letters.ItemsSource = Enum.GetValues(typeof(LetterKey)).Cast<LetterKey>()
+            .Where(k => k != LetterKey._)
+            .Where(k => _settingService.GetLetterKey(k).Length > 0);
         CharacterList.DataContext = this;
     }
 
@@ -63,18 +72,18 @@ public partial class SortPage : Page, INotifyPropertyChanged
         CharacterList.Visibility = Visibility.Visible;
     }
 
+    private void Back_Click(object sender, RoutedEventArgs e)
+    {
+        LetterKey key = (LetterKey)Letters.SelectedItem;
+        Characters = new ObservableCollection<char>(_settingService.GetDefaultLetterKey(key));
+    }
+
     private void Save_Click(object sender, RoutedEventArgs e)
     {
         LetterKey key = (LetterKey)Letters.SelectedItem;
         _settingService.SetLetterKey(key, Characters.ToArray());
         _settingService.Save();
         (Application.Current.MainWindow as Selector).RefreshSettings();
-    }
-
-    private void Back_Click(object sender, RoutedEventArgs e)
-    {
-        LetterKey key = (LetterKey)Letters.SelectedItem;
-        Characters = new ObservableCollection<char>(_settingService.GetDefaultLetterKey(key));
     }
 }
 
