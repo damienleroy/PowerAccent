@@ -88,7 +88,7 @@
                 <Style x:Key="Flag" TargetType="RadioButton">
                     <Style.Triggers>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Opacity" Value="0.4"/>
                         </Trigger>
                     </Style.Triggers>
 
@@ -122,7 +122,7 @@
                     </d:ListView.ItemsSource>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="50,0,50,0" GroupName="Countries" Checked="RadioButton_Checked">
+                            <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" GroupName="Countries" Checked="RadioButton_Checked">
                                 <WrapPanel>
                                     <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" />
                                 </WrapPanel>
