@@ -244,7 +244,9 @@ internal static class Languages
             case LetterKey.O:
                 return new char[] { 'ō', 'ó', 'ǒ', 'ò', 'o' };
             case LetterKey.U:
-                return new char[] { 'ū', 'ǖ', 'ú', 'ǘ', 'ǔ', 'ǚ', 'ù', 'ǜ', 'u', 'ü' };
+                return new char[] { 'ū', 'ú', 'ǔ', 'ù', 'u' };
+            case LetterKey.V:
+                return new char[] { 'ǖ', 'ǘ', 'ǚ', 'ǜ', 'ü' };
         }
 
         return Array.Empty<char>();

@@ -34,6 +34,7 @@ public enum LetterKey
     S = User32.VK.VK_S,
     T = User32.VK.VK_T,
     U = User32.VK.VK_U,
+    V = User32.VK.VK_V,
     W = User32.VK.VK_W,
     X = User32.VK.VK_X,
     Y = User32.VK.VK_Y,
