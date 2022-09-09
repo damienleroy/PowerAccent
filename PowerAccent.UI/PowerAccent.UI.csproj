@@ -13,12 +13,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\Flags\ALL.jpg" />
 		<None Remove="Resources\Flags\PL.jpg" />
 		<None Remove="win11desktop.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Resource Include="a-icon.ico" />
+		<Resource Include="Resources\Flags\ALL.jpg" />
 		<Resource Include="Resources\Flags\PL.jpg">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>

@@ -34,7 +34,7 @@ public partial class SortPage : Page, INotifyPropertyChanged
     {
         base.OnInitialized(e);
         Letters.ItemsSource = Enum.GetValues(typeof(LetterKey)).Cast<LetterKey>()
-            .Where(k => k != LetterKey._)
+            .Where(k => k >= LetterKey.A && k <= LetterKey.Z)
             .Where(k => _settingService.GetLetterKey(k).Length > 0);
         CharacterList.DataContext = this;
     }

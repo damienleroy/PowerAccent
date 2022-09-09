@@ -114,6 +114,7 @@
 
                     <d:ListView.ItemsSource>
                         <x:Array Type="{x:Type models:Country}">
+                            <models:Country Name="ALL" ImageUrl="/Resources/Flags/ALL.jpg" />
                             <models:Country Name="FR" ImageUrl="/Resources/Flags/FR.jpg" />
                             <models:Country Name="SP" ImageUrl="/Resources/Flags/SP.jpg" IsChecked="True" />
                             <models:Country Name="TK" ImageUrl="/Resources/Flags/TK.jpg" />
