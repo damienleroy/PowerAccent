@@ -105,10 +105,10 @@
             </Grid.Resources>
 
             <GroupBox Header="Change the country" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <ListView x:Name="Countries" Height="Auto" VerticalAlignment="Stretch">
+                <ListView x:Name="Countries" Height="Auto" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"></StackPanel>
+                            <WrapPanel/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
 
