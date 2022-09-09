@@ -1,35 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
-    <UseWPF>true</UseWPF>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <ApplicationIcon>a-icon.ico</ApplicationIcon>
-    <AssemblyName>PowerAccent</AssemblyName>
-	<XamlDebuggingInformation>True</XamlDebuggingInformation>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>disable</Nullable>
+		<UseWPF>true</UseWPF>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<ApplicationIcon>a-icon.ico</ApplicationIcon>
+		<AssemblyName>PowerAccent</AssemblyName>
+		<XamlDebuggingInformation>True</XamlDebuggingInformation>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="win11desktop.jpg" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\Flags\ALL.jpg" />
+		<None Remove="Resources\Flags\CUR.jpg" />
+		<None Remove="Resources\Flags\MI.jpg" />
+		<None Remove="Resources\Flags\PI.jpg" />
+		<None Remove="Resources\Flags\PL.jpg" />
+		<None Remove="win11desktop.jpg" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="a-icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="win11desktop.jpg" />
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="a-icon.ico" />
+		<Resource Include="Resources\Flags\ALL.jpg" />
+		<Resource Include="Resources\Flags\CUR.jpg" />
+		<Resource Include="Resources\Flags\MI.jpg" />
+		<Resource Include="Resources\Flags\PI.jpg" />
+		<Resource Include="Resources\Flags\PL.jpg">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="win11desktop.jpg" />
+		<Resource Include="Resources\Flags\FR.jpg">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Flags\SP.jpg">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Flags\TK.jpg">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
+		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
-  </ItemGroup>
-	
+	<ItemGroup>
+		<ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
+	</ItemGroup>
+
 </Project>

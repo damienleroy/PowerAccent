@@ -4,21 +4,149 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:models="clr-namespace:PowerAccent.Core;assembly=PowerAccent.Core"
       xmlns:local="clr-namespace:PowerAccent.UI.SettingsPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OptionsPage">
+      Title="OptionsPage"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid Width="300" Height="200">
+    <Page.Resources>
+        <local:StringToImageSourceConverter x:Key="stringToImageSourceConverter" />
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <Image Source="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" Width="64" Height="64"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
+
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style x:Key="Flag" TargetType="RadioButton">
+                    <Style.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                    <Setter Property="BorderThickness" Value="2"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="RadioButton">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+
+            <GroupBox Header="Change the country" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <ListView x:Name="Countries" Height="Auto" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <d:ListView.ItemsSource>
+                        <x:Array Type="{x:Type models:Country}">
+                            <models:Country Name="ALL" ImageUrl="/Resources/Flags/ALL.jpg" />
+                            <models:Country Name="FR" ImageUrl="/Resources/Flags/FR.jpg" />
+                            <models:Country Name="SP" ImageUrl="/Resources/Flags/SP.jpg" IsChecked="True" />
+                            <models:Country Name="TK" ImageUrl="/Resources/Flags/TK.jpg" />
+                            <models:Country Name="TK" ImageUrl="/Resources/Flags/PL.jpg" />
+                        </x:Array>
+                    </d:ListView.ItemsSource>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" GroupName="Countries" Checked="RadioButton_Checked">
+                                <WrapPanel>
+                                    <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" />
+                                </WrapPanel>
+                            </RadioButton>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </GroupBox>
+        </Grid>
+
+        <StackPanel Grid.Row="1">
+            <Grid Width="300" Height="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
-        <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
+                <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

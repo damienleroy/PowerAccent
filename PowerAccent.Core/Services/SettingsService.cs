@@ -5,6 +5,14 @@ namespace PowerAccent.Core.Services;
 public class SettingsService : ApplicationSettingsBase
 {
     [UserScopedSetting]
+    [DefaultSettingValue("ALL")]
+    public Language SelectedLanguage
+    {
+        get { return (Language)this["SelectedLanguage"]; }
+        set { this["SelectedLanguage"] = value; Save(); }
+    }
+
+    [UserScopedSetting]
     [DefaultSettingValue("Top")]
     public Position Position
     {
@@ -38,91 +46,44 @@ public class SettingsService : ApplicationSettingsBase
 
     #region LetterKey
 
-    [UserScopedSetting]
-    public char[] LetterKeyA
-    {
-        get { return (char[])this["LetterKeyA"]; }
-        set { this["LetterKeyA"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyC
-    {
-        get { return (char[])this["LetterKeyC"]; }
-        set { this["LetterKeyC"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyE
-    {
-        get { return (char[])this["LetterKeyE"]; }
-        set { this["LetterKeyE"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyI
-    {
-        get { return (char[])this["LetterKeyI"]; }
-        set { this["LetterKeyI"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyO
-    {
-        get { return (char[])this["LetterKeyO"]; }
-        set { this["LetterKeyO"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyU
-    {
-        get { return (char[])this["LetterKeyU"]; }
-        set { this["LetterKeyU"] = value; }
-    }
-
-    [UserScopedSetting]
-    public char[] LetterKeyY
-    {
-        get { return (char[])this["LetterKeyY"]; }
-        set { this["LetterKeyY"] = value; }
-    }
-
     public void SetLetterKey(LetterKey letter, char[] value)
     {
-        string key = $"LetterKey{letter}";
+        string key = $"LetterKey{letter}_{SelectedLanguage}";
+        AddingProperty(key);
+
         this[key] = value;
+        this.Save();
     }
 
     public char[] GetLetterKey(LetterKey letter)
     {
-        string key = $"LetterKey{letter}";
-        if (this[key] != null)
+        string key = $"LetterKey{letter}_{SelectedLanguage}";
+        AddingProperty(key);
+        if (this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key) && this[key] != null)
             return (char[])this[key];
-
-        return GetDefaultLetterKey(letter);
+        
+          return Languages.GetDefaultLetterKey(letter, SelectedLanguage);
     }
 
-    public char[] GetDefaultLetterKey(LetterKey letter)
+    public char[] GetDefaultLetterKey(LetterKey key)
     {
-        switch (letter)
-        {
-            case LetterKey.A:
-                return new char[] { 'à', 'â', 'á', 'ä', 'ã' };
-            case LetterKey.C:
-                return new char[] { 'ç' };
-            case LetterKey.E:
-                return new char[] { 'é', 'è', 'ê', 'ë', '€' };
-            case LetterKey.I:
-                return new char[] { 'î', 'ï', 'í', 'ì' };
-            case LetterKey.O:
-                return new char[] { 'ô', 'ö', 'ó', 'ò', 'õ' };
-            case LetterKey.U:
-                return new char[] { 'û', 'ù', 'ü', 'ú' };
-            case LetterKey.Y:
-                return new char[] { 'ÿ', 'ý' };
-        }
+        return Languages.GetDefaultLetterKey(key, SelectedLanguage);
+    }
 
-        throw new ArgumentException("Letter {0} is missing", letter.ToString());
+    private void AddingProperty(string key)
+    {
+        if (!this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key))
+        {
+            SettingsProvider sp = this.Providers["LocalFileSettingsProvider"];
+            SettingsProperty p = new SettingsProperty(key);
+            p.PropertyType = typeof(char[]);
+            p.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
+            p.Provider = sp;
+            p.SerializeAs = SettingsSerializeAs.Xml;
+            SettingsPropertyValue v = new SettingsPropertyValue(p);
+            this.Properties.Add(p);
+            this.Reload();
+        }
     }
 
     #endregion
