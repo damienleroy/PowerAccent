@@ -4,10 +4,13 @@ public enum Language
 {
     ALL,
     CUR,
+    CZ,
+    DE,
     FR,
     MI,
     PI,
     PL,
+    SK,
     SP,
     TK,
 }
@@ -20,10 +23,13 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter);
             case Language.CUR: return GetDefaultLetterKeyCUR(letter);
+            case Language.CZ: return GetDefaultLetterKeyCZ(letter);
+            case Language.DE: return GetDefaultLetterKeyDE(letter);
             case Language.FR: return GetDefaultLetterKeyFR(letter);
             case Language.MI: return GetDefaultLetterKeyMI(letter);
             case Language.PI: return GetDefaultLetterKeyPI(letter);
             case Language.PL: return GetDefaultLetterKeyPL(letter);
+            case Language.SK: return GetDefaultLetterKeySK(letter);
             case Language.SP: return GetDefaultLetterKeySP(letter);
             case Language.TK: return GetDefaultLetterKeyTK(letter);
         }
@@ -303,6 +309,100 @@ internal static class Languages
                 return new char[] { 'ś' };
             case LetterKey.Z:
                 return new char[] { 'ź', 'ż' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Slovak
+    private static char[] GetDefaultLetterKeySK(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á', 'ä' };
+            case LetterKey.C:
+                return new char[] { 'č' };
+            case LetterKey.D:
+                return new char[] { 'ď' };
+            case LetterKey.E:
+                return new char[] { 'é', '€' };
+            case LetterKey.I:
+                return new char[] { 'í' };
+            case LetterKey.L:
+                return new char[] { 'ľ', 'ĺ' };
+            case LetterKey.N:
+                return new char[] { 'ň' };
+            case LetterKey.O:
+                return new char[] { 'ó', 'ô' };
+            case LetterKey.R:
+                return new char[] { 'ŕ' };
+            case LetterKey.S:
+                return new char[] { 'š' };
+            case LetterKey.T:
+                return new char[] { 'ť' };
+            case LetterKey.U:
+                return new char[] { 'ú' };
+            case LetterKey.Y:
+                return new char[] { 'ý' };
+            case LetterKey.Z:
+                return new char[] { 'ž' };
+        }
+
+        return Array.Empty<char>();
+    }
+    
+    // Czech
+    private static char[] GetDefaultLetterKeyCZ(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á' };
+            case LetterKey.C:
+                return new char[] { 'č' };
+            case LetterKey.D:
+                return new char[] { 'ď' };
+            case LetterKey.E:
+                return new char[] { 'ě', 'é' };
+            case LetterKey.I:
+                return new char[] { 'í' };
+            case LetterKey.N:
+                return new char[] { 'ň' };
+            case LetterKey.O:
+                return new char[] { 'ó' };
+            case LetterKey.R:
+                return new char[] { 'ř' };
+            case LetterKey.S:
+                return new char[] { 'š' };
+            case LetterKey.T:
+                return new char[] { 'ť' };
+            case LetterKey.U:
+                return new char[] { 'ů', 'ú' };
+            case LetterKey.Y:
+                return new char[] { 'ý' };
+            case LetterKey.Z:
+                return new char[] { 'ž' };
+        }
+
+        return Array.Empty<char>();
+    }
+    
+    // German
+    private static char[] GetDefaultLetterKeyDE(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'ä' };
+            case LetterKey.E:
+                return new char[] { '€' };
+            case LetterKey.O:
+                return new char[] { 'ö' };
+            case LetterKey.S:
+                return new char[] { 'ß' };
+            case LetterKey.U:
+                return new char[] { 'ü' };
         }
 
         return Array.Empty<char>();
