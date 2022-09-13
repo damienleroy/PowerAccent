@@ -125,7 +125,7 @@
                         <DataTemplate>
                             <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" GroupName="Countries" Checked="RadioButton_Checked">
                                 <WrapPanel>
-                                    <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" />
+                                    <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" Cursor="Hand" />
                                 </WrapPanel>
                             </RadioButton>
                         </DataTemplate>
@@ -139,10 +139,14 @@
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
+                <mah:ToggleSwitch Grid.Row="2" x:Name="DisableInFullScreen" Content="Disable in full screen"
+                          OnContent="On" OffContent="Off"
+                          VerticalAlignment="Center" Toggled="DisableInFullScreen_Toggled" Cursor="Hand" />
                 <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />

@@ -51,6 +51,9 @@ public class PowerAccent : IDisposable
             _visible = true;
             Task.Delay(_settingService.InputTime).ContinueWith(t =>
             {
+                if (_settingService.DisableInFullScreen && WindowsFunctions.IsGameMode())
+                    _visible = false;
+
                 if (_visible)
                     OnChangeDisplay?.Invoke(true, _characters);
             }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -107,7 +110,6 @@ public class PowerAccent : IDisposable
                 if (_stopWatch.ElapsedMilliseconds < _settingService.InputTime)
                 {
                     Debug.WriteLine("Insert before inputTime - " + _stopWatch.ElapsedMilliseconds);
-                    //WindowsFunctions.Insert('e');
                     WindowsFunctions.Insert(' ');
                     OnChangeDisplay?.Invoke(false, null);
                     _selectedIndex = -1;

@@ -20,9 +20,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ToggleButton x:Name="Position" Grid.Column="0" Content="Position" Checked="Position_Checked" />
-            <ToggleButton x:Name="Options" Grid.Column="1" Content="Options" Checked="Options_Checked" />
-            <ToggleButton x:Name="Sort" Grid.Column="2" Content="Sort" Checked="Sort_Checked" />
+            <ToggleButton x:Name="Position" Grid.Column="0" Content="Position" Checked="Position_Checked" Cursor="Hand" />
+            <ToggleButton x:Name="Options" Grid.Column="1" Content="Options" Checked="Options_Checked" Cursor="Hand" />
+            <ToggleButton x:Name="Sort" Grid.Column="2" Content="Sort" Checked="Sort_Checked" Cursor="Hand" />
         </Grid>
         <Frame Grid.Row="1" Name="ParentFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

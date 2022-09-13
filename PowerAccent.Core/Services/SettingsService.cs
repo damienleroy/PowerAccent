@@ -44,6 +44,14 @@ public class SettingsService : ApplicationSettingsBase
         set { this["InputTime"] = value; Save(); }
     }
 
+    [UserScopedSetting]
+    [DefaultSettingValue("True")]
+    public bool DisableInFullScreen
+    {
+        get { return (bool)this["DisableInFullScreen"]; }
+        set { this["DisableInFullScreen"] = value; Save(); }
+    }
+
     #region LetterKey
 
     public void SetLetterKey(LetterKey letter, char[] value)
