@@ -6,13 +6,14 @@
 		<Nullable>disable</Nullable>
 		<UseWPF>true</UseWPF>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-		<ApplicationIcon>a-icon.ico</ApplicationIcon>
+		<ApplicationIcon>Resources/a-icon.ico</ApplicationIcon>
 		<AssemblyName>PowerAccent</AssemblyName>
 		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\win11desktop.jpg" />
 		<None Remove="Resources\Flags\ALL.jpg" />
 		<None Remove="Resources\Flags\CUR.jpg" />
 		<None Remove="Resources\Flags\MI.jpg" />
@@ -24,12 +25,11 @@
 		<None Remove="Resources\Flags\DE.jpg" />
 		<None Remove="Resources\Flags\CZ.jpg" />
 		<None Remove="Resources\Flags\SK.jpg" />
-		<None Remove="win11desktop.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="a-icon.ico" />
-		<Resource Include="win11desktop.jpg" />
+		<Resource Include="Resources\a-icon.ico" />
+		<Resource Include="Resources\win11desktop.jpg" />
 		<Resource Include="Resources\Flags\ALL.jpg" />
 		<Resource Include="Resources\Flags\CUR.jpg" />
 		<Resource Include="Resources\Flags\MI.jpg" />

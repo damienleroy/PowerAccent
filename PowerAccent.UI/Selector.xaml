@@ -9,7 +9,7 @@
         Title="MainWindow" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
     <Grid>
         <tb:TaskbarIcon x:Name="TaskbarIcon"
-            IconSource="a-icon.ico"
+            IconSource="Resources/a-icon.ico"
             ToolTipText="PowerAccent">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
