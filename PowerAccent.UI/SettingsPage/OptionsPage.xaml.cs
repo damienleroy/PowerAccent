@@ -29,6 +29,7 @@ public partial class OptionsPage : Page
 
         IsUseCaretPosition.IsOn = _settingService.UseCaretPosition;
         IsSpaceBarActive.IsOn = _settingService.IsSpaceBarActive;
+        DisableInFullScreen.IsOn = _settingService.DisableInFullScreen;
         Countries.ItemsSource = Enum.GetNames<Language>().Select(l => new Country {
             Name = l,
             ImageUrl = $"/Resources/Flags/{l}.jpg",
@@ -51,6 +52,12 @@ public partial class OptionsPage : Page
     private void RadioButton_Checked(object sender, RoutedEventArgs e)
     {
         _settingService.SelectedLanguage = Enum.Parse<Language>((((RadioButton)sender).DataContext as Country).Name);
+        (Application.Current.MainWindow as Selector).RefreshSettings();
+    }
+
+    private void DisableInFullScreen_Toggled(object sender, RoutedEventArgs e)
+    {
+        _settingService.DisableInFullScreen = ((ToggleSwitch)sender).IsOn;
         (Application.Current.MainWindow as Selector).RefreshSettings();
     }
 }
