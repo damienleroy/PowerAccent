@@ -60,6 +60,12 @@ public partial class OptionsPage : Page
         _settingService.DisableInFullScreen = ((ToggleSwitch)sender).IsOn;
         (Application.Current.MainWindow as Selector).RefreshSettings();
     }
+
+    private void InsertSpaceAfterSelection_Toggled(object sender, RoutedEventArgs e)
+    {
+        _settingService.InsertSpaceAfterSelection = ((ToggleSwitch)sender).IsOn;
+        (Application.Current.MainWindow as Selector).RefreshSettings();
+    }
 }
 
 public class StringToImageSourceConverter : IValueConverter

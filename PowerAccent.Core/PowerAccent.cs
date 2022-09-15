@@ -121,6 +121,8 @@ public class PowerAccent : IDisposable
                 OnChangeDisplay?.Invoke(false, null);
                 if (_selectedIndex != -1)
                     WindowsFunctions.Insert(_characters[_selectedIndex], true);
+                if (_settingService.InsertSpaceAfterSelection)
+                    WindowsFunctions.Insert(' ', false);
                 _selectedIndex = -1;
                 _visible = false;
             }

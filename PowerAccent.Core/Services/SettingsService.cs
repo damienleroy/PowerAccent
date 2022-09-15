@@ -52,6 +52,14 @@ public class SettingsService : ApplicationSettingsBase
         set { this["DisableInFullScreen"] = value; Save(); }
     }
 
+    [UserScopedSetting]
+    [DefaultSettingValue("False")]
+    public bool InsertSpaceAfterSelection
+    {
+        get { return (bool)this["InsertSpaceAfterSelection"]; }
+        set { this["InsertSpaceAfterSelection"] = value; Save(); }
+    }
+
     #region LetterKey
 
     public void SetLetterKey(LetterKey letter, char[] value)
