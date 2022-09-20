@@ -1,21 +1,21 @@
 # How it works
 Press and hold letter then hit space bar or arrow key to select the accent. For example `e` & `⎵`. With spacebar, repeat stroke to change letter. When releasing the letter key, the accent is inserted.
 
-The software is currently working with `a`, `c`, `e`, `i`, `o`, `u`, `y`.
-All accents are ordered by usage frequency: [Wikipedia](https://fr.wikipedia.org/wiki/Fr%C3%A9quence_d%27apparition_des_lettres_en_fran%C3%A7ais)
+The software is currently working with the most of accents for several countries, including `Czech`, `German`, `France`, `Maori`, and many others... (the list can be found [here](https://github.com/damienleroy/PowerAccent/blob/main/PowerAccent.Core/Languages.cs)). If any langage is missing, don't hesitate to create an [issue](https://github.com/damienleroy/PowerAccent/issues).
+
+All accents are ordered by usage frequency ([Wikipedia](https://en.wikipedia.org/wiki/Letter_frequency)) by default.
 
 # Download
 See the [Release](https://github.com/leroyd/PowerAccent/releases) page
 
 # Problem known
-- Only available for windows
+- Some keys can have weird behavior with some actions or some tools
 - (Experimental feature) Inside browsers & some other softwares, the tool can't detect the caret position. So default is applied, meaning up center of the main window
 
 # The future
-- Special characters
 - More accents
-- More options by country
 - Theme & design improvement
+- Some others features [asked](https://github.com/damienleroy/PowerAccent/issues)
 
 # If you like it
 https://www.buymeacoffee.com/dams
