@@ -21,17 +21,17 @@ internal static class Languages
     {
         switch (lang)
         {
-            case Language.ALL: return GetDefaultLetterKeyALL(letter);
-            case Language.CUR: return GetDefaultLetterKeyCUR(letter);
-            case Language.CZ: return GetDefaultLetterKeyCZ(letter);
-            case Language.DE: return GetDefaultLetterKeyDE(letter);
-            case Language.FR: return GetDefaultLetterKeyFR(letter);
-            case Language.MI: return GetDefaultLetterKeyMI(letter);
-            case Language.PI: return GetDefaultLetterKeyPI(letter);
-            case Language.PL: return GetDefaultLetterKeyPL(letter);
-            case Language.SK: return GetDefaultLetterKeySK(letter);
-            case Language.SP: return GetDefaultLetterKeySP(letter);
-            case Language.TK: return GetDefaultLetterKeyTK(letter);
+            case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
+            case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
+            case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
+            case Language.DE: return GetDefaultLetterKeyDE(letter); // German
+            case Language.FR: return GetDefaultLetterKeyFR(letter); // French
+            case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
+            case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
+            case Language.PL: return GetDefaultLetterKeyPL(letter); // Polish
+            case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
+            case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
+            case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
         }
 
         throw new ArgumentException("The language {0} is not know in this context", lang.ToString());
