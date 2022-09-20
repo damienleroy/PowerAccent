@@ -264,15 +264,15 @@ internal static class Languages
         switch (letter)
         {
             case LetterKey.A:
-                return new char[] { 'â', 'ä', 'æ' };
+                return new char[] { 'â' };
             case LetterKey.C:
                 return new char[] { 'ç' };
             case LetterKey.E:
-                return new char[] {'ë', '€' };
+                return new char[] { 'ë', '€' };
             case LetterKey.G:
                 return new char[] { 'ğ' };
             case LetterKey.I:
-                return new char[] { 'î', 'ï' };
+                return new char[] { 'ı', 'İ', 'î',};
             case LetterKey.O:
                 return new char[] { 'ö', 'ô' };
             case LetterKey.S:
@@ -280,9 +280,7 @@ internal static class Languages
             case LetterKey.T:
                 return new char[] { '₺' };
             case LetterKey.U:
-                return new char[] { 'ñ', 'ü', 'û' };
-            case LetterKey.Y:
-                return new char[] { 'ÿ', 'ý' };
+                return new char[] { 'ü', 'û' };
         }
 
         return Array.Empty<char>();
