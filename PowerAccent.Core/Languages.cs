@@ -68,7 +68,7 @@ internal static class Languages
             case LetterKey._9:
 				    return new char[] { '₉', '⁹' };
             case LetterKey.A:
-                return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'ā', 'ą', 'ȧ', 'ã' };
+                return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
             case LetterKey.B:
                 return new char[] { 'ḃ' };
             case LetterKey.C:
@@ -96,7 +96,7 @@ internal static class Languages
             case LetterKey.N:
                 return new char[] { 'ñ', 'ń', 'ŋ', 'ň', 'ņ', 'ṅ',  'ⁿ' };
             case LetterKey.O:
-                return new char[] { 'ô', 'ó', 'ö', 'ő', 'ò', 'ō', 'ȯ', 'ø', 'õ' };
+                return new char[] { 'ô', 'ó', 'ö', 'ő', 'ò', 'ō', 'ȯ', 'ø', 'õ', 'œ' };
             case LetterKey.P:
                 return new char[] { 'ṗ', '₽' };
             case LetterKey.R:
@@ -206,7 +206,7 @@ internal static class Languages
             case LetterKey.O:
                 return new char[] { 'ó' };
             case LetterKey.U:
-                return new char[] { 'ü', 'ú' };
+                return new char[] { 'ú', 'ü' };
             case LetterKey._:
                 return new char[] { '¿', '?' };
         }
@@ -306,7 +306,7 @@ internal static class Languages
             case LetterKey.S:
                 return new char[] { 'ś' };
             case LetterKey.Z:
-                return new char[] { 'ź', 'ż' };
+                return new char[] { 'ż', 'ź' };
         }
 
         return Array.Empty<char>();
