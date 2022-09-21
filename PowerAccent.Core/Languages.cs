@@ -70,7 +70,7 @@ internal static class Languages
             case LetterKey.A:
                 return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
             case LetterKey.B:
-                return new char[] { 'ḃ' };
+                return new char[] { 'ḃ', 'ß' };
             case LetterKey.C:
                 return new char[] { 'ç', 'ć', 'ĉ', 'č', 'ċ', '¢' };
             case LetterKey.D:
@@ -84,7 +84,7 @@ internal static class Languages
             case LetterKey.H:
                 return new char[] { 'ḣ', 'ĥ', 'ħ' };
             case LetterKey.I:
-                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i' };
+                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i', 'ı', 'İ' };
             case LetterKey.J:
                 return new char[] { 'ĵ' };
             case LetterKey.K:
@@ -272,7 +272,7 @@ internal static class Languages
             case LetterKey.G:
                 return new char[] { 'ğ' };
             case LetterKey.I:
-                return new char[] { 'ı', 'İ', 'î',};
+                return new char[] { 'ı', 'İ', 'î' };
             case LetterKey.L:
                 return new char[] { '₺' };
             case LetterKey.O:
