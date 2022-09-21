@@ -48,25 +48,25 @@ internal static class Languages
         switch (letter)
         {
             case LetterKey._0:
-				    return new char[] { '₀', '⁰' };
+		return new char[] { '₀', '⁰' };
             case LetterKey._1:
-				    return new char[] { '₁', '¹' };
+		return new char[] { '₁', '¹' };
             case LetterKey._2:
-				    return new char[] { '₂', '²' };
+		return new char[] { '₂', '²' };
             case LetterKey._3:
-				    return new char[] { '₃', '³' };
+		return new char[] { '₃', '³' };
             case LetterKey._4:
-				    return new char[] { '₄', '⁴' };
+		return new char[] { '₄', '⁴' };
             case LetterKey._5:
-				    return new char[] { '₅', '⁵' };
+		return new char[] { '₅', '⁵' };
             case LetterKey._6:
-				    return new char[] { '₆', '⁶' };
+		return new char[] { '₆', '⁶' };
             case LetterKey._7:
-				    return new char[] { '₇', '⁷' };
+		return new char[] { '₇', '⁷' };
             case LetterKey._8:
-				    return new char[] { '₈', '⁸' };
+		return new char[] { '₈', '⁸' };
             case LetterKey._9:
-				    return new char[] { '₉', '⁹' };
+		return new char[] { '₉', '⁹' };
             case LetterKey.A:
                 return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
             case LetterKey.B:
@@ -190,7 +190,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
 
-    // Spain
+    // Spanish
     private static char[] GetDefaultLetterKeySP(LetterKey letter)
     {
         switch (letter)
@@ -273,12 +273,12 @@ internal static class Languages
                 return new char[] { 'ğ' };
             case LetterKey.I:
                 return new char[] { 'ı', 'İ', 'î',};
+            case LetterKey.L:
+                return new char[] { '₺' };
             case LetterKey.O:
                 return new char[] { 'ö', 'ô' };
             case LetterKey.S:
                 return new char[] { 'ş' };
-            case LetterKey.T:
-                return new char[] { '₺' };
             case LetterKey.U:
                 return new char[] { 'ü', 'û' };
         }
