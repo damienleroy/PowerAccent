@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerAccent.UI"
         mc:Ignorable="d"
-        Title="Settings" Width="900" Height="500" WindowStartupLocation="CenterScreen">
+        Title="Settings" Width="900" Height="650" WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

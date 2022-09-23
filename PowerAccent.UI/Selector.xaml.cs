@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
 
@@ -51,9 +52,14 @@ public partial class Selector : Window
         Application.Current.Shutdown();
     }
 
+    private void Pause_Click(object sender, RoutedEventArgs e)
+    {
+        _powerAccent.IsPaused = !_powerAccent.IsPaused;
+        ((MenuItem)sender).FontWeight = _powerAccent.IsPaused ? FontWeights.Bold : FontWeights.Thin;
+    }
+
     private void CenterWindow()
     {
-        //Method1
         UpdateLayout();
         Size window = new Size(((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualWidth, ((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualHeight);
         Point position = _powerAccent.GetDisplayCoordinates(window);

@@ -18,6 +18,8 @@ public class PowerAccent : IDisposable
     public event Action<bool, char[]> OnChangeDisplay;
     public event Action<int, char> OnSelectCharacter;
 
+    public bool IsPaused { get; set; }
+
     public PowerAccent()
     {
         _keyboardListener.KeyDown += PowerAccent_KeyDown;
@@ -26,6 +28,9 @@ public class PowerAccent : IDisposable
 
     private bool PowerAccent_KeyDown(object sender, KeyboardListener.RawKeyEventArgs args)
     {
+        if (IsPaused)
+            return true;
+
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
             _stopWatch = Stopwatch.StartNew();

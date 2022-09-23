@@ -30,6 +30,7 @@ public partial class OptionsPage : Page
         IsUseCaretPosition.IsOn = _settingService.UseCaretPosition;
         IsSpaceBarActive.IsOn = _settingService.IsSpaceBarActive;
         DisableInFullScreen.IsOn = _settingService.DisableInFullScreen;
+        InputTime.Value = _settingService.InputTime;
         Countries.ItemsSource = Enum.GetNames<Language>().Select(l => new Country {
             Name = l,
             ImageUrl = $"/Resources/Flags/{l}.jpg",
@@ -64,6 +65,13 @@ public partial class OptionsPage : Page
     private void InsertSpaceAfterSelection_Toggled(object sender, RoutedEventArgs e)
     {
         _settingService.InsertSpaceAfterSelection = ((ToggleSwitch)sender).IsOn;
+        (Application.Current.MainWindow as Selector).RefreshSettings();
+    }
+
+    private void InputTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+    {
+        int value = (int)e.NewValue;
+        _settingService.InputTime = value >= 0 ? value : 200;
         (Application.Current.MainWindow as Selector).RefreshSettings();
     }
 }

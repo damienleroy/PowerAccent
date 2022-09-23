@@ -4,6 +4,7 @@ namespace PowerAccent.Core.Services;
 
 public class SettingsService : ApplicationSettingsBase
 {
+
     [UserScopedSetting]
     [DefaultSettingValue("ALL")]
     public Language SelectedLanguage
