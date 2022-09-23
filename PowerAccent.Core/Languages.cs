@@ -90,7 +90,7 @@ internal static class Languages
             case LetterKey.K:
                 return new char[] { 'ķ', 'ǩ' };
             case LetterKey.L:
-                return new char[] { 'ĺ', 'ľ', 'ļ', 'ł' };
+                return new char[] { 'ĺ', 'ľ', 'ļ', 'ł', '₺' };
             case LetterKey.M:
                 return new char[] { 'ṁ' };
             case LetterKey.N:
