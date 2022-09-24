@@ -13,6 +13,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\Flags\GR.jpg" />
+		<None Remove="Resources\Flags\IS.jpg" />
 		<None Remove="Resources\win11desktop.jpg" />
 		<None Remove="Resources\Flags\ALL.jpg" />
 		<None Remove="Resources\Flags\CUR.jpg" />
@@ -29,6 +31,8 @@
 
 	<ItemGroup>
 		<Resource Include="Resources\a-icon.ico" />
+		<Resource Include="Resources\Flags\GR.jpg" />
+		<Resource Include="Resources\Flags\IS.jpg" />
 		<Resource Include="Resources\win11desktop.jpg" />
 		<Resource Include="Resources\Flags\ALL.jpg" />
 		<Resource Include="Resources\Flags\CUR.jpg" />

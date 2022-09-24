@@ -7,6 +7,8 @@ public enum Language
     CZ,
     DE,
     FR,
+    GR,
+    IS,
     MI,
     PI,
     PL,
@@ -26,6 +28,8 @@ internal static class Languages
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
+            case Language.GR: return GetDefaultLetterKeyGR(letter); // Greec
+            case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
             case Language.PL: return GetDefaultLetterKeyPL(letter); // Polish
@@ -68,55 +72,55 @@ internal static class Languages
             case LetterKey._9:
 		return new char[] { '₉', '⁹' };
             case LetterKey.A:
-                return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
+                return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'α', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
             case LetterKey.B:
-                return new char[] { 'ḃ', 'ß' };
+                return new char[] { 'ḃ', 'ß', 'β' };
             case LetterKey.C:
-                return new char[] { 'ç', 'ć', 'ĉ', 'č', 'ċ', '¢' };
+                return new char[] { 'ç', 'ć', 'ĉ', 'č', 'ċ', '¢', 'χ' };
             case LetterKey.D:
-                return new char[] { 'ď', 'ḋ', 'đ' };
+                return new char[] { 'ď', 'ḋ', 'đ', 'δ', 'ð' };
             case LetterKey.E:
-                return new char[] { 'é', 'è', 'ê', 'ë', 'ě', 'ē', 'ę', 'ė' };
+                return new char[] { 'é', 'è', 'ê', 'ë', 'ě', 'ē', 'ę', 'ė', 'ε', 'η', '€' };
             case LetterKey.F:
                 return new char[] { 'ƒ', 'ḟ' };
             case LetterKey.G:
-                return new char[] { 'ğ', 'ģ', 'ǧ', 'ġ', 'ĝ', 'ǥ' };
+                return new char[] { 'ğ', 'ģ', 'ǧ', 'ġ', 'ĝ', 'ǥ', 'γ' };
             case LetterKey.H:
                 return new char[] { 'ḣ', 'ĥ', 'ħ' };
             case LetterKey.I:
-                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i', 'ı', 'İ' };
+                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i', 'ı', 'İ', 'ι' };
             case LetterKey.J:
                 return new char[] { 'ĵ' };
             case LetterKey.K:
-                return new char[] { 'ķ', 'ǩ' };
+                return new char[] { 'ķ', 'ǩ', 'κ' };
             case LetterKey.L:
-                return new char[] { 'ĺ', 'ľ', 'ļ', 'ł', '₺' };
+                return new char[] { 'ĺ', 'ľ', 'ļ', 'ł', '₺', 'λ' };
             case LetterKey.M:
                 return new char[] { 'ṁ' };
             case LetterKey.N:
-                return new char[] { 'ñ', 'ń', 'ŋ', 'ň', 'ņ', 'ṅ',  'ⁿ' };
+                return new char[] { 'ñ', 'ń', 'ŋ', 'ň', 'ņ', 'ṅ', 'ⁿ', 'ν' };
             case LetterKey.O:
-                return new char[] { 'ô', 'ó', 'ö', 'ő', 'ò', 'ō', 'ȯ', 'ø', 'õ', 'œ' };
+                return new char[] { 'ô', 'ó', 'ö', 'ő', 'ò', 'ō', 'ȯ', 'ø', 'õ', 'œ', 'ω' };
             case LetterKey.P:
-                return new char[] { 'ṗ', '₽' };
+                return new char[] { 'ṗ', '₽', 'π', 'φ', 'ψ' };
             case LetterKey.R:
-                return new char[] { 'ŕ', 'ř', 'ṙ', '₹' };
+                return new char[] { 'ŕ', 'ř', 'ṙ', '₹', 'ρ' };
             case LetterKey.S:
-                return new char[] { 'ś', 'ş', 'š', 'ș', 'ṡ', 'ŝ', '$' };
+                return new char[] { 'ś', 'ş', 'š', 'ș', 'ṡ', 'ŝ', '$', 'σ' };
             case LetterKey.T:
-                return new char[] { 'ţ', 'ť', 'ț', 'ṫ', 'ŧ' };
+                return new char[] { 'ţ', 'ť', 'ț', 'ṫ', 'ŧ', 'θ', 'τ' };
             case LetterKey.U:
                 return new char[] { 'û', 'ú', 'ü', 'ŭ', 'ű', 'ù', 'ů', 'ū', 'ų' };
             case LetterKey.W:
                 return new char[] { 'ẇ', 'ŵ', '₩' };
             case LetterKey.X:
-                return new char[] { 'ẋ' };
+                return new char[] { 'ẋ', 'ξ' };
             case LetterKey.Y:
                 return new char[] { 'ÿ', 'ŷ', 'ý', 'ẏ' };
             case LetterKey.Z:
-                return new char[] { 'ź', 'ž', 'ż', 'ʒ', 'ǯ' };
+                return new char[] { 'ź', 'ž', 'ż', 'ʒ', 'ǯ', 'ζ' };
             case LetterKey._:
-                return new char[] { '¿', '¡', '∙', '₋', '⁻', '–', '≤', '≥', '≠', '≈', '≙', '±', '₊', '⁺' };
+                return new char[] { '¿', '¡', '∙', '₋', '⁻', '–', '≤', '≥', '≠', '≈', '≙', '±', '₊', '⁺', 'þ' };
         }
 
         return Array.Empty<char>();
@@ -185,6 +189,50 @@ internal static class Languages
                 return new char[] { 'û', 'ù', 'ü', 'ú' };
             case LetterKey.Y:
                 return new char[] { 'ÿ', 'ý' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Greece
+    private static char[] GetDefaultLetterKeyGR(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A: return new[] { 'α' };
+            case LetterKey.B: return new[] { 'β' };
+            case LetterKey.C: return new[] { 'χ' };
+            case LetterKey.D: return new[] { 'δ' };
+            case LetterKey.E: return new[] { 'ε', 'η', '€' };
+            case LetterKey.G: return new[] { 'γ' };
+            case LetterKey.I: return new[] { 'ι' };
+            case LetterKey.K: return new[] { 'κ' };
+            case LetterKey.L: return new[] { 'λ' };
+            case LetterKey.N: return new[] { 'ν' };
+            case LetterKey.O: return new[] { 'ω' };
+            case LetterKey.P: return new[] { 'π', 'φ', 'ψ' };
+            case LetterKey.R: return new[] { 'ρ' };
+            case LetterKey.S: return new[] { 'σ' };
+            case LetterKey.T: return new[] { 'θ', 'τ' };
+            case LetterKey.X: return new[] { 'ξ' };
+            case LetterKey.Z: return new[] { 'ζ' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Iceland
+    private static char[] GetDefaultLetterKeyIS(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A: return new char[] { 'á', 'æ' };
+            case LetterKey.D: return new char[] { 'ð' };
+            case LetterKey.E: return new char[] { 'é' };
+            case LetterKey.O: return new char[] { 'ó', 'ö' };
+            case LetterKey.U: return new char[] { 'ú' };
+            case LetterKey.Y: return new char[] { 'ý' };
+            case LetterKey._: return new char[] { 'þ' };
         }
 
         return Array.Empty<char>();
