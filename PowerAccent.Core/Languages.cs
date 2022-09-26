@@ -7,7 +7,6 @@ public enum Language
     CZ,
     DE,
     FR,
-    GR,
     IS,
     MI,
     PI,
@@ -28,7 +27,6 @@ internal static class Languages
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
-            case Language.GR: return GetDefaultLetterKeyGR(letter); // Greec
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
@@ -194,34 +192,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
 
-    // Greece
-    private static char[] GetDefaultLetterKeyGR(LetterKey letter)
-    {
-        switch (letter)
-        {
-            case LetterKey.A: return new[] { 'α' };
-            case LetterKey.B: return new[] { 'β' };
-            case LetterKey.C: return new[] { 'χ' };
-            case LetterKey.D: return new[] { 'δ' };
-            case LetterKey.E: return new[] { 'ε', 'η', '€' };
-            case LetterKey.G: return new[] { 'γ' };
-            case LetterKey.I: return new[] { 'ι' };
-            case LetterKey.K: return new[] { 'κ' };
-            case LetterKey.L: return new[] { 'λ' };
-            case LetterKey.N: return new[] { 'ν' };
-            case LetterKey.O: return new[] { 'ω' };
-            case LetterKey.P: return new[] { 'π', 'φ', 'ψ' };
-            case LetterKey.R: return new[] { 'ρ' };
-            case LetterKey.S: return new[] { 'σ' };
-            case LetterKey.T: return new[] { 'θ', 'τ' };
-            case LetterKey.X: return new[] { 'ξ' };
-            case LetterKey.Z: return new[] { 'ζ' };
-        }
-
-        return Array.Empty<char>();
-    }
-
-    // Iceland
+    // Icelandic
     private static char[] GetDefaultLetterKeyIS(LetterKey letter)
     {
         switch (letter)
@@ -360,7 +331,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
 
-    // Slovak
+    // Slovakian
     private static char[] GetDefaultLetterKeySK(LetterKey letter)
     {
         switch (letter)
