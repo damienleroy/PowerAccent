@@ -17,8 +17,12 @@ See the [Release](https://github.com/leroyd/PowerAccent/releases) page
 - Theme & design improvement
 - Some others features [asked](https://github.com/damienleroy/PowerAccent/issues)
 
+# PowerToys
+PowerAccent has been implemented in PowerToys and renamed as QuickAccent. Both have globally the same features and offers different experiences in the usage (taskbar icon, and different settings view).
+
 # If you like it
 https://www.buymeacoffee.com/dams
+
 
 # Thanks to
 - [Ciantic](https://gist.github.com/Ciantic/471698) for the implementation of the Keyboard Listener.
