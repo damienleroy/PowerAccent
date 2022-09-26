@@ -209,11 +209,7 @@ internal static class InterceptKeys
 
     public static IntPtr SetHook(LowLevelKeyboardProc proc)
     {
-        using (Process curProcess = Process.GetCurrentProcess())
-        using (ProcessModule curModule = curProcess.MainModule)
-        {
-            return SetWindowsHookEx(WH_KEYBOARD_LL, proc, (IntPtr)0, 0);
-        }
+        return SetWindowsHookEx(WH_KEYBOARD_LL, proc, (IntPtr)0, 0);
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
