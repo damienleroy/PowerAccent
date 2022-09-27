@@ -7,6 +7,7 @@ public enum Language
     CZ,
     DE,
     FR,
+    HU,
     IS,
     MI,
     PI,
@@ -27,6 +28,7 @@ internal static class Languages
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
+            case Language.HU: return GetDefaultLetterKeyHU(letter); // Hungarian
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
@@ -420,6 +422,24 @@ internal static class Languages
                 return new char[] { 'ß' };
             case LetterKey.U:
                 return new char[] { 'ü' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Hungarian
+    private static char[] GetDefaultLetterKeyHU(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á' };
+            case LetterKey.E:
+                return new char[] { 'é' };
+            case LetterKey.O:
+                return new char[] { 'ő', 'ó' };
+            case LetterKey.U:
+                return new char[] { 'ű' };
         }
 
         return Array.Empty<char>();
