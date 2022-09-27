@@ -2,13 +2,14 @@
 
 Press and hold a letter that supports diacritic marks, then press space bar or arrow key to select the accent. For example <kbd>E</kbd> + <kbd>Space</kbd>. With spacebar, repeat presses to change accent mark. When releasing the letter key, the accented letter is inserted.
 
-The software is currently working with the most of accents for several (Latin script based) countries, including **Czech**, **German**, **France**, **Maori** and many others. The list can be found in [Languages.cs](https://github.com/damienleroy/PowerAccent/blob/main/PowerAccent.Core/Languages.cs). If any language is missing, don't hesitate to create an [issue](https://github.com/damienleroy/PowerAccent/issues).
+The software is currently working with the most of accents for several (Latin script based) countries, including **Czech**, **German**, **France**, **Maori** and many others. The list can be found in [Languages.cs](/PowerAccent.Core/Languages.cs).
+If any language is missing, don't hesitate to create an [issue](/issues).
 
-All letters are sorted by usage frequency by default, as found on [Wikipedia](https://en.wikipedia.org/wiki/Letter_frequency).
+All letters are sorted by usage frequency by default, as found on [Wikipedia](https://wikipedia.org/wiki/Letter_frequency).
 
 # Download
 
-See the [Release](https://github.com/leroyd/PowerAccent/releases) page.
+See the [Release](/releases) page.
 
 # Known problems
 
@@ -21,7 +22,7 @@ See the [Release](https://github.com/leroyd/PowerAccent/releases) page.
 
 - More letters and accents
 - Theme and design improvement
-- Some other [asked features](https://github.com/damienleroy/PowerAccent/issues)
+- Some other [asked features](/issues)
 
 # If you like it
 
