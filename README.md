@@ -24,9 +24,13 @@ See the [Release](/releases) page.
 - Theme and design improvement
 - Some other [asked features](/issues)
 
+# PowerToys
+PowerAccent has been implemented in PowerToys and renamed as QuickAccent. Both have globally the same features and offers different experiences in the usage (taskbar icon, and different settings view).
+
 # If you like it
 
 https://www.buymeacoffee.com/dams
+
 
 # Thanks to
 
