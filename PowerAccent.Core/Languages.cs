@@ -178,7 +178,7 @@ internal static class Languages
         switch (letter)
         {
             case LetterKey.A:
-                return new char[] { 'à', 'â', 'á', 'ä', 'ã' };
+                return new char[] { 'à', 'â', 'á', 'ä', 'ã', 'æ' };
             case LetterKey.C:
                 return new char[] { 'ç' };
             case LetterKey.E:
@@ -186,7 +186,7 @@ internal static class Languages
             case LetterKey.I:
                 return new char[] { 'î', 'ï', 'í', 'ì' };
             case LetterKey.O:
-                return new char[] { 'ô', 'ö', 'ó', 'ò', 'õ' };
+                return new char[] { 'ô', 'ö', 'ó', 'ò', 'õ', 'œ' };
             case LetterKey.U:
                 return new char[] { 'û', 'ù', 'ü', 'ú' };
             case LetterKey.Y:
@@ -438,10 +438,12 @@ internal static class Languages
                 return new char[] { 'á' };
             case LetterKey.E:
                 return new char[] { 'é' };
+            case LetterKey.I:
+                return new char[] { 'í' };
             case LetterKey.O:
-                return new char[] { 'ő', 'ó' };
+                return new char[] { 'ó', 'ő', 'ö' };
             case LetterKey.U:
-                return new char[] { 'ű' };
+                return new char[] { 'ú', 'ű', 'ü' };
         }
 
         return Array.Empty<char>();
