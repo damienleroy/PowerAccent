@@ -16,6 +16,7 @@ public enum Language
     RO,
     SK,
     SP,
+    SW,
     TK,
 }
 
@@ -39,6 +40,7 @@ internal static class Languages
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
             case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
+            case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
         }
 
@@ -234,6 +236,20 @@ internal static class Languages
                 return new char[] { 'ú', 'ü' };
             case LetterKey._:
                 return new char[] { '¿', '?' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Swedish
+    private static char[] GetDefaultLetterKeySW(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'å', 'ä' };
+            case LetterKey.O:
+                return new char[] { 'ö' };
         }
 
         return Array.Empty<char>();

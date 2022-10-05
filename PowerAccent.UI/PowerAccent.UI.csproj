@@ -17,6 +17,7 @@
 		<None Remove="Resources\Flags\IS.jpg" />
 		<None Remove="Resources\Flags\IT.jpg" />
 		<None Remove="Resources\Flags\RO.jpg" />
+		<None Remove="Resources\Flags\SW.jpg" />
 		<None Remove="Resources\win11desktop.jpg" />
 		<None Remove="Resources\Flags\ALL.jpg" />
 		<None Remove="Resources\Flags\CUR.jpg" />
@@ -37,6 +38,7 @@
 		<Resource Include="Resources\Flags\IS.jpg" />
 		<Resource Include="Resources\Flags\IT.jpg" />
 		<Resource Include="Resources\Flags\RO.jpg" />
+		<Resource Include="Resources\Flags\SW.jpg" />
 		<Resource Include="Resources\win11desktop.jpg" />
 		<Resource Include="Resources\Flags\ALL.jpg" />
 		<Resource Include="Resources\Flags\CUR.jpg" />
