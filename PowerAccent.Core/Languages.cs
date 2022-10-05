@@ -11,6 +11,7 @@ public enum Language
     IS,
     IT,
     MI,
+    NL,
     PI,
     PL,
     RO,
@@ -35,6 +36,7 @@ internal static class Languages
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.IT: return GetDefaultLetterKeyIT(letter); // Italian
             case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
+            case Language.NL: return GetDefaultLetterKeyNL(letter); // Netherlands
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
             case Language.PL: return GetDefaultLetterKeyPL(letter); // Polish
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
@@ -272,6 +274,30 @@ internal static class Languages
                 return new char[] { '$' };
             case LetterKey.U:
                 return new char[] { 'ū' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Netherlands
+    private static char[] GetDefaultLetterKeyNL(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á', 'à', 'ä' };
+            case LetterKey.C:
+                return new char[] { 'ç' };
+            case LetterKey.E:
+                return new char[] { 'é', 'è', 'ë', 'ê', '€' };
+            case LetterKey.I:
+                return new char[] { 'í', 'ï', 'î' };
+            case LetterKey.N:
+                return new char[] { 'ñ' };
+            case LetterKey.O:
+                return new char[] { 'ó', 'ö', 'ô' };
+            case LetterKey.U:
+                return new char[] { 'ú', 'ü', 'û' };
         }
 
         return Array.Empty<char>();
