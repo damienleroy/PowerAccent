@@ -337,7 +337,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
 
-    // Slovakian
+    // Slovak
     private static char[] GetDefaultLetterKeySK(LetterKey letter)
     {
         switch (letter)
