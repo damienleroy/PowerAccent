@@ -45,7 +45,7 @@ internal static class Languages
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
             case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
-	    case Language.TK: return GetDefaultLetterKeyCYM(letter); // Welsh
+	    case Language.CYM: return GetDefaultLetterKeyCYM(letter); // Welsh
         }
 
         throw new ArgumentException("The language {0} is not know in this context", lang.ToString());
