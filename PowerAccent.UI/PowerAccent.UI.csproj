@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -25,6 +25,7 @@
 		<None Remove="Resources\Flags\MI.jpg" />
 		<None Remove="Resources\Flags\PI.jpg" />
 		<None Remove="Resources\Flags\PL.jpg" />
+		<None Remove="Resources\Flags\PT.jpg" />	
 		<None Remove="Resources\Flags\FR.jpg" />
 		<None Remove="Resources\Flags\SP.jpg" />
 		<None Remove="Resources\Flags\TK.jpg" />
@@ -47,6 +48,7 @@
 		<Resource Include="Resources\Flags\MI.jpg" />
 		<Resource Include="Resources\Flags\PI.jpg" />
 		<Resource Include="Resources\Flags\PL.jpg" />
+		<Resource Include="Resources\Flags\PT.jpg" />
 		<Resource Include="Resources\Flags\FR.jpg" />
 		<Resource Include="Resources\Flags\SP.jpg" />
 		<Resource Include="Resources\Flags\TK.jpg" />
