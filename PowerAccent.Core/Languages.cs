@@ -1,4 +1,4 @@
-﻿namespace PowerAccent.Core;
+namespace PowerAccent.Core;
 
 public enum Language
 {
@@ -14,6 +14,7 @@ public enum Language
     NL,
     PI,
     PL,
+    PT,
     RO,
     SK,
     SP,
@@ -39,6 +40,7 @@ internal static class Languages
             case Language.NL: return GetDefaultLetterKeyNL(letter); // Netherlands
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
             case Language.PL: return GetDefaultLetterKeyPL(letter); // Polish
+            case Language.PT: return GetDefaultLetterKeyPT(letter); // Portuguese
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
             case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
@@ -374,6 +376,28 @@ internal static class Languages
                 return new char[] { 'ś' };
             case LetterKey.Z:
                 return new char[] { 'ż', 'ź' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Portuguese
+    private static char[] GetDefaultLetterKeyPT(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á', 'à', 'â', 'ã' };
+            case LetterKey.C:
+                return new char[] { 'ç' };
+            case LetterKey.E:
+                return new char[] { 'é', 'ê' };
+            case LetterKey.I:
+                return new char[] { 'í' };
+            case LetterKey.O:
+                return new char[] { 'ó', 'ô', 'õ' };
+            case LetterKey.U:
+                return new char[] { 'ú', 'ü' };
         }
 
         return Array.Empty<char>();
