@@ -20,6 +20,7 @@ public enum Language
     SP,
     SW,
     TK,
+    CYM,
 }
 
 internal static class Languages
@@ -46,6 +47,7 @@ internal static class Languages
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
             case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
+	    case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
         }
 
         throw new ArgumentException("The language {0} is not know in this context", lang.ToString());
@@ -554,4 +556,26 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
+	
+    // Welsh
+    private static char[] GetDefaultLetterKeyCYM(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A: 
+                return new char[] { 'â' };
+            case LetterKey.E: 
+                return new char[] { 'ê' };
+            case LetterKey.I: 
+                return new char[] { 'î' };
+            case LetterKey.O: 
+                return new char[] { 'ô' };
+            case LetterKey.U: 
+                return new char[] { 'û' };
+            case LetterKey.Y: 
+                return new char[] { 'ŷ' };
+        }
+
+        return Array.Empty<char>();
+    }	
 }
