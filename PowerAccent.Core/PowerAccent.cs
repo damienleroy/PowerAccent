@@ -139,10 +139,10 @@ public class PowerAccent : IDisposable
     public Point GetDisplayCoordinates(Size window)
     {
         var activeDisplay = WindowsFunctions.GetActiveDisplay();
-        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
+        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size);
         Position position = _settingService.Position;
 
-        Debug.WriteLine("Dpi: " + activeDisplay.Dpi);
+        Debug.WriteLine($"Dpi: {activeDisplay.Dpi} | X: {screen.X} - Y: {screen.Y} | Width: {screen.Width} - Height: {screen.Height}");
 
         if (!_settingService.UseCaretPosition)
         {
@@ -155,8 +155,10 @@ public class PowerAccent : IDisposable
             return Calculation.GetRawCoordinatesFromPosition(position, screen, window);
         }
 
-        Point dpi = new Point(activeDisplay.Dpi, activeDisplay.Dpi);
-        Point caret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
+        screen = new Rect(activeDisplay.Location, activeDisplay.Size * activeDisplay.Dpi);
+        Point caret = new Point(carretPixel.X, carretPixel.Y);
+        Debug.WriteLine($"Dpi: {activeDisplay.Dpi} | X: {screen.X} - Y: {screen.Y} | Width: {screen.Width} - Height: {screen.Height}");
+        Debug.WriteLine($"Carret X: {caret.X}, Y: {caret.Y}");
         return Calculation.GetRawCoordinatesFromCaret(caret, screen, window);
     }
 

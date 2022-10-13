@@ -48,6 +48,15 @@ public struct Rect
         return new Rect(rect.X / divider, rect.Y / divider, rect.Width / divider, rect.Height / divider);
     }
 
+    public static Rect operator *(Rect rect, double divider)
+    {
+        if (divider == 0)
+        {
+            throw new DivideByZeroException();
+        }
+        return new Rect(rect.X * divider, rect.Y * divider, rect.Width * divider, rect.Height * divider);
+    }
+
     public static Rect operator /(Rect rect, Rect divider)
     {
         if (divider.X == 0 || divider.Y == 0)

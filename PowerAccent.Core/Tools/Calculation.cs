@@ -1,4 +1,5 @@
 ﻿using PowerAccent.Core.Services;
+using System.Diagnostics;
 
 namespace PowerAccent.Core.Tools
 {
@@ -7,10 +8,10 @@ namespace PowerAccent.Core.Tools
         public static Point GetRawCoordinatesFromCaret(Point caret, Rect screen, Size window)
         {
             var left = caret.X - window.Width / 2;
-            var top = caret.Y - window.Height - 20;
+            var top = caret.Y - window.Height;
 
             return new Point(left < screen.X ? screen.X : (left + window.Width > (screen.X + screen.Width) ? (screen.X + screen.Width) - window.Width : left)
-                , top < screen.Y ? caret.Y + 20 : top);
+                , top < screen.Y ? caret.Y : top);
         }
 
         public static Point GetRawCoordinatesFromPosition(Position position, Rect screen, Size window)
@@ -54,6 +55,8 @@ namespace PowerAccent.Core.Tools
                     x == Position.BottomRight
                     => screen.Y + screen.Height - (window.Height + offset),
             };
+
+            Debug.WriteLine($"Default Position to: {pointX} {pointY}");
 
             return new Point(pointX, pointY);
         }
