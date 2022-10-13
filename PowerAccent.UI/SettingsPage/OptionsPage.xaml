@@ -149,13 +149,13 @@
                 <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
-                <mah:ToggleSwitch Grid.Row="2" x:Name="DisableInFullScreen" Content="Disable in full screen"
+                <mah:ToggleSwitch Grid.Row="2" x:Name="DisableInFullScreen" Content="Disable in game mode"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="DisableInFullScreen_Toggled" Cursor="Hand" />
                 <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />
-                <mah:ToggleSwitch Grid.Row="3" x:Name="InsertSpaceAfterSelection" Content="Insert space after selection"
+                <mah:ToggleSwitch Grid.Row="3" x:Name="InsertSpaceAfterSelection" Content="Insert space after insertion"
                           OnContent="On" OffContent="Off"
                           VerticalAlignment="Center" Toggled="InsertSpaceAfterSelection_Toggled" Cursor="Hand" />
                 <Grid Grid.Column="1">
