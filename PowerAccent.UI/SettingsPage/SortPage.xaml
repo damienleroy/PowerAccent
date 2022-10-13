@@ -15,8 +15,8 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="150" />
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Row="0" Header="1 - Select a letter" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
@@ -118,11 +118,16 @@
 
         <Grid Height="Auto" Margin="0,50,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <!--<RowDefinition Height="*" />-->
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button x:Name="Back" DockPanel.Dock="Bottom" Grid.Row="1" Width="200" Height="50" Content="Back to default" Click="Back_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
-            <Button x:Name="Save" DockPanel.Dock="Bottom" Grid.Row="0" Width="200" Height="50" Content="Save" Click="Save_Click"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Back" DockPanel.Dock="Bottom" Grid.Row="0" Grid.Column="0" Width="200" Height="50" Content="Back to default" Click="Back_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
+            <Button x:Name="Save" DockPanel.Dock="Bottom" Grid.Row="0" Grid.Column="1" Width="200" Height="50" Content="Save" Click="Save_Click"
                     Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
                     IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
         </Grid>
