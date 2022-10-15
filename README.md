@@ -13,7 +13,7 @@ See the [Releases][releases] page.
 
 # Known problems
 
-- Some keys can have interference with some actions or some tools (for eample: AutoHotkey)
+- Some keys can have interference with some actions or some tools (for example: AutoHotkey)
 - (Experimental feature) Inside browsers and some other software, the tool can't detect the caret position. Default position is applied, meaning the one you choose in the position settings.
 
 # The future
