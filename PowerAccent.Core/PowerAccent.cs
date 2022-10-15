@@ -81,7 +81,7 @@ public class PowerAccent : IDisposable
                 if (_selectedIndex > _characters.Length - 1) _selectedIndex = _characters.Length - 1;
 
                 OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
-                 return false;
+                return false;
             }
 
             if (triggerPressed.Value == TriggerKey.Space)
