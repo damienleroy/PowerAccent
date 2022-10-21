@@ -27,6 +27,7 @@
 		<None Remove="Resources\Flags\PL.jpg" />
 		<None Remove="Resources\Flags\PT.jpg" />	
 		<None Remove="Resources\Flags\FR.jpg" />
+		<None Remove="Resources\Flags\HR.jpg" />
 		<None Remove="Resources\Flags\SP.jpg" />
 		<None Remove="Resources\Flags\TK.jpg" />
 		<None Remove="Resources\Flags\DE.jpg" />
@@ -51,6 +52,7 @@
 		<Resource Include="Resources\Flags\PL.jpg" />
 		<Resource Include="Resources\Flags\PT.jpg" />
 		<Resource Include="Resources\Flags\FR.jpg" />
+		<Resource Include="Resources\Flags\HR.jpg" />
 		<Resource Include="Resources\Flags\SP.jpg" />
 		<Resource Include="Resources\Flags\TK.jpg" />
 		<Resource Include="Resources\Flags\DE.jpg" />

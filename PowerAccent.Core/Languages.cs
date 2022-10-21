@@ -4,6 +4,7 @@ public enum Language
 {
     ALL,
     CUR,
+    HR,
     CZ,
     DE,
     FR,
@@ -31,6 +32,7 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
+            case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
@@ -177,6 +179,25 @@ internal static class Languages
                 return new char[] { '¥' };
             case LetterKey.Z:
                 return new char[] { 'z' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    //Croatian
+    private static char[] GetDefaultLetterKeyHR(LetterKey letter)
+    {
+        switch (letter)
+        {
+           
+            case LetterKey.C:
+                return new char[] { 'ć', 'č' };
+            case LetterKey.D:
+                return new char[] { 'đ' };
+            case LetterKey.S:
+                return new char[] { 'š' };
+            case LetterKey.Z:
+                return new char[] { 'ž' };
         }
 
         return Array.Empty<char>();
