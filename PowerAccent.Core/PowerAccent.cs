@@ -48,6 +48,13 @@ public class PowerAccent : IDisposable
 
         if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
         {
+            if (!WindowsFunctions.IsKeyPressed(letterPressed.Value))
+            {
+                letterPressed = null;
+                triggerPressed = null;
+                return true;
+            }
+
             _characters = WindowsFunctions.IsCapitalState() ? ToUpper(_settingService.GetLetterKey(letterPressed.Value)) : _settingService.GetLetterKey(letterPressed.Value);
 
             if (_characters == Array.Empty<char>())

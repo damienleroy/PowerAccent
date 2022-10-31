@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Vanara.PInvoke;
 
 namespace PowerAccent.Core.Tools;
@@ -72,6 +73,13 @@ internal static class WindowsFunctions
         var capital = User32.GetKeyState((int)User32.VK.VK_CAPITAL);
         var shift = User32.GetKeyState((int)User32.VK.VK_SHIFT);
         return capital != 0 || shift < 0;
+    }
+
+    public static bool IsKeyPressed(LetterKey key)
+    {
+        var result = User32.GetAsyncKeyState((int)key);
+        Debug.WriteLine("Result - " + result);
+        return result != 0;
     }
 
     public static bool IsGameMode()
