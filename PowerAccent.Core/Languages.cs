@@ -1,14 +1,17 @@
 namespace PowerAccent.Core;
 
+/// <summary>
+/// Languages, ordered alphabetically by country code (except ALL & Currency). It is set the order of the flags in the settings.
+/// </summary>
 public enum Language
 {
     ALL,
     CUR,
     CYM,
-    HR,
     CZ,
     DE,
     FR,
+    HR,
     HU,
     IS,
     IT,
@@ -33,10 +36,10 @@ internal static class Languages
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
 	        case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
-            case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
+            case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.HU: return GetDefaultLetterKeyHU(letter); // Hungarian
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.IT: return GetDefaultLetterKeyIT(letter); // Italian
@@ -414,11 +417,13 @@ internal static class Languages
             case LetterKey.C:
                 return new char[] { 'ç' };
             case LetterKey.E:
-                return new char[] { 'é', 'ê' };
+                return new char[] { 'é', 'ê', '€' };
             case LetterKey.I:
                 return new char[] { 'í' };
             case LetterKey.O:
                 return new char[] { 'ó', 'ô', 'õ' };
+            case LetterKey.P:
+                return new char[] { 'π' };
             case LetterKey.U:
                 return new char[] { 'ú', 'ü' };
         }
@@ -598,5 +603,5 @@ internal static class Languages
         }
 
         return Array.Empty<char>();
-    }	
+    }
 }
