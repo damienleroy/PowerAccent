@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
+using Application = System.Windows.Application;
 
 namespace PowerAccent.UI;
 
@@ -62,7 +64,8 @@ public partial class Selector : Window
     {
         UpdateLayout();
         Size window = new Size(((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualWidth, ((System.Windows.Controls.Panel)Application.Current.MainWindow.Content).ActualHeight);
-        Point position = _powerAccent.GetDisplayCoordinates(window);
+        double primaryDPI = Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth;
+        Point position = _powerAccent.GetDisplayCoordinates(window, primaryDPI);
         this.Left = position.X;
         this.Top = position.Y;
     }

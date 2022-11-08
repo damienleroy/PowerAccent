@@ -143,13 +143,13 @@ public class PowerAccent : IDisposable
         return true;
     }
 
-    public Point GetDisplayCoordinates(Size window)
+    public Point GetDisplayCoordinates(Size window, double primaryDpi)
     {
         var activeDisplay = WindowsFunctions.GetActiveDisplay();
-        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
+        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / primaryDpi;
         Position position = _settingService.Position;
 
-        Debug.WriteLine("Dpi: " + activeDisplay.Dpi);
+        Debug.WriteLine($"Primary Dpi: {primaryDpi} - Screen Dpi: {activeDisplay.Dpi}");
 
         if (!_settingService.UseCaretPosition)
         {
@@ -162,8 +162,7 @@ public class PowerAccent : IDisposable
             return Calculation.GetRawCoordinatesFromPosition(position, screen, window);
         }
 
-        Point dpi = new Point(activeDisplay.Dpi, activeDisplay.Dpi);
-        Point caret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
+        Point caret = new Point(carretPixel.X, carretPixel.Y) / primaryDpi;
         return Calculation.GetRawCoordinatesFromCaret(caret, screen, window);
     }
 
