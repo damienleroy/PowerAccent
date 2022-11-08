@@ -4,6 +4,7 @@ public enum Language
 {
     ALL,
     CUR,
+    CYM,
     HR,
     CZ,
     DE,
@@ -21,7 +22,6 @@ public enum Language
     SP,
     SW,
     TK,
-    CYM,
 }
 
 internal static class Languages
@@ -32,6 +32,7 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
+	        case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
             case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
@@ -49,7 +50,6 @@ internal static class Languages
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
             case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
-	    case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
         }
 
         throw new ArgumentException("The language {0} is not know in this context", lang.ToString());
@@ -262,7 +262,7 @@ internal static class Languages
             case LetterKey.U:
                 return new char[] { 'ú', 'ü' };
             case LetterKey._:
-                return new char[] { '¿', '?' };
+                return new char[] { '¿', '¡' };
         }
 
         return Array.Empty<char>();
