@@ -90,6 +90,6 @@ internal static class WindowsFunctions
             return false;
         }
 
-        return state == Shell32.QUERY_USER_NOTIFICATION_STATE.QUNS_BUSY;
+        return state == Shell32.QUERY_USER_NOTIFICATION_STATE.QUNS_BUSY || state == Shell32.QUERY_USER_NOTIFICATION_STATE.QUNS_RUNNING_D3D_FULL_SCREEN;
     }
 }
