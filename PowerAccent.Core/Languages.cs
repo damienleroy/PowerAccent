@@ -36,7 +36,7 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
-	        case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
+	        case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // German
             case Language.FI: return GetDefaultLetterKeyFI(letter); // Finnish	
