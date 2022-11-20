@@ -7,7 +7,7 @@ public enum Language
 {
     ALL,
     CUR,
-    CYM,
+    CY,
     CZ,
     DE,
     FI,
@@ -24,7 +24,7 @@ public enum Language
     RO,
     SK,
     SP,
-    SW,
+    SV,
     TK,
 }
 
@@ -36,9 +36,9 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
-	        case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh
+            case Language.CY: return GetDefaultLetterKeyCY(letter); // Welsh
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
-            case Language.DE: return GetDefaultLetterKeyDE(letter); // German
+            case Language.DE: return GetDefaultLetterKeyDE(letter); // Germany
             case Language.FI: return GetDefaultLetterKeyFI(letter); // Finnish	
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
             case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
@@ -53,7 +53,7 @@ internal static class Languages
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
             case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
-            case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
+            case Language.SV: return GetDefaultLetterKeySV(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
         }
 
@@ -290,7 +290,7 @@ internal static class Languages
     }
 
     // Swedish
-    private static char[] GetDefaultLetterKeySW(LetterKey letter)
+    private static char[] GetDefaultLetterKeySV(LetterKey letter)
     {
         switch (letter)
         {
@@ -523,7 +523,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
     
-    // German
+    // Germany
     private static char[] GetDefaultLetterKeyDE(LetterKey letter)
     {
         switch (letter)
@@ -602,7 +602,7 @@ internal static class Languages
     }
 	
     // Welsh
-    private static char[] GetDefaultLetterKeyCYM(LetterKey letter)
+    private static char[] GetDefaultLetterKeyCY(LetterKey letter)
     {
         switch (letter)
         {
