@@ -76,7 +76,7 @@ namespace PowerAccent.UI.SettingsPage
             Position_DownLeft.IsChecked = position == Position.BottomLeft;
             Position_Center.IsChecked = position == Position.Center;
 
-            (Application.Current.MainWindow as Selector).RefreshSettings();
+            (Application.Current.MainWindow as MainWindow).RefreshSettings();
         }
     }
 }

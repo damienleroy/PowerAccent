@@ -73,4 +73,11 @@
 		<ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Page Update="MainWindow.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
+
 </Project>

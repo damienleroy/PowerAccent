@@ -3,10 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:local="clr-namespace:PowerAccent"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize"
-        Title="MainWindow" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
+        Title="Selector" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -59,23 +57,8 @@
         
     </Window.Resources>
     
-    <Grid>
-        <tb:TaskbarIcon x:Name="TaskbarIcon"
-            IconSource="Resources/a-icon.ico"
-            ToolTipText="PowerAccent">
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Settings" Click="Settings_Click" />
-                    <MenuItem Header="Pause" Click="Pause_Click" />
-                    <MenuItem Header="Exit" Click="MenuExit_Click" />
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
-
-        <Grid x:Name="SelectorContent">
-            <ListBox x:Name="characters" ItemTemplate="{StaticResource TextBlockDataTemplate}">
-            </ListBox>
-        </Grid>
-        
+    <Grid x:Name="SelectorContent">
+        <ListBox x:Name="characters" ItemTemplate="{StaticResource TextBlockDataTemplate}">
+        </ListBox>
     </Grid>
 </Window>

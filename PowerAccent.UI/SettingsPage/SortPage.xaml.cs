@@ -83,7 +83,7 @@ public partial class SortPage : Page, INotifyPropertyChanged
         LetterKey key = (LetterKey)Letters.SelectedItem;
         _settingService.SetLetterKey(key, Characters.ToArray());
         _settingService.Save();
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 }
 
