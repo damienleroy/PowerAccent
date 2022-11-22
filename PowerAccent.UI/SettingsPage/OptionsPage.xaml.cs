@@ -41,38 +41,38 @@ public partial class OptionsPage : Page
     private void UseCaretPosition_Checked(object sender, RoutedEventArgs e)
     {
         _settingService.UseCaretPosition = ((ToggleSwitch)sender).IsOn;
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
     private void SpaceBarActive_Checked(object sender, RoutedEventArgs e)
     {
         _settingService.IsSpaceBarActive = ((ToggleSwitch)sender).IsOn;
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
     private void RadioButton_Checked(object sender, RoutedEventArgs e)
     {
         _settingService.SelectedLanguage = Enum.Parse<Language>((((RadioButton)sender).DataContext as Country).Name);
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
     private void DisableInFullScreen_Toggled(object sender, RoutedEventArgs e)
     {
         _settingService.DisableInFullScreen = ((ToggleSwitch)sender).IsOn;
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
     private void InsertSpaceAfterSelection_Toggled(object sender, RoutedEventArgs e)
     {
         _settingService.InsertSpaceAfterSelection = ((ToggleSwitch)sender).IsOn;
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
     private void InputTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
     {
         int value = (int)e.NewValue;
         _settingService.InputTime = value >= 0 ? value : 200;
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 }
 

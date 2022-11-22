@@ -3,65 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:local="clr-namespace:PowerAccent"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize"
-        Title="MainWindow" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
-    <Grid>
-        <tb:TaskbarIcon x:Name="TaskbarIcon"
-            IconSource="Resources/a-icon.ico"
-            ToolTipText="PowerAccent">
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Settings" Click="Settings_Click" />
-                    <MenuItem Header="Pause" Click="Pause_Click" />
-                    <MenuItem Header="Exit" Click="MenuExit_Click" />
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
-        <ListBox x:Name="characters" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsHitTestVisible="False"
-                 BorderThickness="1" BorderBrush="SlateGray">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding}" FontSize="18" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemContainerStyle>
-                <Style x:Name="ItemStyle" TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Border x:Name="myBorder"
+        Title="Selector" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="BorderBrush" Value="SlateGray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="myBorder"
                                     Padding="0" Margin="0"
                                     SnapsToDevicePixels="true"
                                     Style="{DynamicResource borderContent}">
-                                    <ContentPresenter />
-                                </Border>
-                                <ControlTemplate.Resources>
-                                    <Style x:Key="borderContent" TargetType="Border">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                        <Setter Property="Background" Value="#ECECEC"/>
-                                        <Setter Property="Width" Value="50"/>
-                                        <Setter Property="Height" Value="50"/>
-                                    </Style>
-                                </ControlTemplate.Resources>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="myBorder" Property="Background" Value="White"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Resources>
+                            <Style x:Key="borderContent" TargetType="Border">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <Setter Property="Background" Value="#ECECEC"/>
+                                <Setter Property="Width" Value="50"/>
+                                <Setter Property="Height" Value="50"/>
+                            </Style>
+                        </ControlTemplate.Resources>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="myBorder" Property="Background" Value="White"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="TextBlockDataTemplate">
+            <TextBlock Text="{Binding}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+        </DataTemplate>
+        
+    </Window.Resources>
+    
+    <Grid x:Name="SelectorContent">
+        <ListBox x:Name="characters" ItemTemplate="{StaticResource TextBlockDataTemplate}">
         </ListBox>
     </Grid>
 </Window>
