@@ -18,4 +18,10 @@ public partial class Selector : Window
     {
         characters.SelectedIndex = index;
     }
+
+    public void SetPosition(double left, double top)
+    {
+        this.Left = left;
+        this.Top = top;
+    }
 }

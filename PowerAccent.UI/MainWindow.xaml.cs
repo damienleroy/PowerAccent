@@ -33,7 +33,6 @@ public partial class MainWindow : Window
 
     private void PowerAccent_OnChangeDisplay(bool isActive, char[] chars)
     {
-        //this.Visibility = isActive ? Visibility.Visible : Visibility.Collapsed;
         if (isActive)
         {
             _selector = new Selector(chars);
@@ -48,12 +47,10 @@ public partial class MainWindow : Window
 
     private void CenterWindow()
     {
-        UpdateLayout();
         Size window = new Size(((System.Windows.Controls.Panel)_selector.Content).ActualWidth, ((System.Windows.Controls.Panel)_selector.Content).ActualHeight);
         double primaryDPI = Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth;
         Point position = _powerAccent.GetDisplayCoordinates(window, primaryDPI);
-        _selector.Left = position.X;
-        _selector.Top = position.Y;
+        _selector.SetPosition(position.X, position.Y);
     }
 
     #region TaskBar
