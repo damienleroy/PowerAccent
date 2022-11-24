@@ -26,7 +26,7 @@ public partial class MainWindow : Window
         this.Visibility = Visibility.Hidden;
     }
 
-    private void PowerAccent_OnSelectionCharacter(int index, char character)
+    private void PowerAccent_OnSelectionCharacter(int index)
     {
          _selector?.SetIndex(index);
     }
@@ -72,6 +72,11 @@ public partial class MainWindow : Window
     }
 
     #endregion
+    
+    public void RefreshSettings()
+    {
+        _powerAccent.ReloadSettings();
+    }
 
     protected override void OnClosed(EventArgs e)
     {
@@ -79,8 +84,9 @@ public partial class MainWindow : Window
         base.OnClosed(e);
     }
 
-    public void RefreshSettings()
+    public void Dispose()
     {
-        _powerAccent.ReloadSettings();
+        _powerAccent.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

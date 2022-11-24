@@ -17,7 +17,7 @@ public class PowerAccent : IDisposable
     private bool isBackwardShiftPressed;
 
     public event Action<bool, char[]> OnChangeDisplay;
-    public event Action<int, char> OnSelectCharacter;
+    public event Action<int> OnSelectCharacter;
 
     public bool IsPaused { get; set; }
 
@@ -97,7 +97,7 @@ public class PowerAccent : IDisposable
                 if (_selectedIndex < 0) _selectedIndex = 0;
                 if (_selectedIndex > _characters.Length - 1) _selectedIndex = _characters.Length - 1;
 
-                OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
+                OnSelectCharacter?.Invoke(_selectedIndex);
                 return false;
             }
 
@@ -115,7 +115,7 @@ public class PowerAccent : IDisposable
             if (triggerPressed.Value == TriggerKey.Right && _selectedIndex < _characters.Length - 1)
                 ++_selectedIndex;
 
-            OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
+            OnSelectCharacter?.Invoke(_selectedIndex);
             return false;
         }
 
