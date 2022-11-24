@@ -8,8 +8,8 @@ public partial class Selector : Window
     public Selector(char[] selectedCharacters)
     {
         InitializeComponent();
-        Application.Current.MainWindow.ShowActivated = false;
-        Application.Current.MainWindow.Topmost = true;
+        this.ShowActivated = false;
+        this.Topmost = true;
         characters.ItemsSource = selectedCharacters;
         characters.SelectedIndex = 0;
     }
