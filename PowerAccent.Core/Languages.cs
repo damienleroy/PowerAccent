@@ -1,12 +1,18 @@
 namespace PowerAccent.Core;
 
+/// <summary>
+/// Languages, ordered alphabetically by country code (except ALL & Currency). It is set the order of the flags in the settings.
+/// </summary>
 public enum Language
 {
     ALL,
     CUR,
+    CY,
     CZ,
     DE,
+    FI,
     FR,
+    HR,
     HU,
     IS,
     IT,
@@ -19,9 +25,8 @@ public enum Language
     SK,
     SP,
     SR,
-    SW,
+    SV,
     TK,
-    CYM,
 }
 
 internal static class Languages
@@ -32,9 +37,12 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
+            case Language.CY: return GetDefaultLetterKeyCY(letter); // Welsh
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
-            case Language.DE: return GetDefaultLetterKeyDE(letter); // German
+            case Language.DE: return GetDefaultLetterKeyDE(letter); // Germany
+            case Language.FI: return GetDefaultLetterKeyFI(letter); // Finnish	
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
+            case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.HU: return GetDefaultLetterKeyHU(letter); // Hungarian
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.IT: return GetDefaultLetterKeyIT(letter); // Italian
@@ -47,9 +55,8 @@ internal static class Languages
             case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
             case Language.SR: return GetDefaultLetterKeySR(letter); // Serbian
-            case Language.SW: return GetDefaultLetterKeySW(letter); // Swedish
+            case Language.SV: return GetDefaultLetterKeySV(letter); // Swedish
             case Language.TK: return GetDefaultLetterKeyTK(letter); // Turkish
-	    case Language.CYM: return GetDefaultLetterKeyCYM(letter); //Welsh		
         }
 
         throw new ArgumentException("The language {0} is not know in this context", lang.ToString());
@@ -184,6 +191,41 @@ internal static class Languages
         return Array.Empty<char>();
     }
 
+    //Croatian
+    private static char[] GetDefaultLetterKeyHR(LetterKey letter)
+    {
+        switch (letter)
+        {
+           
+            case LetterKey.C:
+                return new char[] { 'ć', 'č' };
+            case LetterKey.D:
+                return new char[] { 'đ' };
+            case LetterKey.S:
+                return new char[] { 'š' };
+            case LetterKey.Z:
+                return new char[] { 'ž' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Finnish
+    private static char[] GetDefaultLetterKeyFI(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'ä', 'å' };
+            case LetterKey.E:
+                return new char[] { '€' };
+            case LetterKey.O:
+                return new char[] { 'ö' };
+        }
+
+        return Array.Empty<char>();
+    }
+
     // French
     private static char[] GetDefaultLetterKeyFR(LetterKey letter)
     {
@@ -243,14 +285,14 @@ internal static class Languages
             case LetterKey.U:
                 return new char[] { 'ú', 'ü' };
             case LetterKey._:
-                return new char[] { '¿', '?' };
+                return new char[] { '¿', '¡' };
         }
 
         return Array.Empty<char>();
     }
 
     // Swedish
-    private static char[] GetDefaultLetterKeySW(LetterKey letter)
+    private static char[] GetDefaultLetterKeySV(LetterKey letter)
     {
         switch (letter)
         {
@@ -395,11 +437,13 @@ internal static class Languages
             case LetterKey.C:
                 return new char[] { 'ç' };
             case LetterKey.E:
-                return new char[] { 'é', 'ê' };
+                return new char[] { 'é', 'ê', '€' };
             case LetterKey.I:
                 return new char[] { 'í' };
             case LetterKey.O:
                 return new char[] { 'ó', 'ô', 'õ' };
+            case LetterKey.P:
+                return new char[] { 'π' };
             case LetterKey.U:
                 return new char[] { 'ú', 'ü' };
         }
@@ -481,7 +525,7 @@ internal static class Languages
         return Array.Empty<char>();
     }
     
-    // German
+    // Germany
     private static char[] GetDefaultLetterKeyDE(LetterKey letter)
     {
         switch (letter)
@@ -560,7 +604,7 @@ internal static class Languages
     }
 	
     // Welsh
-    private static char[] GetDefaultLetterKeyCYM(LetterKey letter)
+    private static char[] GetDefaultLetterKeyCY(LetterKey letter)
     {
         switch (letter)
         {
@@ -598,5 +642,4 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
-    
 }

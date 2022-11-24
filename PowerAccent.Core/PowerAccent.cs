@@ -14,6 +14,7 @@ public class PowerAccent : IDisposable
     private char[] _characters = Array.Empty<char>();
     private int _selectedIndex = -1;
     private Stopwatch _stopWatch;
+    private bool isBackwardShiftPressed;
 
     public event Action<bool, char[]> OnChangeDisplay;
     public event Action<int, char> OnSelectCharacter;
@@ -46,8 +47,19 @@ public class PowerAccent : IDisposable
                     triggerPressed = null;
             }
 
+         if (letterPressed.HasValue && Enum.IsDefined(typeof(BackwardKey), (int)args.Key) && !isBackwardShiftPressed)
+            isBackwardShiftPressed = true;
+        
         if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
         {
+            if (!WindowsFunctions.IsKeyPressed(letterPressed.Value))
+            {
+                letterPressed = null;
+                triggerPressed = null;
+                isBackwardShiftPressed = false;
+                return true;
+            }
+
             _characters = WindowsFunctions.IsCapitalState() ? ToUpper(_settingService.GetLetterKey(letterPressed.Value)) : _settingService.GetLetterKey(letterPressed.Value);
 
             if (_characters == Array.Empty<char>())
@@ -57,7 +69,12 @@ public class PowerAccent : IDisposable
             Task.Delay(_settingService.InputTime).ContinueWith(t =>
             {
                 if (_settingService.DisableInFullScreen && WindowsFunctions.IsGameMode())
+                {
+                    letterPressed = null;
+                    triggerPressed = null;
+                    isBackwardShiftPressed = false;
                     _visible = false;
+                }
 
                 if (_visible)
                     OnChangeDisplay?.Invoke(true, _characters);
@@ -65,7 +82,7 @@ public class PowerAccent : IDisposable
         }
 
         if(_visible && triggerPressed.HasValue)
-        {
+        {            
             if (_selectedIndex == -1)
             {
                 if (triggerPressed.Value == TriggerKey.Left)
@@ -86,10 +103,11 @@ public class PowerAccent : IDisposable
 
             if (triggerPressed.Value == TriggerKey.Space)
             {
-                if (_selectedIndex < _characters.Length - 1)
-                    ++_selectedIndex;
-                else
-                    _selectedIndex = 0;
+                Debug.WriteLine($"isBackwardShiftPressed {isBackwardShiftPressed}");
+                _selectedIndex += isBackwardShiftPressed ? -1 : 1;
+
+                if (_selectedIndex < 0) _selectedIndex = _characters.Length - 1;
+                if (_selectedIndex > _characters.Length - 1) _selectedIndex = 0;
             }
 
             if (triggerPressed.Value == TriggerKey.Left && _selectedIndex > 0)
@@ -106,6 +124,9 @@ public class PowerAccent : IDisposable
 
     private bool PowerAccent_KeyUp(object sender, KeyboardListener.RawKeyEventArgs args)
     {
+        if (isBackwardShiftPressed && Enum.IsDefined(typeof(BackwardKey), (int)args.Key))
+            isBackwardShiftPressed = false;
+
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
             letterPressed = null;
@@ -119,6 +140,7 @@ public class PowerAccent : IDisposable
                     OnChangeDisplay?.Invoke(false, null);
                     _selectedIndex = -1;
                     _visible = false;
+                    isBackwardShiftPressed = false;
                     return false;
                 }
 
@@ -136,13 +158,13 @@ public class PowerAccent : IDisposable
         return true;
     }
 
-    public Point GetDisplayCoordinates(Size window)
+    public Point GetDisplayCoordinates(Size window, double primaryDpi)
     {
         var activeDisplay = WindowsFunctions.GetActiveDisplay();
-        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
+        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / primaryDpi;
         Position position = _settingService.Position;
 
-        Debug.WriteLine("Dpi: " + activeDisplay.Dpi);
+        Debug.WriteLine($"Primary Dpi: {primaryDpi} - Screen Dpi: {activeDisplay.Dpi}");
 
         if (!_settingService.UseCaretPosition)
         {
@@ -155,8 +177,7 @@ public class PowerAccent : IDisposable
             return Calculation.GetRawCoordinatesFromPosition(position, screen, window);
         }
 
-        Point dpi = new Point(activeDisplay.Dpi, activeDisplay.Dpi);
-        Point caret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
+        Point caret = new Point(carretPixel.X, carretPixel.Y) / primaryDpi;
         return Calculation.GetRawCoordinatesFromCaret(caret, screen, window);
     }
 

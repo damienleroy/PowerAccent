@@ -46,5 +46,11 @@ public enum TriggerKey
 {
     Left = User32.VK.VK_LEFT,
     Right = User32.VK.VK_RIGHT,
-    Space = User32.VK.VK_SPACE
+    Space = User32.VK.VK_SPACE,
+}
+
+public enum BackwardKey
+{
+    LeftShift = User32.VK.VK_LSHIFT,
+    RightShift = User32.VK.VK_RSHIFT,
 }

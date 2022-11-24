@@ -1,6 +1,7 @@
 # How it works
 
 Press and hold a letter that supports diacritic marks, then press space bar or arrow key to select the accent. For example <kbd>E</kbd> + <kbd>Space</kbd>. With spacebar, repeat presses to change accent mark. When releasing the letter key, the accented letter is inserted.
+> Note: Some characters (like `¡` for Spanish are available with the comma (`,`) key).
 
 The software is currently working with the most of accents for several (Latin script based) countries, including **Czech**, **German**, **France**, **Maori** and many others. The list can be found in [Languages.cs](/PowerAccent.Core/Languages.cs).
 If any language is missing, don't hesitate to [create an issue][newissue].
@@ -15,6 +16,7 @@ See the [Releases][releases] page.
 
 - Some keys can have interference with some actions or some tools (for example: AutoHotkey)
 - (Experimental feature) Inside browsers and some other software, the tool can't detect the caret position. Default position is applied, meaning the one you choose in the position settings.
+- Mathematical symbols are often requested. But for several reasons (technical and functional), this feature can't be implemented now in the tool. So currently mathematical symbol will not be accepted (cf: [issue](https://github.com/damienleroy/PowerAccent/issues/23#issuecomment-1301532208)).
 
 # The future
 
