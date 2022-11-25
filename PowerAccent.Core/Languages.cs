@@ -23,6 +23,7 @@ public enum Language
     PT,
     RO,
     RS,
+    SA,
     SK,
     SP,
     SV,
@@ -53,6 +54,7 @@ internal static class Languages
             case Language.PT: return GetDefaultLetterKeyPT(letter); // Portuguese
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
             case Language.RS: return GetDefaultLetterKeySR(letter); // Serbian
+            case Language.SA: return GetDefaultLetterKeySA(letter); // Sanskrit
             case Language.SK: return GetDefaultLetterKeySK(letter); // Slovak
             case Language.SP: return GetDefaultLetterKeySP(letter); // Spain
             case Language.SV: return GetDefaultLetterKeySV(letter); // Swedish
@@ -642,4 +644,51 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
+
+    // Sanskrit
+    private static char[] GetDefaultLetterKeySA(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'ā', 'ǣ' };
+            case LetterKey.C:
+                return new char[] { 'ĉ' };
+            case LetterKey.D:
+                return new char[] { 'ḍ' };
+            case LetterKey.E:
+                return new char[] { 'ē', 'ê' };
+            case LetterKey.G:
+                return new char[] { 'ġ' };
+            case LetterKey.H:
+                return new char[] { 'ḥ', 'ẖ', 'ḫ' };
+            case LetterKey.I:
+                return new char[] { 'ī' };
+            case LetterKey.K:
+                return new char[] { 'ḵ' };
+            case LetterKey.L:
+                return new char[] { 'ḷ', 'ḻ' };
+            case LetterKey.M:
+                return new char[] { 'ṃ', 'ṁ' };
+            case LetterKey.N:
+                return new char[] { 'ṅ', 'ñ' };
+            case LetterKey.O:
+                return new char[] { 'ō', 'ô' };
+            case LetterKey.R:
+                return new char[] { 'ṛ', 'ṝ', 'ṟ', 'ṙ' };
+            case LetterKey.S:
+                return new char[] { 'ś', 'ṣ' };
+            case LetterKey.T:
+                return new char[] { 'ṭ', 'ṯ' };
+            case LetterKey.U:
+                return new char[] { 'ū', 'ŭ' };
+            case LetterKey.Y:
+                return new char[] { 'ẏ' };
+            case LetterKey.Z:
+                return new char[] { 'ẓ', 'ẕ', 'ź', 'ž' };
+        }
+
+        return Array.Empty<char>();
+    }
+
 }

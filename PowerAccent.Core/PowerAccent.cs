@@ -13,8 +13,8 @@ public class PowerAccent : IDisposable
     private bool _visible;
     private char[] _characters = Array.Empty<char>();
     private int _selectedIndex = -1;
-    private Stopwatch _stopWatch;
-    private bool isBackwardShiftPressed;
+    private bool _delayOk;
+    private bool _isBackwardShiftPressed;
 
     public event Action<bool, char[]> OnChangeDisplay;
     public event Action<int> OnSelectCharacter;
@@ -34,7 +34,6 @@ public class PowerAccent : IDisposable
 
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
-            _stopWatch = Stopwatch.StartNew();
             letterPressed = (LetterKey)args.Key;
         }
 
@@ -47,8 +46,8 @@ public class PowerAccent : IDisposable
                     triggerPressed = null;
             }
 
-         if (letterPressed.HasValue && Enum.IsDefined(typeof(BackwardKey), (int)args.Key) && !isBackwardShiftPressed)
-            isBackwardShiftPressed = true;
+         if (letterPressed.HasValue && Enum.IsDefined(typeof(BackwardKey), (int)args.Key) && !_isBackwardShiftPressed)
+            _isBackwardShiftPressed = true;
         
         if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
         {
@@ -56,7 +55,7 @@ public class PowerAccent : IDisposable
             {
                 letterPressed = null;
                 triggerPressed = null;
-                isBackwardShiftPressed = false;
+                _isBackwardShiftPressed = false;
                 return true;
             }
 
@@ -64,7 +63,7 @@ public class PowerAccent : IDisposable
 
             if (_characters == Array.Empty<char>())
                 return true;
-
+            
             _visible = true;
             Task.Delay(_settingService.InputTime).ContinueWith(t =>
             {
@@ -72,12 +71,16 @@ public class PowerAccent : IDisposable
                 {
                     letterPressed = null;
                     triggerPressed = null;
-                    isBackwardShiftPressed = false;
+                    _isBackwardShiftPressed = false;
                     _visible = false;
                 }
 
                 if (_visible)
+                {
+                    _delayOk = true;
                     OnChangeDisplay?.Invoke(true, _characters);
+                }
+                
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -103,8 +106,7 @@ public class PowerAccent : IDisposable
 
             if (triggerPressed.Value == TriggerKey.Space)
             {
-                Debug.WriteLine($"isBackwardShiftPressed {isBackwardShiftPressed}");
-                _selectedIndex += isBackwardShiftPressed ? -1 : 1;
+                _selectedIndex += _isBackwardShiftPressed ? -1 : 1;
 
                 if (_selectedIndex < 0) _selectedIndex = _characters.Length - 1;
                 if (_selectedIndex > _characters.Length - 1) _selectedIndex = 0;
@@ -124,34 +126,31 @@ public class PowerAccent : IDisposable
 
     private bool PowerAccent_KeyUp(object sender, KeyboardListener.RawKeyEventArgs args)
     {
-        if (isBackwardShiftPressed && Enum.IsDefined(typeof(BackwardKey), (int)args.Key))
-            isBackwardShiftPressed = false;
+        if (_isBackwardShiftPressed && Enum.IsDefined(typeof(BackwardKey), (int)args.Key))
+            _isBackwardShiftPressed = false;
 
         if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
         {
             letterPressed = null;
-            _stopWatch.Stop();
             if (_visible)
             {
-                if (_stopWatch.ElapsedMilliseconds < _settingService.InputTime)
+                _isBackwardShiftPressed = false;
+                _visible = false;
+                OnChangeDisplay?.Invoke(false, null);
+
+                if (!_delayOk)
                 {
-                    Debug.WriteLine("Insert before inputTime - " + _stopWatch.ElapsedMilliseconds);
                     WindowsFunctions.Insert(' ');
-                    OnChangeDisplay?.Invoke(false, null);
                     _selectedIndex = -1;
-                    _visible = false;
-                    isBackwardShiftPressed = false;
                     return false;
                 }
 
-                Debug.WriteLine("Insert after inputTime - " + _stopWatch.ElapsedMilliseconds);
-                OnChangeDisplay?.Invoke(false, null);
                 if (_selectedIndex != -1)
                     WindowsFunctions.Insert(_characters[_selectedIndex], true);
                 if (_settingService.InsertSpaceAfterSelection)
                     WindowsFunctions.Insert(' ', false);
                 _selectedIndex = -1;
-                _visible = false;
+                _delayOk = false;
             }
         }
 
