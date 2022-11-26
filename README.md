@@ -1,6 +1,7 @@
 # How it works
 
 Press and hold a letter that supports diacritic marks, then press space bar or arrow key to select the accent. For example <kbd>E</kbd> + <kbd>Space</kbd>. With spacebar, repeat presses to change accent mark. When releasing the letter key, the accented letter is inserted.
+
 ![](.github/Recording.gif)
 > Note: Some characters (like `¡` for Spanish are available with the comma (`,`) key).
 
