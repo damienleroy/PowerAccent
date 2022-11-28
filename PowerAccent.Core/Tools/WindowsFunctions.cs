@@ -8,6 +8,7 @@ internal static class WindowsFunctions
 {
     public static void Insert(char c, bool back = false)
     {
+        Debug.WriteLine($"Insert character: '{c}'. Back: {back}");
         unsafe
         {
             if (back)

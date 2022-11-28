@@ -2,7 +2,7 @@
 
 namespace PowerAccent.Core;
 
-public enum LetterKey
+public enum LetterKey : uint
 {
     _0 = User32.VK.VK_0,
     _1 = User32.VK.VK_1,
@@ -42,14 +42,14 @@ public enum LetterKey
     _ = User32.VK.VK_OEM_COMMA,
 }
 
-public enum TriggerKey
+public enum TriggerKey : uint
 {
     Left = User32.VK.VK_LEFT,
     Right = User32.VK.VK_RIGHT,
     Space = User32.VK.VK_SPACE,
 }
 
-public enum BackwardKey
+public enum BackwardKey : uint
 {
     LeftShift = User32.VK.VK_LSHIFT,
     RightShift = User32.VK.VK_RSHIFT,
