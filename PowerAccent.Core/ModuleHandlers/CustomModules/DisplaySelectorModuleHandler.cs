@@ -28,7 +28,10 @@ internal class DisplaySelectorModuleHandler : ModuleHandler
         }
 
         if (Options.CancelTrigger)
+        {
+            Options.CancelTrigger = false;
             return false;
+        }
 
         return base.InvokeKeyDown(key);
     }

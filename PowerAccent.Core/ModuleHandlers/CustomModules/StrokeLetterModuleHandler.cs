@@ -17,12 +17,13 @@ namespace PowerAccent.Core.ModuleHandlers.CustomModules
                 Options.LetterPressed = (LetterKey)key;
                 Debug.WriteLine($"Invoke StrokeLetterModuleHandler - Key: {(LetterKey)key}");
             }
-
+            
             return base.InvokeKeyDown(key);
         }
 
         public override bool InvokeKeyUp(uint key)
         {
+            Debug.WriteLine($"Invoke StrokeLetterModuleHandler - KeyUp: {(LetterKey)key}");
             if (Enum.IsDefined(typeof(LetterKey), key))
             {
                 Options.LetterPressed = null;
@@ -36,7 +37,7 @@ namespace PowerAccent.Core.ModuleHandlers.CustomModules
                         Options.Reset();
                         return false;
                     }
-
+                    
                     if (Options.SelectedIndex != -1)
                         WindowsFunctions.Insert(Options.Characters[Options.SelectedIndex], true);
                     if (SettingsService.InsertSpaceAfterSelection)
