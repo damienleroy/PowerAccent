@@ -13,11 +13,11 @@ internal class DisplaySelectorModuleHandler : ModuleHandler
     {
         if (!Options.IsVisible && Options.LetterPressed.HasValue && Options.TriggerPressed.HasValue)
         {
-            Debug.WriteLine($"Invoke DisplaySelectorModuleHandler - Begin delay {SettingsService.InputTime}");
+            Debug.WriteLine($"InvokeKeyDown DisplaySelectorModuleHandler - Begin delay {SettingsService.InputTime}");
             Options.IsVisible = true;
             Task.Delay(SettingsService.InputTime).ContinueWith(t =>
             {
-                Debug.WriteLine($"Invoke DisplaySelectorModuleHandler - End delay. Visible: {Options.IsVisible}");
+                Debug.WriteLine($"InvokeKeyDown DisplaySelectorModuleHandler - End delay. Visible: {Options.IsVisible}");
                 if (Options.IsVisible)
                 {
                     Options.IsDelayOk = true;

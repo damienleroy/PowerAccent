@@ -15,7 +15,7 @@ namespace PowerAccent.Core.ModuleHandlers.CustomModules
             if (Enum.IsDefined(typeof(LetterKey), key))
             {
                 Options.LetterPressed = (LetterKey)key;
-                Debug.WriteLine($"Invoke StrokeLetterModuleHandler - Key: {(LetterKey)key}");
+                Debug.WriteLine($"InvokeKeyDown StrokeLetterModuleHandler - Key: {(LetterKey)key}");
             }
             
             return base.InvokeKeyDown(key);
@@ -23,7 +23,7 @@ namespace PowerAccent.Core.ModuleHandlers.CustomModules
 
         public override bool InvokeKeyUp(uint key)
         {
-            Debug.WriteLine($"Invoke StrokeLetterModuleHandler - KeyUp: {(LetterKey)key}");
+            Debug.WriteLine($"InvokeKeyUp StrokeLetterModuleHandler - KeyUp: {(LetterKey)key}");
             if (Enum.IsDefined(typeof(LetterKey), key))
             {
                 Options.LetterPressed = null;
@@ -33,11 +33,14 @@ namespace PowerAccent.Core.ModuleHandlers.CustomModules
 
                     if (!Options.IsDelayOk)
                     {
-                        WindowsFunctions.Insert(' ');
+                        Debug.WriteLine("InvokeKeyUp StrokeLetterModuleHandler - Delay not ok");
+                        if (Options.TriggerPressed == TriggerKey.Space)
+                            WindowsFunctions.Insert(' ');
                         Options.Reset();
                         return false;
                     }
                     
+                    Debug.WriteLine($"InvokeKeyUp StrokeLetterModuleHandler - KeyUp: {(LetterKey)key} - {Options.SelectedIndex} - {Options.Characters.Length}");
                     if (Options.SelectedIndex != -1)
                         WindowsFunctions.Insert(Options.Characters[Options.SelectedIndex], true);
                     if (SettingsService.InsertSpaceAfterSelection)

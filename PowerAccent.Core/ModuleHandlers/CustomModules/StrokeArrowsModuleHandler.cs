@@ -13,10 +13,10 @@ internal class StrokeArrowsModuleHandler : ModuleHandler
 
     public override bool InvokeKeyDown(uint key)
     {
-        if (Options.LetterPressed.HasValue && key == (uint)TriggerKey.Left || key == (uint)TriggerKey.Right)
+        if (Options.LetterPressed.HasValue && (key == (uint)TriggerKey.Left || key == (uint)TriggerKey.Right))
         {
             Options.TriggerPressed = (TriggerKey)key;
-            Debug.WriteLine($"Invoke StrokeArrowsModuleHandler - Key: {(TriggerKey)key}");
+            Debug.WriteLine($"InvokeKeyDown StrokeArrowsModuleHandler - Key: {(TriggerKey)key}");
             if (!Options.IsVisible)
             {
                 if (!WindowsFunctions.IsKeyPressed(Options.LetterPressed.Value))
@@ -30,7 +30,7 @@ internal class StrokeArrowsModuleHandler : ModuleHandler
 
                 if (Options.Characters == Array.Empty<char>())
                 {
-                    Debug.WriteLine($"Invoke StrokeArrowsModuleHandler - No characters for key: {Options.LetterPressed.Value}");
+                    Debug.WriteLine($"InvokeKeyDown StrokeArrowsModuleHandler - No characters for key: {Options.LetterPressed.Value}");
                     return true;
                 }
             }
@@ -39,7 +39,7 @@ internal class StrokeArrowsModuleHandler : ModuleHandler
 
             if (Options.SelectedIndex < 0) Options.SelectedIndex = Options.Characters.Length - 1;
             if (Options.SelectedIndex > Options.Characters.Length - 1) Options.SelectedIndex = 0;
-            Debug.WriteLine($"Invoke StrokeArrowsModuleHandler - SelectedIndex: {Options.SelectedIndex}");
+            Debug.WriteLine($"InvokeKeyDown StrokeArrowsModuleHandler - SelectedIndex: {Options.SelectedIndex}");
             PowerAccent.SelectCharacter(Options.SelectedIndex);
             Options.CancelTrigger = true;
         }

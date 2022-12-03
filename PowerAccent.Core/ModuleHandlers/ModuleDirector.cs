@@ -11,6 +11,7 @@ internal class ModuleDirector
 
     public ModuleDirector(PowerAccent powerAccent, SettingsService settingsService, KeyOptions options)
     {
+        Console.WriteLine("Start ModuleDirector");
         _moduleHandler = new PauseModuleHandler(powerAccent, settingsService, options);
         _moduleHandler
             .SetNext(new CheckGameModeModuleHandler(powerAccent, settingsService, options))
@@ -23,12 +24,30 @@ internal class ModuleDirector
 
     public bool InvokeKeyDown(uint key)
     {
-        return _moduleHandler.InvokeKeyDown(key);
+        try
+        {
+            return _moduleHandler.InvokeKeyDown(key);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error in InvokeKeyDown: {e.Message}");
+            Console.WriteLine(e.StackTrace);
+            throw;
+        }
     }
 
     public bool InvokeKeyUp(uint key)
     {
-        return _moduleHandler.InvokeKeyUp(key);
+        try
+        {
+            return _moduleHandler.InvokeKeyUp(key);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error in InvokeKeyUp: {e.Message}");
+            Console.WriteLine(e.StackTrace);
+            throw;
+        }
     }
 }
 

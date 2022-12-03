@@ -19,7 +19,7 @@ internal class StrokeSpaceModuleHandler : ModuleHandler
 
             if (Enum.IsDefined(typeof(BackwardKey), key) && !Options.IsBackwardShiftPressed)
                 Options.IsBackwardShiftPressed = true;
-            Debug.WriteLine($"Invoke StrokeSpaceModuleHandler - Key: {(TriggerKey)key}, Backward: {Options.IsBackwardShiftPressed}");
+            Debug.WriteLine($"InvokeKeyDown StrokeSpaceModuleHandler - Key: {(TriggerKey)key}, Backward: {Options.IsBackwardShiftPressed}");
 
             if (!Options.IsVisible)
             {
@@ -31,19 +31,20 @@ internal class StrokeSpaceModuleHandler : ModuleHandler
                 Options.Characters = WindowsFunctions.IsCapitalState()
                     ? SettingsService.GetLetterKey(Options.LetterPressed.Value).ToUpper()
                     : SettingsService.GetLetterKey(Options.LetterPressed.Value);
+            }
 
-                if (Options.Characters == Array.Empty<char>())
-                {
-                    Debug.WriteLine($"Invoke StrokeSpaceModuleHandler - No characters found for {Options.LetterPressed.Value}");
-                    return true;
-                }
+            if (Options.Characters == Array.Empty<char>())
+            {
+                Debug.WriteLine($"InvokeKeyDown StrokeSpaceModuleHandler - No characters found for {Options.LetterPressed.Value}");
+                Options.Reset();
+                return true;
             }
 
             Options.SelectedIndex += Options.IsBackwardShiftPressed ? -1 : 1;
 
             if (Options.SelectedIndex < 0) Options.SelectedIndex = Options.Characters.Length - 1;
             if (Options.SelectedIndex > Options.Characters.Length - 1) Options.SelectedIndex = 0;
-            Debug.WriteLine($"Invoke StrokeSpaceModuleHandler - SelectedIndex: {Options.SelectedIndex}");
+            Debug.WriteLine($"InvokeKeyDown StrokeSpaceModuleHandler - SelectedIndex: {Options.SelectedIndex}");
             PowerAccent.SelectCharacter(Options.SelectedIndex);
             Options.CancelTrigger = true;
         }
