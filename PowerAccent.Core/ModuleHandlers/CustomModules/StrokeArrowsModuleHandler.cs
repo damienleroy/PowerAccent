@@ -27,12 +27,13 @@ internal class StrokeArrowsModuleHandler : ModuleHandler
                 Options.Characters = WindowsFunctions.IsCapitalState()
                     ? SettingsService.GetLetterKey(Options.LetterPressed.Value).ToUpper()
                     : SettingsService.GetLetterKey(Options.LetterPressed.Value);
-
-                if (Options.Characters == Array.Empty<char>())
-                {
-                    Debug.WriteLine($"InvokeKeyDown StrokeArrowsModuleHandler - No characters for key: {Options.LetterPressed.Value}");
-                    return true;
-                }
+            }
+            
+            if (Options.Characters == Array.Empty<char>())
+            {
+                Debug.WriteLine($"InvokeKeyDown StrokeArrowsModuleHandler - No characters for key: {Options.LetterPressed.Value}");
+                Options.Reset();
+                return true;
             }
 
             Options.SelectedIndex += key == (uint)TriggerKey.Left ? -1 : 1;
