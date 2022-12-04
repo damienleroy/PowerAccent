@@ -4,11 +4,15 @@ namespace PowerAccent.UI;
 
 public partial class Selector : Window
 {
-    public Selector(char[] selectedCharacters)
+    public Selector()
     {
         InitializeComponent();
         this.ShowActivated = false;
         this.Topmost = true;
+    }
+
+    public void SetChars(char[] selectedCharacters)
+    {
         characters.ItemsSource = selectedCharacters;
         characters.SelectedIndex = 0;
     }

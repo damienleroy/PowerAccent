@@ -26,6 +26,7 @@ public partial class MainWindow : Window
         _powerAccent.OnChangeDisplay += PowerAccent_OnChangeDisplay;
         _powerAccent.OnSelectCharacter += PowerAccent_OnSelectionCharacter;
         this.Visibility = Visibility.Hidden;
+        _selector = new Selector();
     }
 
     private void PowerAccent_OnSelectionCharacter(int index)
@@ -37,18 +38,13 @@ public partial class MainWindow : Window
     {
         if (isActive)
         {
-            Selector selector = new Selector(chars);
-            CenterWindow(selector);
-            selector.Show();
-            _selectorStack.Push(selector);
-            _selector = selector;
+            _selector.SetChars(chars);
+            CenterWindow(_selector);
+            _selector.Visibility = Visibility.Visible;
         }
         else
         {
-            while (_selectorStack.Count > 0)
-            {
-                _selectorStack.Pop().Close();
-            }
+            _selector.Visibility = Visibility.Hidden;
         }
     }
 
