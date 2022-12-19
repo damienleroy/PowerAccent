@@ -7,6 +7,7 @@ public enum Language
 {
     ALL,
     CUR,
+    CN,
     CY,
     CZ,
     DE,
@@ -38,10 +39,11 @@ internal static class Languages
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
+            case Language.CN: return GetDefaultLetterKeyCN(letter); // Chinese
             case Language.CY: return GetDefaultLetterKeyCY(letter); // Welsh
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
             case Language.DE: return GetDefaultLetterKeyDE(letter); // Germany
-            case Language.FI: return GetDefaultLetterKeyFI(letter); // Finnish	
+            case Language.FI: return GetDefaultLetterKeyFI(letter); // Finnish
             case Language.FR: return GetDefaultLetterKeyFR(letter); // French
             case Language.HR: return GetDefaultLetterKeyHR(letter); // Croatian
             case Language.HU: return GetDefaultLetterKeyHU(letter); // Hungarian
@@ -75,25 +77,25 @@ internal static class Languages
         switch (letter)
         {
             case LetterKey._0:
-		return new char[] { '₀', '⁰' };
+                return new char[] { '₀', '⁰' };
             case LetterKey._1:
-		return new char[] { '₁', '¹' };
+                return new char[] { '₁', '¹' };
             case LetterKey._2:
-		return new char[] { '₂', '²' };
+                return new char[] { '₂', '²' };
             case LetterKey._3:
-		return new char[] { '₃', '³' };
+                return new char[] { '₃', '³' };
             case LetterKey._4:
-		return new char[] { '₄', '⁴' };
+                return new char[] { '₄', '⁴' };
             case LetterKey._5:
-		return new char[] { '₅', '⁵' };
+                return new char[] { '₅', '⁵' };
             case LetterKey._6:
-		return new char[] { '₆', '⁶' };
+                return new char[] { '₆', '⁶' };
             case LetterKey._7:
-		return new char[] { '₇', '⁷' };
+                return new char[] { '₇', '⁷' };
             case LetterKey._8:
-		return new char[] { '₈', '⁸' };
+                return new char[] { '₈', '⁸' };
             case LetterKey._9:
-		return new char[] { '₉', '⁹' };
+                return new char[] { '₉', '⁹' };
             case LetterKey.A:
                 return new char[] { 'á', 'à', 'ä', 'â', 'ă', 'å', 'α', 'ā', 'ą', 'ȧ', 'ã', 'æ' };
             case LetterKey.B:
@@ -604,7 +606,27 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
-	
+
+    // Chinese
+    private static char[] GetDefaultLetterKeyCN(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'ā', 'á', 'ǎ', 'à' };
+            case LetterKey.E:
+                return new char[] { 'ē', 'é', 'ě', 'è' };
+            case LetterKey.I:
+                return new char[] { 'ī', 'í', 'ǐ', 'ì' };
+            case LetterKey.O:
+                return new char[] { 'ō', 'ó', 'ǒ', 'ò' };
+            case LetterKey.U:
+                return new char[] { 'ū', 'ú', 'ǔ', 'ù', 'ǖ', 'ǘ', 'ǚ', 'ǜ', 'ü' };
+        }
+
+        return Array.Empty<char>();
+    }
+
     // Welsh
     private static char[] GetDefaultLetterKeyCY(LetterKey letter)
     {
@@ -625,7 +647,7 @@ internal static class Languages
         }
 
         return Array.Empty<char>();
-    }	
+    }
 
     // Serbian
     private static char[] GetDefaultLetterKeySR(LetterKey letter)
