@@ -17,9 +17,11 @@ public enum Language
     IS,
     IT,
     JP,
+    LO,
     MI,
     NL,
     PI,
+    PJ,
     PL,
     PT,
     RO,
@@ -49,9 +51,11 @@ internal static class Languages
             case Language.IS: return GetDefaultLetterKeyIS(letter); // Iceland
             case Language.IT: return GetDefaultLetterKeyIT(letter); // Italian
             case Language.JP: return GetDefaultLetterKeyJP(letter); // Japanese
+            case Language.LO: return GetDefaultLetterKeyLO(letter); // Taiwan Tâi-Lô
             case Language.MI: return GetDefaultLetterKeyMI(letter); // Maori
             case Language.NL: return GetDefaultLetterKeyNL(letter); // Netherlands
             case Language.PI: return GetDefaultLetterKeyPI(letter); // Pinyin
+            case Language.PJ: return GetDefaultLetterKeyPJ(letter); // Taiwan Pe̍h-ōh-jī
             case Language.PL: return GetDefaultLetterKeyPL(letter); // Polish
             case Language.PT: return GetDefaultLetterKeyPT(letter); // Portuguese
             case Language.RO: return GetDefaultLetterKeyRO(letter); // Romanian
@@ -624,6 +628,54 @@ internal static class Languages
                 return new char[] { 'ū', 'û' };
             case LetterKey.Y:
                 return new char[] { '¥' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    //Tâi-Lô
+    private static char[] GetDefaultLetterKeyLO(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á', 'à', 'â', 'ǎ', 'ā', 'a̍', 'a̋' };
+            case LetterKey.E:
+                return new char[] { 'é', 'è', 'ê', 'ě', 'ē', 'e̍', 'e̋' };
+            case LetterKey.I:
+                return new char[] { 'í', 'ì', 'î', 'ǐ', 'ī', 'i̍', 'i̋' };
+            case LetterKey.O:
+                return new char[] { 'ó', 'ò', 'ô', 'ǒ', 'ō', 'o̍', 'ő' };
+            case LetterKey.U:
+                return new char[] { 'ú', 'ù', 'û', 'ǔ', 'ū', 'u̍', 'ű' };
+            case LetterKey.M:
+                return new char[] { 'ḿ', 'm̀', 'm̂', 'm̌', 'm̄', 'm̍', 'm̋' };
+            case LetterKey.N:
+                return new char[] { 'ń', 'ǹ', 'n̂', 'ň', 'n̄', 'n̍', 'n̋' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    //Pe̍h-ōh-jī
+    private static char[] GetDefaultLetterKeyPJ(LetterKey letter)
+    {
+        switch (letter)
+        {
+            case LetterKey.A:
+                return new char[] { 'á', 'à', 'â', 'ā', 'a̍', 'ă' };
+            case LetterKey.E:
+                return new char[] { 'é', 'è', 'ê', 'ē', 'e̍', 'ĕ' };
+            case LetterKey.I:
+                return new char[] { 'í', 'ì', 'î', 'ī', 'i̍', 'ĭ' };
+            case LetterKey.O:
+                return new char[] { 'ó', 'ò', 'ô', 'ō', 'o̍', 'ŏ', 'ó͘', 'ò͘', 'o͘', 'ô͘', 'ō͘', 'o̍͘', 'ŏ͘' };
+            case LetterKey.U:
+                return new char[] { 'ú', 'ù', 'û', 'ū', 'u̍', 'ŭ' };
+            case LetterKey.M:
+                return new char[] { 'ḿ', 'm̀', 'm̂', 'm̄', 'm̍', 'm̆' };
+            case LetterKey.N:
+                return new char[] { 'ń', 'ǹ', 'n̂', 'n̄', 'n̍', 'n̆' };
         }
 
         return Array.Empty<char>();
