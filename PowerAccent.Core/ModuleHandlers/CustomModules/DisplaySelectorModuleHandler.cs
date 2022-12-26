@@ -1,4 +1,5 @@
 ﻿using PowerAccent.Core.Services;
+using PowerAccent.Core.Tools;
 using System.Diagnostics;
 
 namespace PowerAccent.Core.ModuleHandlers.CustomModules;
@@ -18,7 +19,7 @@ internal class DisplaySelectorModuleHandler : ModuleHandler
             Task.Delay(SettingsService.InputTime).ContinueWith(t =>
             {
                 Debug.WriteLine($"InvokeKeyDown DisplaySelectorModuleHandler - End delay. Visible: {Options.IsVisible}");
-                if (Options.IsVisible)
+                if (Options.IsVisible && WindowsFunctions.IsKeyPressed(Options.LetterPressed.Value))
                 {
                     Options.IsDelayOk = true;
                     PowerAccent.ChangeDisplay(true, Options.Characters);

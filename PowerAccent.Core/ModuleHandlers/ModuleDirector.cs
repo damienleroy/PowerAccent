@@ -11,7 +11,6 @@ internal class ModuleDirector
 
     public ModuleDirector(PowerAccent powerAccent, SettingsService settingsService, KeyOptions options)
     {
-        Console.WriteLine("Start ModuleDirector");
         _moduleHandler = new PauseModuleHandler(powerAccent, settingsService, options);
         _moduleHandler
             .SetNext(new CheckGameModeModuleHandler(powerAccent, settingsService, options))
