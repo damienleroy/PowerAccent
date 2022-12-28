@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<UseWPF>true</UseWPF>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -10,6 +10,7 @@
 		<AssemblyName>PowerAccent</AssemblyName>
 		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -70,9 +71,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ControlzEx" Version="5.0.2" />
 		<PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.4" />
 	</ItemGroup>
 
 	<ItemGroup>
