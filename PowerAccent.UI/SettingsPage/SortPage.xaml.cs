@@ -8,12 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Shell;
 using Application = System.Windows.Application;
-using DragDropEffects = System.Windows.DragDropEffects;
-using DragEventArgs = System.Windows.Forms.DragEventArgs;
 using ListBox = System.Windows.Controls.ListBox;
 
 namespace PowerAccent.UI.SettingsPage;

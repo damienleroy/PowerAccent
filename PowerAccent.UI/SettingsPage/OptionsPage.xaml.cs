@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+﻿using ModernWpf.Controls;
 using PowerAccent.Core;
 using PowerAccent.Core.Services;
 using System;
@@ -14,7 +14,7 @@ namespace PowerAccent.UI.SettingsPage;
 /// <summary>
 /// Logique d'interaction pour OptionsPage.xaml
 /// </summary>
-public partial class OptionsPage : Page
+public partial class OptionsPage : System.Windows.Controls.Page
 {
     private readonly SettingsService _settingService = new SettingsService();
 
@@ -31,11 +31,6 @@ public partial class OptionsPage : Page
         IsSpaceBarActive.IsOn = _settingService.IsSpaceBarActive;
         DisableInFullScreen.IsOn = _settingService.DisableInFullScreen;
         InputTime.Value = _settingService.InputTime;
-        Countries.ItemsSource = Enum.GetNames<Language>().Select(l => new Country {
-            Name = l,
-            ImageUrl = $"/Resources/Flags/{l}.jpg",
-            IsChecked = l == _settingService.SelectedLanguage.ToString()
-        }).ToList();
     }
 
     private void UseCaretPosition_Checked(object sender, RoutedEventArgs e)
@@ -47,12 +42,6 @@ public partial class OptionsPage : Page
     private void SpaceBarActive_Checked(object sender, RoutedEventArgs e)
     {
         _settingService.IsSpaceBarActive = ((ToggleSwitch)sender).IsOn;
-        (Application.Current.MainWindow as MainWindow).RefreshSettings();
-    }
-
-    private void RadioButton_Checked(object sender, RoutedEventArgs e)
-    {
-        _settingService.SelectedLanguage = Enum.Parse<Language>((((RadioButton)sender).DataContext as Country).Name);
         (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
@@ -68,23 +57,10 @@ public partial class OptionsPage : Page
         (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 
-    private void InputTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+    private void InputTime_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
     {
-        int value = (int)e.NewValue;
+        int value = (int)args.NewValue;
         _settingService.InputTime = value >= 0 ? value : 200;
         (Application.Current.MainWindow as MainWindow).RefreshSettings();
-    }
-}
-
-public class StringToImageSourceConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return new BitmapImage(new Uri("pack://application:,,,/PowerAccent;component/" + value.ToString(), UriKind.Absolute));
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
     }
 }

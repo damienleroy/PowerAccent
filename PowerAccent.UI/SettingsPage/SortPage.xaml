@@ -20,7 +20,8 @@
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Row="0" Header="1 - Select a letter" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <ListBox Grid.Row="1" x:Name="Letters" HorizontalAlignment="Center" BorderThickness="0" SelectionChanged="Letters_SelectionChanged">
+                <ListBox Grid.Row="1" x:Name="Letters" HorizontalAlignment="Center" BorderThickness="0" SelectionChanged="Letters_SelectionChanged"
+                         Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
@@ -53,7 +54,7 @@
                                         </ControlTemplate.Resources>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="true">
-                                                <Setter TargetName="myBorder" Property="Background" Value="DeepSkyBlue"/>
+                                                <Setter TargetName="myBorder" Property="Background" Value="{DynamicResource SystemControlBackgroundAccentBrush}"/>
                                                 <Setter Property="FontWeight" Value="Bold"/>
                                                 <Setter Property="Foreground" Value="White"/>
                                             </Trigger>
@@ -68,7 +69,7 @@
 
             <Grid Grid.Row="1" Visibility="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource visibilityNullConverter}}">
                 <GroupBox Header="2 - Drag &amp; drop to rearrange the characters" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
-                    <ListBox Grid.Row="1" x:Name="CharacterList" HorizontalAlignment="Center" BorderThickness="0"
+                    <ListBox Grid.Row="1" x:Name="CharacterList" HorizontalAlignment="Center" BorderThickness="0" Background="Transparent"
                  ItemsSource="{Binding Characters}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -102,8 +103,9 @@
                                             </ControlTemplate.Resources>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsSelected" Value="true">
-                                                    <Setter TargetName="myBorder" Property="Background" Value="White"/>
+                                                    <Setter TargetName="myBorder" Property="Background" Value="{DynamicResource SystemControlBackgroundAccentBrush}"/>
                                                     <Setter Property="FontWeight" Value="Bold"/>
+                                                    <Setter Property="Foreground" Value="White"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -128,7 +130,6 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="Back" DockPanel.Dock="Bottom" Grid.Row="0" Grid.Column="0" Width="200" Height="50" Content="Back to default" Click="Back_Click" IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
             <Button x:Name="Save" DockPanel.Dock="Bottom" Grid.Row="0" Grid.Column="1" Width="200" Height="50" Content="Save" Click="Save_Click"
-                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
                     IsEnabled="{Binding SelectedValue, ElementName=Letters, Converter={StaticResource booleanNullConverter}}" Cursor="Hand" />
         </Grid>
 

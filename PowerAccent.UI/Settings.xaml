@@ -6,27 +6,6 @@
         xmlns:local="clr-namespace:PowerAccent.UI"
         mc:Ignorable="d"
         Title="Settings" Width="900" Height="650" WindowStartupLocation="CenterScreen">
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ToggleButton x:Name="Position" Grid.Column="0" Content="Position" Checked="Position_Checked" Cursor="Hand" />
-            <ToggleButton x:Name="Options" Grid.Column="1" Content="Options" Checked="Options_Checked" Cursor="Hand" />
-            <ToggleButton x:Name="Sort" Grid.Column="2" Content="Sort" Checked="Sort_Checked" Cursor="Hand" />
-        </Grid>
-        <Frame Grid.Row="1" Name="ParentFrame" NavigationUIVisibility="Hidden"/>
-    </Grid>
-
     <Window.Resources>
         <Style TargetType="ToggleButton">
             <Setter Property="Background" Value="White" />
@@ -41,11 +20,34 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Background" Value="DeepSkyBlue" />
+                    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAccentBrush}" />
                     <Setter Property="Foreground" Value="White" />
                     <Setter Property="Opacity" Value="1" />
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ToggleButton x:Name="Countries" Grid.Column="0" Content="Countries" Checked="Countries_Checked" Cursor="Hand" />
+            <ToggleButton x:Name="Position" Grid.Column="1" Content="Position" Checked="Position_Checked" Cursor="Hand" />
+            <ToggleButton x:Name="Options" Grid.Column="2" Content="Options" Checked="Options_Checked" Cursor="Hand" />
+            <ToggleButton x:Name="Sort" Grid.Column="3" Content="Sort" Checked="Sort_Checked" Cursor="Hand" />
+        </Grid>
+        <Frame Grid.Row="1" Name="ParentFrame" NavigationUIVisibility="Hidden" Margin="25"/>
+    </Grid>
 </Window>
