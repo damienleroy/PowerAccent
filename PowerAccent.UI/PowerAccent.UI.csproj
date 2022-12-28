@@ -39,6 +39,8 @@
 		<None Remove="Resources\Flags\CZ.jpg" />
 		<None Remove="Resources\Flags\SK.jpg" />
 		<None Remove="Resources\Flags\JP.jpg" />
+		<None Remove="Resources\Flags\LO.jpg" />
+		<None Remove="Resources\Flags\PJ.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,6 +70,8 @@
 		<Resource Include="Resources\Flags\SK.jpg" />
 		<Resource Include="Resources\Flags\CY.jpg" />
 		<Resource Include="Resources\Flags\JP.jpg" />
+		<Resource Include="Resources\Flags\LO.jpg" />
+		<Resource Include="Resources\Flags\PJ.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
