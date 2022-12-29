@@ -50,6 +50,7 @@ public class PowerAccent : IDisposable
         Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / primaryDpi;
         Position position = _settingService.Position;
 
+        Debug.WriteLine($"Window {window} - Screen {screen}");
         Debug.WriteLine($"Primary Dpi: {primaryDpi} - Screen Dpi: {activeDisplay.Dpi}");
 
         if (!_settingService.UseCaretPosition)
@@ -70,6 +71,16 @@ public class PowerAccent : IDisposable
     public char[] GetLettersFromKey(LetterKey letter)
     {
         return _settingService.GetLetterKey(letter);
+    }
+
+    public bool? IsLeftPosition()
+    {
+        return _settingService.Position switch
+        {
+            Position.Left or Position.TopLeft or Position.BottomLeft => true,
+            Position.Right or Position.TopRight or Position.BottomRight => false,
+            _ => null
+        };
     }
 
     public void ReloadSettings()

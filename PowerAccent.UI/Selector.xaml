@@ -21,14 +21,8 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="IsHitTestVisible" Value="False" />
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="IsHitTestVisible" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
         </Style>
 
         <Style TargetType="ListBoxItem">
@@ -42,8 +36,7 @@
                             Margin="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            SnapsToDevicePixels="true"
-                            Style="{DynamicResource borderContent}">
+                            SnapsToDevicePixels="true">
                             <Rectangle
                                 x:Name="SelectionIndicator"
                                 Margin="7"
@@ -54,7 +47,6 @@
                                 RadiusY="4"
                                 Visibility="Collapsed" />
                             <ContentPresenter Margin="12" />
-
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
@@ -84,6 +76,11 @@
             <Grid>
                 <Border Background="{DynamicResource PrimaryBackgroundBrush}" CornerRadius="8">
                     <ListBox x:Name="characters">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
                     </ListBox>
                 </Border>
             </Grid>

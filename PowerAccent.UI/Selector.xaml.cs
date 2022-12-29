@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PowerAccent.Core.Services;
+using PowerAccent.Core;
+using System.Windows;
 
 namespace PowerAccent.UI;
 
@@ -22,5 +24,15 @@ public partial class Selector : Window
     {
         this.Left = left;
         this.Top = top;
+    }
+
+    public void SetBorderWindowAlignment(bool? isLeft)
+    {
+        gridBorder.HorizontalAlignment = isLeft switch
+        {
+            true => HorizontalAlignment.Left,
+            false => HorizontalAlignment.Right,
+            _ => HorizontalAlignment.Center,
+        };
     }
 }

@@ -42,4 +42,9 @@ public struct Size
         }
         return new Size(size.Width / divider.Width, size.Height / divider.Height);
     }
+
+    public override string ToString()
+    {
+        return $"Width: {Width}, Height: {Height}";
+    }
 }

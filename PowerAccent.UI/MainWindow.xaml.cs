@@ -6,6 +6,7 @@ using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
 using Application = System.Windows.Application;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace PowerAccent.UI;
 
@@ -38,8 +39,8 @@ public partial class MainWindow : Window
         if (isActive)
         {
             Selector selector = new Selector(chars);
-            CenterWindow(selector);
             selector.Show();
+            CenterWindow(selector);
             _selectorStack.Push(selector);
             _selector = selector;
         }
@@ -58,6 +59,7 @@ public partial class MainWindow : Window
         double primaryDPI = Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth;
         Point position = _powerAccent.GetDisplayCoordinates(window, primaryDPI);
         selector.SetPosition(position.X, position.Y);
+        selector.SetBorderWindowAlignment(_powerAccent.IsLeftPosition());
     }
 
     #region TaskBar
