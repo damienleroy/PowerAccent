@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<UseWPF>true</UseWPF>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -10,29 +10,35 @@
 		<AssemblyName>PowerAccent</AssemblyName>
 		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\Flags\CY.jpg" />
 		<None Remove="Resources\Flags\HU.jpg" />
 		<None Remove="Resources\Flags\IS.jpg" />
 		<None Remove="Resources\Flags\IT.jpg" />
 		<None Remove="Resources\Flags\NL.jpg" />
 		<None Remove="Resources\Flags\RO.jpg" />
-		<None Remove="Resources\Flags\SW.jpg" />
+		<None Remove="Resources\Flags\RS.jpg" />
+		<None Remove="Resources\Flags\SA.jpg" />
+		<None Remove="Resources\Flags\SV.jpg" />
 		<None Remove="Resources\win11desktop.jpg" />
 		<None Remove="Resources\Flags\ALL.jpg" />
 		<None Remove="Resources\Flags\CUR.jpg" />
 		<None Remove="Resources\Flags\MI.jpg" />
 		<None Remove="Resources\Flags\PI.jpg" />
 		<None Remove="Resources\Flags\PL.jpg" />
-		<None Remove="Resources\Flags\PT.jpg" />	
+		<None Remove="Resources\Flags\PT.jpg" />
+		<None Remove="Resources\Flags\FI.jpg" />
 		<None Remove="Resources\Flags\FR.jpg" />
+		<None Remove="Resources\Flags\HR.jpg" />
 		<None Remove="Resources\Flags\SP.jpg" />
 		<None Remove="Resources\Flags\TK.jpg" />
 		<None Remove="Resources\Flags\DE.jpg" />
 		<None Remove="Resources\Flags\CZ.jpg" />
 		<None Remove="Resources\Flags\SK.jpg" />
-		<None Remove="Resources\Flags\CYM.jpg" />
+		<None Remove="Resources\Flags\JP.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,7 +48,9 @@
 		<Resource Include="Resources\Flags\IT.jpg" />
 		<Resource Include="Resources\Flags\NL.jpg" />
 		<Resource Include="Resources\Flags\RO.jpg" />
-		<Resource Include="Resources\Flags\SW.jpg" />
+		<Resource Include="Resources\Flags\RS.jpg" />
+		<Resource Include="Resources\Flags\SA.jpg" />
+		<Resource Include="Resources\Flags\SV.jpg" />
 		<Resource Include="Resources\win11desktop.jpg" />
 		<Resource Include="Resources\Flags\ALL.jpg" />
 		<Resource Include="Resources\Flags\CUR.jpg" />
@@ -50,23 +58,34 @@
 		<Resource Include="Resources\Flags\PI.jpg" />
 		<Resource Include="Resources\Flags\PL.jpg" />
 		<Resource Include="Resources\Flags\PT.jpg" />
+		<Resource Include="Resources\Flags\FI.jpg" />
 		<Resource Include="Resources\Flags\FR.jpg" />
+		<Resource Include="Resources\Flags\HR.jpg" />
 		<Resource Include="Resources\Flags\SP.jpg" />
 		<Resource Include="Resources\Flags\TK.jpg" />
 		<Resource Include="Resources\Flags\DE.jpg" />
 		<Resource Include="Resources\Flags\CZ.jpg" />
 		<Resource Include="Resources\Flags\SK.jpg" />
-		<Resource Include="Resources\Flags\CYM.jpg" />
+		<Resource Include="Resources\Flags\CY.jpg" />
+		<Resource Include="Resources\Flags\JP.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ControlzEx" Version="5.0.2" />
 		<PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\PowerAccent.Core\PowerAccent.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="MainWindow.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	</ItemGroup>
 
 </Project>

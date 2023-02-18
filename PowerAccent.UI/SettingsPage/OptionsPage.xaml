@@ -3,17 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-      xmlns:models="clr-namespace:PowerAccent.Core;assembly=PowerAccent.Core"
-      xmlns:local="clr-namespace:PowerAccent.UI.SettingsPage"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OptionsPage"
       DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Page.Resources>
-        <local:StringToImageSourceConverter x:Key="stringToImageSourceConverter" />
-
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -75,100 +71,36 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Grid.Resources>
-                <Style x:Key="Flag" TargetType="RadioButton">
-                    <Style.Triggers>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
-                        </Trigger>
-                    </Style.Triggers>
-
-                    <Setter Property="BorderThickness" Value="2"/>
-
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="RadioButton">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Grid.Resources>
-
-            <GroupBox Header="Change the country" Height="Auto" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <ListView x:Name="Countries" Height="Auto" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-
-                    <d:ListView.ItemsSource>
-                        <x:Array Type="{x:Type models:Country}">
-                            <models:Country Name="ALL" ImageUrl="/Resources/Flags/ALL.jpg" />
-                            <models:Country Name="FR" ImageUrl="/Resources/Flags/FR.jpg" />
-                            <models:Country Name="SP" ImageUrl="/Resources/Flags/SP.jpg" IsChecked="True" />
-                            <models:Country Name="TK" ImageUrl="/Resources/Flags/TK.jpg" />
-                            <models:Country Name="TK" ImageUrl="/Resources/Flags/PL.jpg" />
-                        </x:Array>
-                    </d:ListView.ItemsSource>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" GroupName="Countries" Checked="RadioButton_Checked">
-                                <WrapPanel>
-                                    <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" Cursor="Hand" />
-                                </WrapPanel>
-                            </RadioButton>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </GroupBox>
+        <ui:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Header="Activate space bar for insertion"
+                        OnContent="On" OffContent="Off"
+                        VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
+        <ui:ToggleSwitch Grid.Row="2" x:Name="DisableInFullScreen" Header="Disable in game mode"
+                        OnContent="On" OffContent="Off"
+                        VerticalAlignment="Center" Toggled="DisableInFullScreen_Toggled" Cursor="Hand" />
+        <ui:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Header="Use caret position (experimental)"
+                        OnContent="On" OffContent="Off"
+                        VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />
+        <ui:ToggleSwitch Grid.Row="3" x:Name="InsertSpaceAfterSelection" Header="Insert space after insertion"
+                        OnContent="On" OffContent="Off"
+                        VerticalAlignment="Center" Toggled="InsertSpaceAfterSelection_Toggled" Cursor="Hand" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Input time before trigger (in milliseconds)" HorizontalAlignment="Right" />
+            <ui:NumberBox Grid.Row="1" x:Name="InputTime" Width="200" HorizontalAlignment="Right" SmallChange="50"
+                                SpinButtonPlacementMode="Inline" Minimum="0" Maximum="10000"
+                                ValueChanged="InputTime_ValueChanged"/>
         </Grid>
-
-        <GroupBox Grid.Row="1" Header="Other options">
-            <Grid Height="200" Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <mah:ToggleSwitch Grid.Row="0" x:Name="IsSpaceBarActive" Content="Activate space bar for insertion"
-                          OnContent="On" OffContent="Off"
-                          VerticalAlignment="Center" Toggled="SpaceBarActive_Checked" Cursor="Hand" />
-                <mah:ToggleSwitch Grid.Row="2" x:Name="DisableInFullScreen" Content="Disable in full screen"
-                          OnContent="On" OffContent="Off"
-                          VerticalAlignment="Center" Toggled="DisableInFullScreen_Toggled" Cursor="Hand" />
-                <mah:ToggleSwitch Grid.Row="1" x:Name="IsUseCaretPosition" Content="Use caret position (experimental)"
-                          OnContent="On" OffContent="Off"
-                          VerticalAlignment="Center" Toggled="UseCaretPosition_Checked" Cursor="Hand" />
-                <mah:ToggleSwitch Grid.Row="3" x:Name="InsertSpaceAfterSelection" Content="Insert space after selection"
-                          OnContent="On" OffContent="Off"
-                          VerticalAlignment="Center" Toggled="InsertSpaceAfterSelection_Toggled" Cursor="Hand" />
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Input time before trigger (in milliseconds)" HorizontalAlignment="Right" />
-                    <mah:NumericUpDown Grid.Row="1" x:Name="InputTime" Width="100" HorizontalAlignment="Right"
-                                           Interval="50" Minimum="0" Maximum="10000" NumericInputMode="Numbers"
-                                           ValueChanged="InputTime_ValueChanged"/>
-                </Grid>
-            </Grid>
-        </GroupBox>
     </Grid>
 </Page>

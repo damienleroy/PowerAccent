@@ -56,4 +56,9 @@ public struct Rect
         }
         return new Rect(rect.X / divider.X, rect.Y / divider.Y, rect.Width / divider.Width, rect.Height / divider.Height);
     }
+
+    public override string ToString()
+    {
+        return $"X: {X}, Y: {Y}, Width: {Width}, Height: {Height}";
+    }
 }

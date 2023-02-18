@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using PowerAccent.Core.ModuleHandlers;
 using PowerAccent.Core.Services;
 using PowerAccent.Core.Tools;
 
@@ -6,143 +7,51 @@ namespace PowerAccent.Core;
 
 public class PowerAccent : IDisposable
 {
-    private readonly SettingsService _settingService = new SettingsService();
+    internal readonly SettingsService _settingService = new SettingsService();
     private readonly KeyboardListener _keyboardListener = new KeyboardListener();
-
-    private LetterKey? letterPressed;
-    private bool _visible;
-    private char[] _characters = Array.Empty<char>();
-    private int _selectedIndex = -1;
-    private Stopwatch _stopWatch;
+    private readonly KeyOptions _moduleOptions = new KeyOptions();
+    private readonly ModuleDirector _moduleDirector;
 
     public event Action<bool, char[]> OnChangeDisplay;
-    public event Action<int, char> OnSelectCharacter;
+    public event Action<int> OnSelectCharacter;
 
     public bool IsPaused { get; set; }
 
     public PowerAccent()
     {
+        _moduleDirector = new ModuleDirector(this, _settingService, _moduleOptions);
         _keyboardListener.KeyDown += PowerAccent_KeyDown;
         _keyboardListener.KeyUp += PowerAccent_KeyUp;
     }
 
     private bool PowerAccent_KeyDown(object sender, KeyboardListener.RawKeyEventArgs args)
     {
-        if (IsPaused)
-            return true;
-
-        if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
-        {
-            _stopWatch = Stopwatch.StartNew();
-            letterPressed = (LetterKey)args.Key;
-        }
-
-        TriggerKey? triggerPressed = null;
-        if (letterPressed.HasValue)
-            if (Enum.IsDefined(typeof(TriggerKey), (int)args.Key))
-            {
-                triggerPressed = (TriggerKey)args.Key;
-                if (triggerPressed == TriggerKey.Space && !_settingService.IsSpaceBarActive)
-                    triggerPressed = null;
-            }
-
-        if (!_visible && letterPressed.HasValue && triggerPressed.HasValue)
-        {
-            _characters = WindowsFunctions.IsCapitalState() ? ToUpper(_settingService.GetLetterKey(letterPressed.Value)) : _settingService.GetLetterKey(letterPressed.Value);
-
-            if (_characters == Array.Empty<char>())
-                return true;
-
-            _visible = true;
-            Task.Delay(_settingService.InputTime).ContinueWith(t =>
-            {
-                if (_settingService.DisableInFullScreen && WindowsFunctions.IsGameMode())
-                    _visible = false;
-
-                if (_visible)
-                    OnChangeDisplay?.Invoke(true, _characters);
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
-        if(_visible && triggerPressed.HasValue)
-        {
-            if (_selectedIndex == -1)
-            {
-                if (triggerPressed.Value == TriggerKey.Left)
-                    _selectedIndex = _characters.Length / 2 - 1;
-
-                if (triggerPressed.Value == TriggerKey.Right)
-                    _selectedIndex = _characters.Length / 2;
-
-                if (triggerPressed.Value == TriggerKey.Space)
-                    _selectedIndex = 0;
-
-                if (_selectedIndex < 0) _selectedIndex = 0;
-                if (_selectedIndex > _characters.Length - 1) _selectedIndex = _characters.Length - 1;
-
-                OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
-                return false;
-            }
-
-            if (triggerPressed.Value == TriggerKey.Space)
-            {
-                if (_selectedIndex < _characters.Length - 1)
-                    ++_selectedIndex;
-                else
-                    _selectedIndex = 0;
-            }
-
-            if (triggerPressed.Value == TriggerKey.Left && _selectedIndex > 0)
-                --_selectedIndex;
-            if (triggerPressed.Value == TriggerKey.Right && _selectedIndex < _characters.Length - 1)
-                ++_selectedIndex;
-
-            OnSelectCharacter?.Invoke(_selectedIndex, _characters[_selectedIndex]);
-            return false;
-        }
-
-        return true;
+        return _moduleDirector.InvokeKeyDown(args.Key);
     }
 
     private bool PowerAccent_KeyUp(object sender, KeyboardListener.RawKeyEventArgs args)
     {
-        if (Enum.IsDefined(typeof(LetterKey), (int)args.Key))
-        {
-            letterPressed = null;
-            _stopWatch.Stop();
-            if (_visible)
-            {
-                if (_stopWatch.ElapsedMilliseconds < _settingService.InputTime)
-                {
-                    Debug.WriteLine("Insert before inputTime - " + _stopWatch.ElapsedMilliseconds);
-                    WindowsFunctions.Insert(' ');
-                    OnChangeDisplay?.Invoke(false, null);
-                    _selectedIndex = -1;
-                    _visible = false;
-                    return false;
-                }
-
-                Debug.WriteLine("Insert after inputTime - " + _stopWatch.ElapsedMilliseconds);
-                OnChangeDisplay?.Invoke(false, null);
-                if (_selectedIndex != -1)
-                    WindowsFunctions.Insert(_characters[_selectedIndex], true);
-                if (_settingService.InsertSpaceAfterSelection)
-                    WindowsFunctions.Insert(' ', false);
-                _selectedIndex = -1;
-                _visible = false;
-            }
-        }
-
-        return true;
+        return _moduleDirector.InvokeKeyUp(args.Key);
     }
 
-    public Point GetDisplayCoordinates(Size window)
+    public void ChangeDisplay(bool visible, char[] characters)
+    {
+        OnChangeDisplay?.Invoke(visible, characters);
+    }
+
+    public void SelectCharacter(int index)
+    {
+        OnSelectCharacter?.Invoke(index);
+    }
+
+    public Point GetDisplayCoordinates(Size window, double primaryDpi)
     {
         var activeDisplay = WindowsFunctions.GetActiveDisplay();
-        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / activeDisplay.Dpi;
+        Rect screen = new Rect(activeDisplay.Location, activeDisplay.Size) / primaryDpi;
         Position position = _settingService.Position;
 
-        Debug.WriteLine("Dpi: " + activeDisplay.Dpi);
+        Debug.WriteLine($"Window {window} - Screen {screen}");
+        Debug.WriteLine($"Primary Dpi: {primaryDpi} - Screen Dpi: {activeDisplay.Dpi}");
 
         if (!_settingService.UseCaretPosition)
         {
@@ -155,14 +64,23 @@ public class PowerAccent : IDisposable
             return Calculation.GetRawCoordinatesFromPosition(position, screen, window);
         }
 
-        Point dpi = new Point(activeDisplay.Dpi, activeDisplay.Dpi);
-        Point caret = new Point(carretPixel.X / dpi.X, carretPixel.Y / dpi.Y);
+        Point caret = new Point(carretPixel.X, carretPixel.Y) / primaryDpi;
         return Calculation.GetRawCoordinatesFromCaret(caret, screen, window);
     }
 
     public char[] GetLettersFromKey(LetterKey letter)
     {
         return _settingService.GetLetterKey(letter);
+    }
+
+    public bool? IsLeftPosition()
+    {
+        return _settingService.Position switch
+        {
+            Position.Left or Position.TopLeft or Position.BottomLeft => true,
+            Position.Right or Position.TopRight or Position.BottomRight => false,
+            _ => null
+        };
     }
 
     public void ReloadSettings()
@@ -174,15 +92,5 @@ public class PowerAccent : IDisposable
     {
         _keyboardListener.Dispose();
         GC.SuppressFinalize(this);
-    }
-
-    public static char[] ToUpper(char[] array)
-    {
-        char[] result = new char[array.Length];
-        for (int i = 0; i < array.Length; i++)
-        {
-            result[i] = Char.ToUpper(array[i]);
-        }
-        return result;
     }
 }

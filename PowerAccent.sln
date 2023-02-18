@@ -15,9 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PowerAccent.Wix", "PowerAccent.Wix\PowerAccent.Wix.wixproj", "{0746A5C8-5935-4075-9C76-B8016E66EFF5}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PowerAccent.Wix.SelfContained", "PowerAccent.Wix.SelfContained\PowerAccent.Wix.SelfContained.wixproj", "{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PowerAccent.Wix.SelfContained", "PowerAccent.Wix\PowerAccent.Wix.SelfContained.wixproj", "{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,28 +71,7 @@ Global
 		{0124DDDD-22C0-482C-B96A-92B8F9B25464}.Release|x64.Build.0 = Release|Any CPU
 		{0124DDDD-22C0-482C-B96A-92B8F9B25464}.Release|x86.ActiveCfg = Release|Any CPU
 		{0124DDDD-22C0-482C-B96A-92B8F9B25464}.Release|x86.Build.0 = Release|Any CPU
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|Any CPU.Build.0 = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|ARM.ActiveCfg = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|ARM.Build.0 = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|ARM64.ActiveCfg = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|ARM64.Build.0 = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|x64.ActiveCfg = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|x64.Build.0 = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|x86.ActiveCfg = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Debug|x86.Build.0 = Debug|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|Any CPU.ActiveCfg = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|Any CPU.Build.0 = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|ARM.ActiveCfg = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|ARM.Build.0 = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|ARM64.ActiveCfg = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|ARM64.Build.0 = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|x64.ActiveCfg = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|x64.Build.0 = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|x86.ActiveCfg = Release|x86
-		{0746A5C8-5935-4075-9C76-B8016E66EFF5}.Release|x86.Build.0 = Release|x86
 		{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}.Debug|Any CPU.Build.0 = Debug|x86
 		{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}.Debug|ARM.ActiveCfg = Debug|x86
 		{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}.Debug|ARM.Build.0 = Debug|x86
 		{0C31F068-83E6-48ED-AB58-4E8EBFE51D9A}.Debug|ARM64.ActiveCfg = Debug|x86

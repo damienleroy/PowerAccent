@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace PowerAccent.Core.Tools;
@@ -73,11 +72,11 @@ internal class KeyboardListener : IDisposable
     [MethodImpl(MethodImplOptions.NoInlining)]
     private IntPtr LowLevelKeyboardProc(int nCode, UIntPtr wParam, IntPtr lParam)
     {
-        if (nCode >= 0)
+        if (nCode == 0)
+            //Captures the character(s) pressed only on WM_KEYDOWN or WM_KEYUP
             if (wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_KEYDOWN ||
                 wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_KEYUP)
             {
-                //Captures the character(s) pressed only on WM_KEYDOWN
                 var chars = InterceptKeys.VKCodeToString((uint)Marshal.ReadInt32(lParam),
                     wParam.ToUInt32() == (int)InterceptKeys.KeyEvent.WM_KEYDOWN);
 
@@ -195,25 +194,11 @@ internal static class InterceptKeys
         /// Key up
         /// </summary>
         WM_KEYUP = 257,
-
-        /// <summary>
-        /// System key up
-        /// </summary>
-        WM_SYSKEYUP = 261,
-
-        /// <summary>
-        /// System key down
-        /// </summary>
-        WM_SYSKEYDOWN = 260
     }
 
     public static IntPtr SetHook(LowLevelKeyboardProc proc)
     {
-        using (Process curProcess = Process.GetCurrentProcess())
-        using (ProcessModule curModule = curProcess.MainModule)
-        {
-            return SetWindowsHookEx(WH_KEYBOARD_LL, proc, (IntPtr)0, 0);
-        }
+        return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(null), 0);
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]

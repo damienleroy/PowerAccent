@@ -8,12 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Shell;
 using Application = System.Windows.Application;
-using DragDropEffects = System.Windows.DragDropEffects;
-using DragEventArgs = System.Windows.Forms.DragEventArgs;
 using ListBox = System.Windows.Controls.ListBox;
 
 namespace PowerAccent.UI.SettingsPage;
@@ -83,7 +78,7 @@ public partial class SortPage : Page, INotifyPropertyChanged
         LetterKey key = (LetterKey)Letters.SelectedItem;
         _settingService.SetLetterKey(key, Characters.ToArray());
         _settingService.Save();
-        (Application.Current.MainWindow as Selector).RefreshSettings();
+        (Application.Current.MainWindow as MainWindow).RefreshSettings();
     }
 }
 

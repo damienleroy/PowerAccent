@@ -3,65 +3,87 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:local="clr-namespace:PowerAccent"
-        mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize"
-        Title="MainWindow" Height="50" Width="50" Visibility="Collapsed" WindowStyle="None">
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ResizeMode="NoResize" AllowsTransparency="True"
+        Title="Selector" Height="120" MinWidth="600" Visibility="Collapsed" WindowStyle="None" Background="Transparent">
+    <Window.Resources>
+        
+        <DataTemplate x:Key="DefaultKeyTemplate">
+            <TextBlock VerticalAlignment="Center" FontSize="18" Foreground="{DynamicResource PrimaryForegroundBrush}" Text="{Binding}" TextAlignment="Center" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SelectedKeyTemplate">
+            <TextBlock VerticalAlignment="Center" FontSize="18" Foreground="White" Text="{Binding}" TextAlignment="Center" />
+        </DataTemplate>
+        
+        <Style TargetType="ListBox">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="ContentTemplate" Value="{StaticResource DefaultKeyTemplate}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid
+                            Width="48"
+                            Height="48"
+                            Margin="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SnapsToDevicePixels="true">
+                            <Rectangle
+                                x:Name="SelectionIndicator"
+                                Margin="7"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Fill="{DynamicResource SystemControlBackgroundAccentBrush}"
+                                RadiusX="4"
+                                RadiusY="4"
+                                Visibility="Collapsed" />
+                            <ContentPresenter Margin="12" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="SelectionIndicator" Property="Visibility" Value="Visible" />
+                                <Setter Property="ContentTemplate" Value="{StaticResource SelectedKeyTemplate}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    
     <Grid>
-        <tb:TaskbarIcon x:Name="TaskbarIcon"
-            IconSource="Resources/a-icon.ico"
-            ToolTipText="PowerAccent">
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Settings" Click="Settings_Click" />
-                    <MenuItem Header="Pause" Click="Pause_Click" />
-                    <MenuItem Header="Exit" Click="MenuExit_Click" />
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
-        <ListBox x:Name="characters" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsHitTestVisible="False"
-                 BorderThickness="1" BorderBrush="SlateGray">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding}" FontSize="18" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemContainerStyle>
-                <Style x:Name="ItemStyle" TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Border x:Name="myBorder"
-                                    Padding="0" Margin="0"
-                                    SnapsToDevicePixels="true"
-                                    Style="{DynamicResource borderContent}">
-                                    <ContentPresenter />
-                                </Border>
-                                <ControlTemplate.Resources>
-                                    <Style x:Key="borderContent" TargetType="Border">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                        <Setter Property="Background" Value="#ECECEC"/>
-                                        <Setter Property="Width" Value="50"/>
-                                        <Setter Property="Height" Value="50"/>
-                                    </Style>
-                                </ControlTemplate.Resources>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="myBorder" Property="Background" Value="White"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
+        <Border
+            x:Name="gridBorder"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="{DynamicResource SecondaryBackgroundBrush}"
+            BorderBrush="{DynamicResource WindowsBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="32" Opacity="0.28" ShadowDepth="1" />
+            </Border.Effect>
+            <Grid>
+                <Border Background="{DynamicResource PrimaryBackgroundBrush}" CornerRadius="8">
+                    <ListBox x:Name="characters">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="False" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
