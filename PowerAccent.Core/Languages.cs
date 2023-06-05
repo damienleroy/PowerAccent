@@ -646,6 +646,8 @@ internal static class Languages
                 return new char[] { 'û' };
             case LetterKey.Y: 
                 return new char[] { 'ŷ' };
+            case LetterKey.W:
+                return new char[] { 'ŵ' };
         }
 
         return Array.Empty<char>();
