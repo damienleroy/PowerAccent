@@ -33,6 +33,47 @@ public enum Language
 
 internal static class Languages
 {
+    public static char[] GetMultipleLetterKey(LetterKey letter, Language[] langs)
+    {
+        var multipleLetterKey = new List<char[]>();
+        foreach (var lang in langs)
+        {
+            multipleLetterKey.Add(GetDefaultLetterKey(letter, lang));
+        }
+
+        var result = new List<char>();
+        for (int i = 0; i < multipleLetterKey.Max(x => x.Length); i++)
+        {
+            for (int j = 0; j < multipleLetterKey.Count; j++)
+            {
+                if (i < multipleLetterKey[j].Length)
+                {
+                    result.Add(multipleLetterKey[j][i]);
+                }
+
+                if (j > multipleLetterKey.Count)
+                    j = 0;
+            }
+        }
+
+        // remove duplicate
+        int index = 0;
+        while (index < result.Count)
+        {
+            int index2 = result.FindIndex(index + 1, x => x == result[index]);
+            if (index2 != -1)
+            {
+                result.RemoveAt(index);
+            }
+            else
+            {
+                index++;
+            }
+        }
+
+        return result.ToArray();
+    }
+
     public static char[] GetDefaultLetterKey(LetterKey letter, Language lang)
     {
         switch (lang)
@@ -200,7 +241,7 @@ internal static class Languages
     {
         switch (letter)
         {
-           
+
             case LetterKey.C:
                 return new char[] { 'ć', 'č' };
             case LetterKey.D:
@@ -492,7 +533,7 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
-    
+
     // Czech
     private static char[] GetDefaultLetterKeyCZ(LetterKey letter)
     {
@@ -528,7 +569,7 @@ internal static class Languages
 
         return Array.Empty<char>();
     }
-    
+
     // Germany
     private static char[] GetDefaultLetterKeyDE(LetterKey letter)
     {
@@ -615,7 +656,7 @@ internal static class Languages
             case LetterKey.A:
                 return new char[] { 'ā', 'â' };
             case LetterKey.E:
-                return new char[] { 'ē', 'ê'};
+                return new char[] { 'ē', 'ê' };
             case LetterKey.I:
                 return new char[] { 'ī', 'î' };
             case LetterKey.O:
@@ -634,17 +675,17 @@ internal static class Languages
     {
         switch (letter)
         {
-            case LetterKey.A: 
+            case LetterKey.A:
                 return new char[] { 'â' };
-            case LetterKey.E: 
+            case LetterKey.E:
                 return new char[] { 'ê' };
-            case LetterKey.I: 
+            case LetterKey.I:
                 return new char[] { 'î' };
-            case LetterKey.O: 
+            case LetterKey.O:
                 return new char[] { 'ô' };
-            case LetterKey.U: 
+            case LetterKey.U:
                 return new char[] { 'û' };
-            case LetterKey.Y: 
+            case LetterKey.Y:
                 return new char[] { 'ŷ' };
             case LetterKey.W:
                 return new char[] { 'ŵ' };

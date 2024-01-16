@@ -6,7 +6,6 @@ using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
 using Application = System.Windows.Application;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace PowerAccent.UI;
 

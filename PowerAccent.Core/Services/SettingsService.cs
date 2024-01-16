@@ -95,12 +95,12 @@ public class SettingsService : ApplicationSettingsBase
         if (this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key) && this[key] != null)
             return (char[])this[key];
         
-          return Languages.GetDefaultLetterKey(letter, SelectedLanguage);
+          return Languages.GetMultipleLetterKey(letter, SelectedLanguages);
     }
 
     public char[] GetDefaultLetterKey(LetterKey key)
     {
-        return Languages.GetDefaultLetterKey(key, SelectedLanguage);
+        return Languages.GetMultipleLetterKey(key, SelectedLanguages);
     }
 
     private void AddingProperty(string key)
