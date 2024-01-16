@@ -27,18 +27,48 @@ public partial class CountriesPage : Page
     {
         base.OnInitialized(e);
 
+        RefreshData();
+    }
+
+    private void RefreshData()
+    {
         Countries.ItemsSource = Enum.GetNames<Language>().Select(l => new Country
         {
             Name = l,
             ImageUrl = $"/Resources/Flags/{l}.jpg",
-            IsChecked = l == _settingService.SelectedLanguage.ToString()
+            IsChecked = _settingService.SelectedLanguages.Any(s => s.ToString() == l)
         }).ToList();
     }
 
-    private void RadioButton_Checked(object sender, RoutedEventArgs e)
+    private void CheckBox_OnChanged(object sender, RoutedEventArgs e)
     {
-        _settingService.SelectedLanguage = Enum.Parse<Language>((((RadioButton)sender).DataContext as Country).Name);
+        var selectedCountry = ((CheckBox)sender).DataContext as Country;
+        var doRefresh = false;
+        var selectedLanguages = Countries.Items.Cast<Country>().Where(c => c.IsChecked).Select(c => Enum.Parse<Language>(c.Name)).ToArray();
+        if (selectedCountry.Name == Core.Language.ALL.ToString() && selectedCountry.IsChecked)
+        {
+            selectedLanguages = new[] { Core.Language.ALL };
+            Countries.ItemsSource.Cast<Country>().ToList().ForEach(c => c.IsChecked = false);
+            Countries.ItemsSource.Cast<Country>().First(c => c.Name == Core.Language.ALL.ToString()).IsChecked = true;
+            doRefresh = true;
+        }
+        else if (selectedLanguages.Length == 0)
+        {
+            selectedLanguages = new[] { Core.Language.ALL };
+            Countries.ItemsSource.Cast<Country>().First(c => c.Name == Core.Language.ALL.ToString()).IsChecked = true;
+            doRefresh = true;
+        }
+        else if (selectedLanguages.Length > 1 && selectedLanguages.Any(s => s == Core.Language.ALL))
+        {
+            selectedLanguages = selectedLanguages.Where(s => s != Core.Language.ALL).ToArray();
+            Countries.ItemsSource.Cast<Country>().First(c => c.Name == Core.Language.ALL.ToString()).IsChecked = false;
+            doRefresh = true;
+        }
+        
+        _settingService.SelectedLanguages = selectedLanguages;
         (Application.Current.MainWindow as MainWindow).RefreshSettings();
+        if (doRefresh)
+        RefreshData();
     }
 }
 
