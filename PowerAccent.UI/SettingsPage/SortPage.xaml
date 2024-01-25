@@ -8,9 +8,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SortPage">
+
     <Page.Resources>
         <local:VisibilityNullConverter x:Key="visibilityNullConverter" />
         <local:BooleanNullConverter x:Key="booleanNullConverter" />
+        <Style TargetType="ListBox">
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
     </Page.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top">
@@ -47,7 +51,7 @@
                                             <Style x:Key="borderContent" TargetType="Border">
                                                 <Setter Property="BorderThickness" Value="0"/>
                                                 <Setter Property="BorderBrush" Value="Transparent"/>
-                                                <Setter Property="Background" Value="#ECECEC"/>
+                                                <Setter Property="Background" Value="{DynamicResource WindowBorderBrush}"/>
                                                 <Setter Property="Width" Value="50"/>
                                                 <Setter Property="Height" Value="50"/>
                                             </Style>
@@ -96,7 +100,7 @@
                                                 <Style x:Key="borderContent" TargetType="Border">
                                                     <Setter Property="BorderThickness" Value="0"/>
                                                     <Setter Property="BorderBrush" Value="Transparent"/>
-                                                    <Setter Property="Background" Value="#ECECEC"/>
+                                                    <Setter Property="Background" Value="{DynamicResource WindowBorderBrush}"/>
                                                     <Setter Property="Width" Value="50"/>
                                                     <Setter Property="Height" Value="50"/>
                                                 </Style>

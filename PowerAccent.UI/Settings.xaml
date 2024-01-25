@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PowerAccent.UI"
-        mc:Ignorable="d"
-        Title="Settings" Width="900" Height="650" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" Title="Settings" Width="900" Height="650" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource SecondaryBackgroundBrush}">
+
     <Window.Resources>
+
         <Style TargetType="ToggleButton">
-            <Setter Property="Background" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
@@ -27,8 +29,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
-    <Grid >
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -50,4 +52,5 @@
         </Grid>
         <Frame Grid.Row="1" Name="ParentFrame" NavigationUIVisibility="Hidden" Margin="25"/>
     </Grid>
+
 </Window>

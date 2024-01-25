@@ -19,7 +19,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    
+
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
@@ -81,7 +81,7 @@ public partial class MainWindow : Window
     }
 
     #endregion
-    
+
     public void RefreshSettings()
     {
         _powerAccent.ReloadSettings();
