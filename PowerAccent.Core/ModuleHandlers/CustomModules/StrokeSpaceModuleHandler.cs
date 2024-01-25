@@ -33,7 +33,7 @@ internal class StrokeSpaceModuleHandler : ModuleHandler
                     : SettingsService.GetLetterKey(Options.LetterPressed.Value);
             }
 
-            if (Options.Characters == Array.Empty<char>())
+            if (Options.Characters.Length == 0)
             {
                 Debug.WriteLine($"InvokeKeyDown StrokeSpaceModuleHandler - No characters found for {Options.LetterPressed.Value}");
                 Options.Reset();

@@ -6,8 +6,6 @@ using Point = PowerAccent.Core.Point;
 using Size = PowerAccent.Core.Size;
 using Application = System.Windows.Application;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Input;
 
 namespace PowerAccent.UI;
 
@@ -28,6 +26,7 @@ public partial class MainWindow : Window
         _powerAccent.OnChangeDisplay += PowerAccent_OnChangeDisplay;
         _powerAccent.OnSelectCharacter += PowerAccent_OnSelectionCharacter;
         this.Visibility = Visibility.Hidden;
+        _powerAccent.CheckVersion();
     }
 
     private void PowerAccent_OnSelectionCharacter(int index)

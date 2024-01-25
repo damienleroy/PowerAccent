@@ -88,6 +88,11 @@ public class PowerAccent : IDisposable
         _settingService.Reload();
     }
 
+    public void CheckVersion()
+    {
+        _settingService.UpdateSettingsVersion();
+    }
+
     public void Dispose()
     {
         _keyboardListener.Dispose();

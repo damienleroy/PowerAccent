@@ -15,7 +15,7 @@
 
     <Grid>
         <Grid.Resources>
-            <Style x:Key="Flag" TargetType="RadioButton">
+            <Style x:Key="Flag" TargetType="CheckBox">
                 <Style.Triggers>
                     <Trigger Property="IsChecked" Value="False">
                         <Setter Property="Opacity" Value="0.4"/>
@@ -26,7 +26,7 @@
 
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="RadioButton">
+                        <ControlTemplate TargetType="CheckBox">
                             <ContentPresenter />
                         </ControlTemplate>
                     </Setter.Value>
@@ -53,11 +53,11 @@
                 </d:ListView.ItemsSource>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" GroupName="Countries" Checked="RadioButton_Checked">
+                        <CheckBox Tag="{Binding Path=Name}" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource Flag}" Margin="25,0,25,0" Checked="CheckBox_OnChanged" Unchecked="CheckBox_OnChanged">
                             <WrapPanel>
                                 <Image Source="{Binding Path=ImageUrl, Converter={StaticResource stringToImageSourceConverter}}" Width="75" Height="75" Cursor="Hand" />
                             </WrapPanel>
-                        </RadioButton>
+                        </CheckBox>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

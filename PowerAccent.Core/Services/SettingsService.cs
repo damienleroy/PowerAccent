@@ -14,6 +14,14 @@ public class SettingsService : ApplicationSettingsBase
     }
 
     [UserScopedSetting]
+    [DefaultSettingValue("ALL")]
+    public Language[] SelectedLanguages
+    {
+        get { return (Language[])this["SelectedLanguages"]; }
+        set { this["SelectedLanguages"] = value; Save(); }
+    }
+
+    [UserScopedSetting]
     [DefaultSettingValue("Top")]
     public Position Position
     {
@@ -61,6 +69,14 @@ public class SettingsService : ApplicationSettingsBase
         set { this["InsertSpaceAfterSelection"] = value; Save(); }
     }
 
+    [UserScopedSetting]
+    [DefaultSettingValue("0")]
+    public int SettingsVersion
+    {
+        get { return (int)this["SettingsVersion"]; }
+        set { this["SettingsVersion"] = value; Save(); }
+    }
+
     #region LetterKey
 
     public void SetLetterKey(LetterKey letter, char[] value)
@@ -79,12 +95,12 @@ public class SettingsService : ApplicationSettingsBase
         if (this.PropertyValues.Cast<SettingsPropertyValue>().Any(s => s.Name == key) && this[key] != null)
             return (char[])this[key];
         
-          return Languages.GetDefaultLetterKey(letter, SelectedLanguage);
+          return Languages.GetMultipleLetterKey(letter, SelectedLanguages);
     }
 
     public char[] GetDefaultLetterKey(LetterKey key)
     {
-        return Languages.GetDefaultLetterKey(key, SelectedLanguage);
+        return Languages.GetMultipleLetterKey(key, SelectedLanguages);
     }
 
     private void AddingProperty(string key)
@@ -101,6 +117,21 @@ public class SettingsService : ApplicationSettingsBase
             this.Properties.Add(p);
             this.Reload();
         }
+    }
+
+    // Check and update properties from previous version
+    public void UpdateSettingsVersion()
+    {
+        if (this.SettingsVersion == 1)
+            return;
+
+        if (this.SettingsVersion == 0)
+        {
+            SelectedLanguages = new[] { SelectedLanguage };
+        }
+
+        SettingsVersion = 1;
+        this.Save();
     }
 
     #endregion
