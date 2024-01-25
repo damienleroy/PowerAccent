@@ -1,6 +1,4 @@
-﻿using PowerAccent.Core.Services;
-using PowerAccent.Core;
-using System.Windows;
+﻿using System.Windows;
 
 namespace PowerAccent.UI;
 

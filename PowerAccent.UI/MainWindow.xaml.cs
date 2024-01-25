@@ -7,6 +7,7 @@ using Size = PowerAccent.Core.Size;
 using Application = System.Windows.Application;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace PowerAccent.UI;
 
@@ -20,7 +21,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    
+
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
@@ -81,7 +82,7 @@ public partial class MainWindow : Window
     }
 
     #endregion
-    
+
     public void RefreshSettings()
     {
         _powerAccent.ReloadSettings();
