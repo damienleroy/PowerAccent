@@ -9,7 +9,7 @@
     <Window.Resources>
         
         <DataTemplate x:Key="DefaultKeyTemplate">
-            <TextBlock VerticalAlignment="Center" FontSize="18" Foreground="{DynamicResource PrimaryForegroundBrush}" Text="{Binding}" TextAlignment="Center" />
+            <TextBlock VerticalAlignment="Center" FontSize="18" Foreground="{DynamicResource SecondaryBackgroundBrush}" Text="{Binding}" TextAlignment="Center" />
         </DataTemplate>
 
         <DataTemplate x:Key="SelectedKeyTemplate">
