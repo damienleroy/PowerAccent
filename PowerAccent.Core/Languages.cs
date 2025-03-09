@@ -6,6 +6,7 @@ namespace PowerAccent.Core;
 public enum Language
 {
     ALL,
+    BG,
     CUR,
     CY,
     CZ,
@@ -79,6 +80,7 @@ internal static class Languages
         switch (lang)
         {
             case Language.ALL: return GetDefaultLetterKeyALL(letter); // ALL
+            case Language.BG: return GetDefaultLetterKeyBG(letter); // Bulgarian
             case Language.CUR: return GetDefaultLetterKeyCUR(letter); // Currency
             case Language.CY: return GetDefaultLetterKeyCY(letter); // Welsh
             case Language.CZ: return GetDefaultLetterKeyCZ(letter); // Czech
@@ -154,7 +156,7 @@ internal static class Languages
             case LetterKey.H:
                 return new char[] { 'ḣ', 'ĥ', 'ħ' };
             case LetterKey.I:
-                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i', 'ı', 'İ', 'ι' };
+                return new char[] { 'ï', 'î', 'í', 'ì', 'ī', 'į', 'i', 'ı', 'İ', 'ι', 'ѝ', 'Ѝ' };
             case LetterKey.J:
                 return new char[] { 'ĵ' };
             case LetterKey.K:
@@ -187,6 +189,20 @@ internal static class Languages
                 return new char[] { 'ź', 'ž', 'ż', 'ʒ', 'ǯ', 'ζ' };
             case LetterKey._:
                 return new char[] { '¿', '¡', '∙', '₋', '⁻', '–', '≤', '≥', '≠', '≈', '≙', '±', '₊', '⁺', 'þ' };
+        }
+
+        return Array.Empty<char>();
+    }
+
+    // Bulgarian
+    // Alphabet: "АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъьЮюЯя"
+    private static char[] GetDefaultLetterKeyBG(LetterKey letter)
+    {
+        switch (letter)
+        {
+            // There could be more cases ?
+            case LetterKey.I:
+                return new char[] { 'ѝ', 'Ѝ' };
         }
 
         return Array.Empty<char>();
